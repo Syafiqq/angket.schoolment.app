@@ -1,0 +1,28 @@
+{
+  "name": "angket.000.app",
+  "homepage": "https://github.com/Syafiqq/angket.000.app",
+  "authors": [
+    "Syafiqq <syafiq.rezpector@gmail.com>"
+  ],
+  "description": "angket",
+  "main": "?",
+  "keywords": [
+    "angket"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "tether": "^1.4.0",
+    "jquery-serialize-object": "^2.5.0",
+    "components-font-awesome": "^4.7.0"
+  }
+}
