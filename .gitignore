@@ -1,5 +1,6 @@
 .DS_Store
 
+.gitignore
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
@@ -9,6 +10,8 @@ application/logs/*
 !application/logs/.htaccess
 
 composer.lock
+assets/bower_components
+Homestead.yaml
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
