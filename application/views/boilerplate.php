@@ -22,7 +22,7 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.css') ?>">
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
 <body>
