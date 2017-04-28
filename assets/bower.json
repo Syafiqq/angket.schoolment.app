@@ -23,6 +23,7 @@
     "bootstrap": "^3.3.7",
     "tether": "^1.4.0",
     "jquery-serialize-object": "^2.5.0",
-    "components-font-awesome": "^4.7.0"
+    "components-font-awesome": "^4.7.0",
+    "remarkable-bootstrap-notify": "^3.1.3"
   }
 }
