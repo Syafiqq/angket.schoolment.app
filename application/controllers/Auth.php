@@ -53,13 +53,13 @@ class Auth extends CI_Controller
             {
                 case 'counselor' :
                 {
-                    $this->load->view('auth/login/counselor');
+                    $this->load->view('auth/login/login-counselor');
 
                     return;
                 }
                 case 'student' :
                 {
-                    $this->load->view('auth/login/student');
+                    $this->load->view('auth/login/login-student');
 
                     return;
                 }
@@ -82,13 +82,13 @@ class Auth extends CI_Controller
             {
                 case 'counselor' :
                 {
-                    $this->load->view('auth/register/counselor');
+                    $this->load->view('auth/register/register-counselor');
 
                     return;
                 }
                 case 'student' :
                 {
-                    $this->load->view('auth/register/student');
+                    $this->load->view('auth/register/register-student');
 
                     return;
                 }
@@ -107,22 +107,36 @@ class Auth extends CI_Controller
     {
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
         {
-            if (isset($_POST['email']) &&
+            if (isset($_POST['credential']) &&
                 isset($_POST['password']) &&
                 isset($_POST['role'])
             )
             {
-                $_POST['email'] = strtolower($_POST['email']);
+                $_POST['credential'] = strtolower($_POST['credential']);
                 $_POST['role'] = strtolower($_POST['role']);
                 if (($_POST['role'] == 'student') || ($_POST['role'] == 'counselor'))
                 {
                     $this->load->model('mauth', 'auth');
-                    $result = $this->auth->findByEmailAndRole($_POST['email'], $_POST['role']);
+                    $result = [];
+                    switch ($_POST['role'])
+                    {
+                        case 'student' :
+                        {
+                            $result = $this->auth->findStudentByCredential($_POST['credential']);
+                        }
+                            break;
+                        case 'counselor' :
+                        {
+                            $result = $this->auth->findCounselorByCredential($_POST['credential']);
+                        }
+                            break;
+                    }
                     if (count($result) > 0)
                     {
                         if (password_verify($_POST['password'], $result[0]['password']))
                         {
                             $_SESSION['user']['auth'] = $result[0];
+                            $_SESSION['user']['auth']['role'] = $_POST['role'];
                             echo apiMakeCallback(API_SUCCESS, 'Accepted', ['notify' => [['Login Success', 'success']]], site_url('dashboard'));
                         }
                         else
@@ -169,11 +183,11 @@ class Auth extends CI_Controller
                     $_POST['gender'] = strtolower($_POST['gender']);
                     if (($_POST['gender'] == 'male') || ($_POST['gender'] == 'female'))
                     {
+                        $this->load->model('mauth', 'auth');
                         switch ($_POST['role'])
                         {
                             case 'student' :
                             {
-                                $this->load->model('mauth', 'auth');
                                 $result = $this->auth->findStudentByCredential($_POST['credential']);
                                 if (count($result) == 0)
                                 {
@@ -189,7 +203,6 @@ class Auth extends CI_Controller
                                 break;
                             case 'counselor' :
                             {
-                                $this->load->model('mauth', 'auth');
                                 $result = $this->auth->findCounselorByCredential($_POST['credential']);
                                 if (count($result) == 0)
                                 {
