@@ -2,7 +2,7 @@
 /**
  * This <angket.000.app> project created by :
  * Name         : syafiq
- * Date / Time  : 28 April 2017, 10:28 AM.
+ * Date / Time  : 28 April 2017, 10:14 PM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
@@ -43,19 +43,16 @@
                 <input type="text" class="form-control" id="name" placeholder="Name" name="name">
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                <label for="credential">NISN</label>
+                <input type="number" class="form-control" id="credential" placeholder="NISN" name="credential">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password" name="password">
             </div>
             <div class="form-group">
-                <label for="role">Role</label>
-                <select id="role" name="role" class="form-control">
-                    <option value="counselor">Counselor</option>
-                    <option value="student">Student</option>
-                </select>
+                <label for="re-password">Password</label>
+                <input type="password" class="form-control" id="re-password" placeholder="Retype Password" name="re_password">
             </div>
             <div class="form-group">
                 <label for="role">Gender</label>
@@ -64,8 +61,9 @@
                     <option value="female">Female</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-
+            <input type="hidden" name="role" value="student">
+            <button type="submit" class="btn btn-default">Register</button>
+        </form>
     </div>
 </div>
 
@@ -77,8 +75,7 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/assets/js/auth/register.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/js/auth/register-student.min.js') ?>"></script>
 
 </body>
 </html>
-
