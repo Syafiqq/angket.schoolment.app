@@ -76,7 +76,31 @@ class Auth extends CI_Controller
 
     public function register()
     {
-        $this->load->view('auth/register');
+        if (isset($_GET['role']))
+        {
+            switch ($_GET['role'])
+            {
+                case 'counselor' :
+                {
+                    $this->load->view('auth/register/counselor');
+
+                    return;
+                }
+                case 'student' :
+                {
+                    $this->load->view('auth/register/student');
+
+                    return;
+                }
+                default:
+                {
+                    redirect('/auth/register?role=student');
+                }
+            }
+
+            return;
+        }
+        redirect('/auth/register?role=student');
     }
 
     public function do_login()
@@ -132,30 +156,53 @@ class Auth extends CI_Controller
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
         {
             if (isset($_POST['name']) &&
-                isset($_POST['email']) &&
+                isset($_POST['credential']) &&
                 isset($_POST['role']) &&
                 isset($_POST['gender']) &&
                 isset($_POST['password'])
             )
             {
-                $_POST['email'] = strtolower($_POST['email']);
+                $_POST['credential'] = strtolower($_POST['credential']);
                 $_POST['role'] = strtolower($_POST['role']);
                 if (($_POST['role'] == 'student') || ($_POST['role'] == 'counselor'))
                 {
                     $_POST['gender'] = strtolower($_POST['gender']);
                     if (($_POST['gender'] == 'male') || ($_POST['gender'] == 'female'))
                     {
-                        $this->load->model('mauth', 'auth');
-                        $result = $this->auth->findByEmailAndRole($_POST['email'], $_POST['role']);
-                        if (count($result) == 0)
+                        switch ($_POST['role'])
                         {
-                            $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                            $this->auth->register($_POST['name'], $_POST['email'], $_POST['role'], $_POST['gender'], $_POST['password']);
-                            echo apiMakeCallback(API_SUCCESS, 'Register Success', ['notify' => [['Register Success', 'success']]], site_url("auth/login?role={$_POST['role']}"));
-                        }
-                        else
-                        {
-                            echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Email Already Exists', ['notify' => [['Email Already Exists', 'info']]]);
+                            case 'student' :
+                            {
+                                $this->load->model('mauth', 'auth');
+                                $result = $this->auth->findStudentByCredential($_POST['credential']);
+                                if (count($result) == 0)
+                                {
+                                    $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                                    $this->auth->registerStudent($_POST['name'], $_POST['credential'], $_POST['gender'], $_POST['password']);
+                                    echo apiMakeCallback(API_SUCCESS, 'Register Success', ['notify' => [['Register Success', 'success']]], site_url("auth/login?role={$_POST['role']}"));
+                                }
+                                else
+                                {
+                                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'NISN Already Exists', ['notify' => [['NISN Already Exists', 'info']]]);
+                                }
+                            }
+                                break;
+                            case 'counselor' :
+                            {
+                                $this->load->model('mauth', 'auth');
+                                $result = $this->auth->findCounselorByCredential($_POST['credential']);
+                                if (count($result) == 0)
+                                {
+                                    $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                                    $this->auth->registerCounselor($_POST['name'], $_POST['credential'], $_POST['gender'], $_POST['password']);
+                                    echo apiMakeCallback(API_SUCCESS, 'Register Success', ['notify' => [['Register Success', 'success']]], site_url("auth/login?role={$_POST['role']}"));
+                                }
+                                else
+                                {
+                                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'NIP/NIK Already Exists', ['notify' => [['NIP/NIK Already Exists', 'info']]]);
+                                }
+                            }
+                                break;
                         }
                     }
                     else
