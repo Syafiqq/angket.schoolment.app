@@ -47,8 +47,7 @@
                 <input type="password" class="form-control" id="password" placeholder="Password" name="password">
             </div>
             <input type="hidden" name="role" value="counselor">
-            <button type="submit" class="btn btn-default">Submit</button>
-
+            <button type="submit" class="btn btn-default">Login</button>
     </div>
 </div>
 
