@@ -39,8 +39,8 @@
     <div class="row">
         <form id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                <label for="credential">NIP/NIK</label>
+                <input type="number" class="form-control" id="credential" placeholder="NIP/NIK" name="credential">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
