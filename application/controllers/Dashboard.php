@@ -29,11 +29,37 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('url');
+        $this->load->helper('api_facade');
+        $this->load->library('session');
+        if (!isset($_SESSION['user']['auth']))
+        {
+            redirect('/auth/login');
+        }
         // Your own constructor code
     }
 
     public function index()
     {
+        $this->view();
+    }
 
+    private function view()
+    {
+        switch ($_SESSION['user']['auth']['role'])
+        {
+            case 'counselor' :
+            {
+                $this->load->view('dashboard/view/view-counselor');
+
+                return;
+            }
+            case 'student' :
+            {
+                $this->load->view('dashboard/view/view-student');
+
+                return;
+            }
+        }
     }
 }
