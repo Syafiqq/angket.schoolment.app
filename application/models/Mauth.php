@@ -74,4 +74,16 @@ class Mauth extends CI_Model
 
         return $this->db->insert_id();
     }
+
+    public function updatePasswordStudentByID($id, $password)
+    {
+        $query = 'UPDATE `user_student` SET `password`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$password, (int)$id));
+    }
+
+    public function updatePasswordCounselorByID($id, $password)
+    {
+        $query = 'UPDATE `user_counselor` SET `password`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$password, (int)$id));
+    }
 }
