@@ -37,33 +37,35 @@
 <body>
 <div class="container">
     <div class="row">
-        <form id="register" action="<?php echo site_url('auth/do_register') ?>" method="post">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name" name="name">
-            </div>
-            <div class="form-group">
-                <label for="credential">NISN</label>
-                <input type="number" class="form-control" id="credential" placeholder="NISN" name="credential">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-            </div>
-            <div class="form-group">
-                <label for="re-password">Password</label>
-                <input type="password" class="form-control" id="re-password" placeholder="Retype Password" name="re_password">
-            </div>
-            <div class="form-group">
-                <label for="role">Gender</label>
-                <select id="role" name="gender" class="form-control">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-            </div>
-            <input type="hidden" name="role" value="student">
-            <button type="submit" class="btn btn-default">Register</button>
-        </form>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form id="register" action="<?php echo site_url('auth/do_register') ?>" method="post">
+                <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nama" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="credential">NISN</label>
+                    <input type="number" class="form-control" id="credential" placeholder="NISN" name="credential">
+                </div>
+                <div class="form-group">
+                    <label for="role">Jenis Kelamin</label>
+                    <select id="role" name="gender" class="form-control">
+                        <option value="male">Laki Laki</option>
+                        <option value="female">Perempuan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="re-password">Password</label>
+                    <input type="password" class="form-control" id="re-password" placeholder="Ulangi Password" name="re_password">
+                </div>
+                <input type="hidden" name="role" value="student">
+                <button type="submit" class="btn btn-default">Register</button>
+            </form>
+        </div>
     </div>
 </div>
 
