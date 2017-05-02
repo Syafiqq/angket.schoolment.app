@@ -37,17 +37,20 @@
 <body>
 <div class="container">
     <div class="row">
-        <form id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
-            <div class="form-group">
-                <label for="credential">NIP/NIK</label>
-                <input type="number" class="form-control" id="credential" placeholder="NIP/NIK" name="credential">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-            </div>
-            <input type="hidden" name="role" value="counselor">
-            <button type="submit" class="btn btn-default">Login</button>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
+                <div class="form-group">
+                    <label for="credential">NIP/NIK</label>
+                    <input type="number" class="form-control" id="credential" placeholder="NIP/NIK" name="credential" value="125150200111112">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="12345">
+                </div>
+                <input type="hidden" name="role" value="counselor">
+                <button type="submit" class="btn btn-default">Login</button>
+            </form>
+        </div>
     </div>
 </div>
 
