@@ -384,7 +384,6 @@ class Auth extends CI_Controller
         }
     }
 
-
     public function do_recover_confirm()
     {
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
@@ -429,5 +428,11 @@ class Auth extends CI_Controller
         {
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
+    }
+
+    public function do_logout()
+    {
+        unset($_SESSION['user']['auth']);
+        echo apiMakeCallback(API_SUCCESS, 'Logout Sukses', ['notify' => [['Logout Sukses', 'success']]], site_url('/'));
     }
 }
