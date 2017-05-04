@@ -59,7 +59,7 @@
                     <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                 </div>
                 <div class="form-group">
-                    <label for="re-password">Password</label>
+                    <label for="re-password">Ulangi Password</label>
                     <input type="password" class="form-control" id="re-password" placeholder="Ulangi Password" name="re_password">
                 </div>
                 <input type="hidden" name="role" value="student">

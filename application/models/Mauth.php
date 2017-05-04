@@ -86,4 +86,28 @@ class Mauth extends CI_Model
         $query = 'UPDATE `user_counselor` SET `password`= ? WHERE `id` = ?';
         $this->db->query($query, array((string)$password, (int)$id));
     }
+
+    public function updateAvatarCounselorByID($id, $path)
+    {
+        $query = 'UPDATE `user_counselor` SET `avatar`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$path, (int)$id));
+    }
+
+    public function updateAdditionalCounselorByID($id, $address, $birthplace, $datebirth)
+    {
+        $query = 'UPDATE `user_counselor` SET `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
+    }
+
+    public function updateAvatarStudentByID($id, $path)
+    {
+        $query = 'UPDATE `user_student` SET `avatar`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$path, (int)$id));
+    }
+
+    public function updateAdditionalStudentByID($id, $period, $grade, $address, $birthplace, $datebirth)
+    {
+        $query = 'UPDATE `user_student` SET `period` = ?, `grade` = ?, `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
+        $this->db->query($query, array((int)$period, (int)$grade, (string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
+    }
 }

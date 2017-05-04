@@ -2,13 +2,11 @@
 /**
  * This <angket.000.app> project created by :
  * Name         : syafiq
- * Date / Time  : 02 May 2017, 12:04 PM.
+ * Date / Time  : 03 May 2017, 6:24 AM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-
 ?>
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -70,3 +68,4 @@
 <script src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 </body>
 </html>
+

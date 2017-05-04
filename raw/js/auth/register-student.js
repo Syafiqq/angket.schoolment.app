@@ -51,7 +51,6 @@
                             {
                                 if (data.hasOwnProperty('redirect'))
                                 {
-                                    console.log(data['redirect']);
                                     setTimeout(function ()
                                     {
                                         location.href = data['redirect'];
