@@ -39,7 +39,6 @@ class Auth extends CI_Controller
         {
             redirect('/dashboard');
         }
-        // Your own constructor code
     }
 
     public function index()
