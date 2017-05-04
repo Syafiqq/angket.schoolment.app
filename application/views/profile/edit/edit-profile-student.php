@@ -65,6 +65,9 @@ $profile['datebirth'] = $profile['datebirth'] === null ? '' : $profile['datebirt
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                </li>
+                <li>
                     <a href="<?php echo site_url('profile') ?>">Profile</a>
                 </li>
             </ul>

@@ -68,6 +68,9 @@ $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                </li>
+                <li>
                     <a href="<?php echo site_url('profile') ?>">Profile</a>
                 </li>
             </ul>
@@ -138,6 +141,9 @@ $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] 
 <script src="<?php echo base_url('/assets/js/plugins.js') ?>"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/js/profile/view/view-profile-student.min.js') ?>"></script>
 </body>
 </html>
 
