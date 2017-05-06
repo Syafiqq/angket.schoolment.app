@@ -114,6 +114,7 @@ unset($_categories);
                                 <i>Favourable</i>
                             </th>
                             <th style="width: 150px">Aktif</th>
+                            <th style="width: 30px">Edit</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -122,6 +123,7 @@ unset($_categories);
                         $activeURL = site_url('inventory/do_change_active');
                         foreach ($questions as $no => $question)
                         {
+                            $url = site_url("inventory/question/edit/{$question['id']}");
                             ++$no;
                             echo '<tr>';
                             echo "<td>{$no}</td>";
@@ -146,6 +148,7 @@ unset($_categories);
                             }
                             echo '</select>';
                             echo '</td>';
+                            echo "<td><a class=\"btn btn-default\" href=\"{$url}\" role=\"button\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></a></td>";
                             echo '</tr>';
                         }
                         ?>
