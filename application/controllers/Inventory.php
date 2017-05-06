@@ -89,6 +89,37 @@ class Inventory extends CI_Controller
         }
     }
 
+    public function edit_question($id)
+    {
+        switch ($_SESSION['user']['auth']['role'])
+        {
+            case 'counselor' :
+            {
+                $this->load->model('minventory', 'inventory');
+                $question = $this->inventory->getQuestionByID($id);
+                if (count($question) > 0)
+                {
+                    $question = $question[0];
+                    $categories = $this->inventory->getCategory();
+                    $favourables = $this->inventory->getFavourable();
+                    $this->load->view('inventory/edit/edit-inventory-counselor', compact('categories', 'favourables', 'question'));
+                }
+                else
+                {
+                    redirect('/inventory');
+                }
+
+                return;
+            }
+            case 'student' :
+            {
+                $this->load->view('inventory/edit/edit-inventory-student');
+
+                return;
+            }
+        }
+    }
+
     public function do_add()
     {
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
@@ -109,6 +140,44 @@ class Inventory extends CI_Controller
                     $this->load->model('minventory', 'inventory');
                     $this->inventory->addQuestion($_POST['question'], $_POST['category'], $_POST['favour'], $_POST['active']);
                     echo apiMakeCallback(API_SUCCESS, 'Tambah Soal Berhasil', ['notify' => [['Tambah Soal Berhasil', 'success']]]);
+                }
+                else
+                {
+                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Data Kurang Lengkap', ['notify' => [['Data Kurang Lengkap', 'info']]]);
+                }
+            }
+            else
+            {
+                echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Data Kurang Lengkap', ['notify' => [['Data Kurang Lengkap', 'info']]]);
+            }
+        }
+        else
+        {
+            echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+        }
+    }
+
+    public function do_edit()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['id']) &&
+                isset($_POST['question']) &&
+                isset($_POST['category']) &&
+                isset($_POST['favour']) &&
+                isset($_POST['active'])
+            )
+            {
+                if (
+                    (strlen($_POST['question']) > 0) &&
+                    (strlen($_POST['category']) > 0) &&
+                    (strlen($_POST['favour']) > 0) &&
+                    (strlen($_POST['active']) > 0)
+                )
+                {
+                    $this->load->model('minventory', 'inventory');
+                    $this->inventory->updateQuestionByID($_POST['id'], $_POST['question'], $_POST['category'], $_POST['favour'], $_POST['active']);
+                    echo apiMakeCallback(API_SUCCESS, 'Update Soal Berhasil', ['notify' => [['Update Soal Berhasil', 'success']]], site_url('/inventory'));
                 }
                 else
                 {
