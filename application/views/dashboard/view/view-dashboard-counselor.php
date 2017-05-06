@@ -56,6 +56,9 @@
                 <li>
                     <a href="<?php echo site_url('inventory') ?>">Inventory</a>
                 </li>
+                <li>
+                    <a href="<?php echo site_url('student') ?>">Siswa</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
