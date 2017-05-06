@@ -148,4 +148,3 @@ if (!isset($favourables))
 <script src="<?php echo base_url('/assets/js/inventory/add/add-counselor.min.js') ?>"></script>
 </body>
 </html>
-x
