@@ -2,7 +2,7 @@
 /**
  * This <angket.000.app> project created by :
  * Name         : syafiq
- * Date / Time  : 04 May 2017, 6:22 PM.
+ * Date / Time  : 06 May 2017, 3:52 PM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
@@ -16,6 +16,12 @@ if (!isset($favourables))
 {
     $favourables = [];
 }
+
+if (!isset($question))
+{
+    $question = null;
+}
+
 
 ?>
 
@@ -82,23 +88,23 @@ if (!isset($favourables))
 </nav>
 
 <div class="container">
-    <form id="add" action="<?php echo site_url('inventory/do_add') ?>" method="post" class="form-horizontal">
+    <form id="add" action="<?php echo site_url('inventory/do_edit') ?>" method="post" class="form-horizontal">
         <div class="form-group">
             <label for="question" class="col-sm-2 control-label">Pertanyaan</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control option-text-disable" id="question" placeholder="Pertanyaan" name="question">
+                <input type="text" class="form-control option-text-disable" id="question" placeholder="Pertanyaan" name="question" value="<?php echo $question['question'] ?>">
             </div>
         </div>
         <div class="form-group">
             <label for="category" class="col-sm-2 control-label">Kategori</label>
             <div class="col-sm-10">
                 <select id="category" name="category" class="form-control">
-                    <option class="option-select-disable"></option>
                     <?php
                     foreach ($categories as $category)
                     {
                         $category['description'] = ucfirst($category['description']);
-                        echo "<option value=\"{$category['id']}\">{$category['description']}</option>";
+                        $selected = $category['id'] === $question['category'] ? 'selected' : '';
+                        echo "<option value=\"{$category['id']}\" {$selected}>{$category['description']}</option>";
                     }
                     ?>
                 </select>
@@ -108,12 +114,12 @@ if (!isset($favourables))
             <label for="favour" class="col-sm-2 control-label">Favourable</label>
             <div class="col-sm-10">
                 <select id="favour" name="favour" class="form-control">
-                    <option class="option-select-disable"></option>
                     <?php
                     foreach ($favourables as $favourable)
                     {
                         $favourable['description'] = ucfirst($favourable['description']);
-                        echo "<option value=\"{$favourable['id']}\">{$favourable['description']}</option>";
+                        $selected = $favourable['id'] === $question['favour'] ? 'selected' : '';
+                        echo "<option value=\"{$favourable['id']}\" {$selected}>{$favourable['description']}</option>";
                     }
                     ?>
                 </select>
@@ -122,15 +128,20 @@ if (!isset($favourables))
         <div class="form-group">
             <label for="active" class="col-sm-2 control-label">Aktif</label>
             <div class="col-sm-10">
-                <select id="active" name="active" class="form-control">
-                    <option class="option-select-disable"></option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Tidak Aktif</option>
-                </select>
+                <?php
+                echo "<select id=\"active\" name=\"active\" class=\"form-control\">";
+                foreach ([['id' => 1, 'description' => 'Aktif'], ['id' => 0, 'description' => 'Tidak Aktif']] as $active)
+                {
+                    $selected = $active['id'] === (int)$question['is_active'] ? 'selected' : '';
+                    echo "<option value=\"{$active['id']}\" {$selected}>{$active['description']}</option>";
+                }
+                echo '</select>';
+                ?>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="id" value="<?php echo $question['id'] ?>">
                 <button type="submit" class="btn btn-default">Simpan</button>
             </div>
         </div>
@@ -145,6 +156,6 @@ if (!isset($favourables))
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/js/inventory/add/add-counselor.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/js/inventory/edit/edit-counselor.min.js') ?>"></script>
 </body>
 </html>
