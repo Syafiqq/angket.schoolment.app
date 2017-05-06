@@ -110,4 +110,26 @@ class Mauth extends CI_Model
         $query = 'UPDATE `user_student` SET `period` = ?, `grade` = ?, `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
         $this->db->query($query, array((int)$period, (int)$grade, (string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
     }
+
+    public function updateStudentActivation($id, $active)
+    {
+        $query = 'UPDATE `user_student` SET `is_active` = ? WHERE `id` = ?';
+        $this->db->query($query, array((int)$active, (int)$id));
+    }
+
+    public function getAllStudent()
+    {
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` ORDER BY `id` ASC';
+        $result = $this->db->query($query);
+
+        return $result->result_array();
+    }
+
+    public function getAllAnsweredStudent()
+    {
+        $query = 'SELECT `user_student`.`id`, `user_student`.`credential`, `user_student`.`name`, `user_student`.`gender`, `user_student`.`password`, `user_student`.`period`, `user_student`.`grade`, `user_student`.`address`, `user_student`.`birthplace`, `user_student`.`datebirth`, `user_student`.`avatar`, `user_student`.`is_active`, `user_student`.`create_at`, `user_student`.`update_at` FROM `user_student` RIGHT OUTER JOIN `answered_question` ON `user_student`.`id` = `answered_question`.`student` GROUP BY `user_student`.`id` ORDER BY `user_student`.`id` ASC';
+        $result = $this->db->query($query);
+
+        return $result->result_array();
+    }
 }
