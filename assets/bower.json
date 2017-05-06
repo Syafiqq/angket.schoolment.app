@@ -29,6 +29,7 @@
     "moment": "^2.18.1",
     "jquery-ui": "^1.12.1",
     "jquery-iframe-transport": "https://raw.githubusercontent.com/blueimp/jQuery-File-Upload/master/js/jquery.iframe-transport.js",
-    "jquery.fileupload": "https://raw.githubusercontent.com/blueimp/jQuery-File-Upload/master/js/jquery.fileupload.js"
+    "jquery.fileupload": "https://raw.githubusercontent.com/blueimp/jQuery-File-Upload/master/js/jquery.fileupload.js",
+    "jQuery.print": "https://github.com/DoersGuild/jQuery.print.git#^1.5.1"
   }
 }
