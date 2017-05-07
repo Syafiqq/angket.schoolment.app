@@ -56,7 +56,7 @@
                 })
         });
 
-        /*$("page#printable-area").print({
+        $("page#printable-area").print({
          globalStyles: true,
          mediaPrint: false,
          stylesheet: null,
@@ -69,7 +69,7 @@
          timeout: 750,
          title: null,
          doctype: '<!doctype html>'
-         });*/
+        });
     });
     /*
      * Run right away
