@@ -43,7 +43,7 @@ class Profile extends CI_Controller
         $this->view();
     }
 
-    private function view()
+    public function view()
     {
         switch ($_SESSION['user']['auth']['role'])
         {
@@ -163,7 +163,7 @@ class Profile extends CI_Controller
                 $_SESSION['user']['auth']['birthplace'] = $_POST['birthplace'];
                 $_SESSION['user']['auth']['datebirth'] = $_POST['datebirth'];
                 $_SESSION['user']['auth']['school'] = $_POST['school'];
-                echo apiMakeCallback(API_SUCCESS, 'Update Berhasil', ['notify' => [['Update Berhasil', 'success']]], site_url('profile/edit'));
+                echo apiMakeCallback(API_SUCCESS, 'Update Berhasil', ['notify' => [['Update Berhasil', 'success']]], site_url('profile'));
             }
             else
             {

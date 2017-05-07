@@ -41,20 +41,95 @@ class Report extends CI_Controller
 
     public function index()
     {
-        $this->print();
+        $this->publish();
     }
 
-    public function print()
+    public function publish()
     {
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
             {
+                if (isset($_GET['answer']))
+                {
+                    $this->load->model('minventory', 'inventory');
+                    $this->load->model('mauth', 'auth');
+                    $answered = $this->inventory->getAnsweredByAnswerID($_GET['answer']);
+                    if (count($answered) > 0)
+                    {
+                        $answered = $answered[0];
+                        $profile = $this->auth->findStudentByID($answered['student']);
+                        $profile = $profile[0];
+                        $_categories = $this->inventory->getCategory();
+                        $categories = [];
+                        foreach ($_categories as $_cv)
+                        {
+                            $categories[".{$_cv['id']}"] = $_cv;
+                        }
+                        $result = $this->inventory->getAnsweredResultByID($answered['id']);
+                        $isMale = $profile === 'male';
+                        foreach ($result as $kr => $vr)
+                        {
+                            if ($isMale)
+                            {
+                                if ((int)$vr['category'] === 1)
+                                {
+                                    unset($result[$kr]);
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                if ((int)$vr['category'] === 2)
+                                {
+                                    unset($result[$kr]);
+                                    continue;
+                                }
+                            }
 
-                $this->load->view('report/print/print-report-counselor');
+                            $this->load->helper('conclusion_interpretation');
 
-                return;
+                            switch ((int)$vr['category'])
+                            {
+                                case 1 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretLesbian($vr['value']);
+                                }
+                                    break;
+                                case 2 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretGay($vr['value']);
+                                }
+                                    break;
+                                case 3 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretBisexual($vr['value']);
+                                }
+                                    break;
+                                case 4 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretTransGender($vr['value']);
+                                }
+                                    break;
+                            }
+                        }
+
+                        $counselor = $_SESSION['user']['auth'];
+
+
+                        $this->load->view('report/print/print-report-counselor', compact('counselor', 'profile', 'categories', 'result', 'answered'));
+                    }
+                    else
+                    {
+                        redirect('student/report');
+                    }
+                }
+                else
+                {
+                    redirect('student/report');
+                }
             }
+                break;
             case 'student' :
             {
                 $this->load->view('report/print/print-report-student');
@@ -83,12 +158,69 @@ class Report extends CI_Controller
                     $answered = $this->inventory->getAnsweredUserByAnswerID($_SESSION['user']['auth']['id'], $_GET['answer']);
                     if (count($answered) > 0)
                     {
-                        $this->load->view('report/display/display-report-student');
+                        $answered = $answered[0];
+                        $_categories = $this->inventory->getCategory();
+                        $categories = [];
+                        foreach ($_categories as $_cv)
+                        {
+                            $categories[".{$_cv['id']}"] = $_cv;
+                        }
+                        $result = $this->inventory->getAnsweredResultByID($answered['id']);
+                        $isMale = $_SESSION['user']['auth']['gender'] === 'male';
+                        foreach ($result as $kr => $vr)
+                        {
+                            if ($isMale)
+                            {
+                                if ((int)$vr['category'] === 1)
+                                {
+                                    unset($result[$kr]);
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                if ((int)$vr['category'] === 2)
+                                {
+                                    unset($result[$kr]);
+                                    continue;
+                                }
+                            }
+
+                            $this->load->helper('conclusion_interpretation');
+
+                            switch ((int)$vr['category'])
+                            {
+                                case 1 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretLesbian($vr['value']);
+                                }
+                                    break;
+                                case 2 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretGay($vr['value']);
+                                }
+                                    break;
+                                case 3 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretBisexual($vr['value']);
+                                }
+                                    break;
+                                case 4 :
+                                {
+                                    $result[$kr]['interpretation'] = interpretTransGender($vr['value']);
+                                }
+                                    break;
+                            }
+                        }
+
+                        $profile = $_SESSION['user']['auth'];
+
+                        $this->load->view('report/display/display-report-student', compact('profile', 'categories', 'result', 'answered'));
 
                         return;
                     }
                 }
-                redirect('/inventory');
+                redirect('/inventory/result');
 
                 return;
             }

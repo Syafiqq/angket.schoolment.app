@@ -62,8 +62,9 @@ class Inventory extends CI_Controller
             }
             case 'student' :
             {
-                $allowed = $this->allowedToTakeTest();
-                $this->load->view('inventory/view/view-inventory-student', compact('allowed'));
+                $b_test = $this->allowedToTakeTest();
+                $b_complete = $this->isStudentIdentityIsComplete();
+                $this->load->view('inventory/view/view-inventory-student', compact('b_test', 'b_complete'));
 
                 return;
             }
@@ -76,9 +77,11 @@ class Inventory extends CI_Controller
         $this->load->model('mauth', 'auth');
         $this->load->model('manswer', 'answer');
         $answered = $this->answer->getLatestAnsweredByStudentID($_SESSION['user']['auth']['id']);
+
         if (count($answered) > 0)
         {
             $answered = Carbon::createFromFormat('Y-m-d H:i:s', $answered[0]['answer_at']);
+
             if ((int)$_SESSION['user']['auth']['is_active'] === 1)
             {
                 $allowed = true;
@@ -88,7 +91,6 @@ class Inventory extends CI_Controller
                 if ($answered->diffInDays(Carbon::now('Asia/Jakarta')) <= 7)
                 {
                     $allowed = false;
-
                 }
                 else
                 {
@@ -117,10 +119,29 @@ class Inventory extends CI_Controller
             case 'student' :
             {
                 $allowed = $this->allowedToTakeTest();
+                $allowed &= $this->isStudentIdentityIsComplete();
                 if ($allowed)
                 {
                     $this->load->model('minventory', 'inventory');
                     $questions = $this->inventory->getQuestionByActive(1);
+                    $isMale = $_SESSION['user']['auth']['gender'] === 'male';
+                    foreach ($questions as $qk => $qv)
+                    {
+                        if ($isMale)
+                        {
+                            if ((int)$qv['category'] === 1)
+                            {
+                                unset($questions[$qk]);
+                            }
+                        }
+                        else
+                        {
+                            if ((int)$qv['category'] === 2)
+                            {
+                                unset($questions[$qk]);
+                            }
+                        }
+                    }
                     $options = $this->inventory->getOptions();
                     $this->load->view('inventory/test/test-inventory-student', compact('questions', 'options'));
                 }
@@ -151,6 +172,24 @@ class Inventory extends CI_Controller
                 $answered = [];
                 $result = $this->inventory->getAnsweredResultByUser($_SESSION['user']['auth']['id']);
                 $categories = $this->inventory->getCategory();
+                $isMale = $_SESSION['user']['auth']['gender'] === 'male';
+                foreach ($categories as $ck => $cv)
+                {
+                    if ($isMale)
+                    {
+                        if ((int)$cv['id'] === 1)
+                        {
+                            unset($categories[$ck]);
+                        }
+                    }
+                    else
+                    {
+                        if ((int)$cv['id'] === 2)
+                        {
+                            unset($categories[$ck]);
+                        }
+                    }
+                }
                 foreach ($_answered as $av)
                 {
                     $answered[".{$av['id']}"] = $av;
@@ -163,6 +202,20 @@ class Inventory extends CI_Controller
 
                 foreach ($result as $rv)
                 {
+                    if ($isMale)
+                    {
+                        if ((int)$rv['category'] === 1)
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if ((int)$rv['category'] === 2)
+                        {
+                            continue;
+                        }
+                    }
                     $answered[".{$rv['answer_id']}"]['category'][".{$rv['category']}"] = $rv['value'];
                 }
                 unset($_answered, $result);
@@ -355,20 +408,38 @@ class Inventory extends CI_Controller
         {
             $this->load->model('minventory', 'inventory');
             $_questions = $this->inventory->getQuestion();
+            $isMale = $_SESSION['user']['auth']['gender'] === 'male';
+            foreach ($_questions as $qk => $qv)
+            {
+                if ($isMale)
+                {
+                    if ((int)$qv['category'] === 1)
+                    {
+                        unset($_questions[$qk]);
+                    }
+                }
+                else
+                {
+                    if ((int)$qv['category'] === 2)
+                    {
+                        unset($_questions[$qk]);
+                    }
+                }
+            }
             $question = [];
             foreach ($_questions as $q)
             {
                 $question["q{$q['id']}"] = $q;
             }
             $allowed = true;
-            foreach ($_POST['question'] as $k => $q)
+            foreach ($question as $k => $q)
             {
-                if (!isset($question[$k]))
+                if (!key_exists($k, $_POST['question']))
                 {
                     $allowed = false;
                     break;
                 }
-                elseif ($q <= 0)
+                elseif ($_POST['question'][$k] <= 0)
                 {
                     $allowed = false;
                     break;
@@ -382,7 +453,6 @@ class Inventory extends CI_Controller
                 //Answered Question
                 $aq = $_SESSION['user']['auth']['id'];
                 $raq = $this->inventory->addAnsweredUser($aq);
-                log_message('ERROR', var_export(['Answered Question' => $raq], true));
 
                 //Answered Detail
                 $ad = [];
@@ -397,7 +467,6 @@ class Inventory extends CI_Controller
                     array_push($ad, $_ad);
                 }
                 $this->inventory->addAnswerDetail($ad);
-                log_message('ERROR', var_export(['Answered Detail' => $ad], true));
 
                 //Answered Result
                 foreach ($ad as $k => $v)
@@ -425,11 +494,11 @@ class Inventory extends CI_Controller
                     $ar[$k]['value'] *= 100;
                 }
                 $this->inventory->addAnswerResult($ar);
-                log_message('ERROR', var_export(['Answered Result' => $ar], true));
 
                 $this->load->model('mauth', 'auth');
                 $this->auth->updateStudentActivation($aq, 0);
-                echo apiMakeCallback(API_SUCCESS, 'Tambah Soal Berhasil', ['notify' => [['Tambah Soal Berhasil', 'success']]], site_url('/inventory'));
+                $_SESSION['user']['auth']['is_active'] = 0;
+                echo apiMakeCallback(API_SUCCESS, 'Pengerjaan Selesai', ['notify' => [['Pengerjaan Selesai', 'success']]], site_url('/inventory'));
             }
             else
             {
@@ -440,5 +509,22 @@ class Inventory extends CI_Controller
         {
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
+    }
+
+    private function isStudentIdentityIsComplete()
+    {
+        $complete = false;
+        if (
+            (strlen($_SESSION['user']['auth']['grade']) > 0) &&
+            (strlen($_SESSION['user']['auth']['school']) > 0) &&
+            (strlen($_SESSION['user']['auth']['address']) > 0) &&
+            (strlen($_SESSION['user']['auth']['birthplace']) > 0) &&
+            (strlen($_SESSION['user']['auth']['datebirth']) > 0)
+        )
+        {
+            $complete = true;
+        }
+
+        return $complete;
     }
 }
