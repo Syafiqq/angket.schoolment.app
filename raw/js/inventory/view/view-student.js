@@ -1,7 +1,7 @@
 /**
  * This <angket.000.app> project created by :
  * Name         : syafiq
- * Date / Time  : 06 May 2017, 8:26 PM.
+ * Date / Time  : 06 May 2017, 10:53 PM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
@@ -54,21 +54,6 @@
                         type: 'danger'
                     });
                 })
-        });
-
-        $("page#printable-area").print({
-         globalStyles: true,
-         mediaPrint: false,
-         stylesheet: null,
-         noPrintSelector: ".no-print",
-         iframe: true,
-         append: null,
-         prepend: null,
-         manuallyCopyFormValues: true,
-         deferred: $.Deferred(),
-         timeout: 750,
-         title: null,
-         doctype: '<!doctype html>'
         });
     });
     /*

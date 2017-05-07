@@ -63,4 +63,35 @@ class Report extends CI_Controller
             }
         }
     }
+
+    public function display()
+    {
+        switch ($_SESSION['user']['auth']['role'])
+        {
+            case 'counselor' :
+            {
+
+                redirect('/student');
+
+                return;
+            }
+            case 'student' :
+            {
+                if (isset($_GET['answer']))
+                {
+                    $this->load->model('minventory', 'inventory');
+                    $answered = $this->inventory->getAnsweredUserByAnswerID($_SESSION['user']['auth']['id'], $_GET['answer']);
+                    if (count($answered) > 0)
+                    {
+                        $this->load->view('report/display/display-report-student');
+
+                        return;
+                    }
+                }
+                redirect('/inventory');
+
+                return;
+            }
+        }
+    }
 }

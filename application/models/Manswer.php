@@ -16,7 +16,7 @@ class Manswer extends CI_Model
         // Your own constructor code
     }
 
-    public function getLatestAnsweredByStudentID()
+    public function getLatestAnsweredAllStudent()
     {
         $query = 'SELECT `aq1`.`id`, `aq1`.`student`, `aq1`.`answer_at` FROM `answered_question` AS `aq1` WHERE `aq1`.`id` = (SELECT `aq2`.`id` FROM `answered_question` AS `aq2` WHERE `aq1`.`student` = `aq2`.`student` ORDER BY `answer_at` DESC LIMIT 1) ORDER BY `student` ASC';
         $result = $this->db->query($query);
@@ -28,6 +28,14 @@ class Manswer extends CI_Model
     {
         $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` WHERE 1';
         $result = $this->db->query($query);
+
+        return $result->result_array();
+    }
+
+    public function getLatestAnsweredByStudentID($id)
+    {
+        $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` WHERE `student` = ? ORDER BY `answer_at` DESC LIMIT 1';
+        $result = $this->db->query($query, (int)$id);
 
         return $result->result_array();
     }

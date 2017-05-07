@@ -56,6 +56,9 @@ body {
 #print_container {
     width: inherit;
     padding: .5cm;
+    -webkit-print-color-adjust: exact;
+    background: url("/assets/img/avatar/logo/watermark_transparent.png") no-repeat center;
+    background-size: 7.5cm;
 }
 
 #header_university {
@@ -235,6 +238,8 @@ page[size="A5"][layout="portrait"] {
     #print_container {
         width: inherit;
         padding: .5cm;
+        background: url("/assets/img/avatar/logo/watermark_transparent.png") no-repeat center !important;
+        background-size: 7.5cm !important;
     }
 
     #header_university {

@@ -55,7 +55,7 @@ class Student extends CI_Controller
                 $this->load->model('mauth', 'auth');
                 $this->load->model('manswer', 'answer');
                 $students = $this->auth->getAllStudent();
-                $_answered = $this->answer->getLatestAnsweredByStudentID();
+                $_answered = $this->answer->getLatestAnsweredAllStudent();
                 $answered = [];
                 foreach ($_answered as $ans)
                 {
