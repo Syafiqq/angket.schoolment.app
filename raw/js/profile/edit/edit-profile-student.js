@@ -42,7 +42,7 @@
     $('input#period').datetimepicker({
         format: 'YYYY',
         useCurrent: false,
-        defaultDate: moment($(this).attr("value")),
+        defaultDate: $(this).attr("value") ? moment($(this).attr("value")) : false,
         maxDate: moment()
     });
 
