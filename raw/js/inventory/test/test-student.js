@@ -8,6 +8,9 @@
 
 (function ($)
 {
+    $('table#inventory_test').DataTable({
+        paging: false
+    });
     $(function ()
     {
         $("form#test").on('submit', function (event)

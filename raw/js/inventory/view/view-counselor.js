@@ -8,6 +8,7 @@
 
 (function ($)
 {
+    $('table#inventory_tb').DataTable();
     $(function ()
     {
         $("select#favour").on('change', function ()

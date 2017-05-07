@@ -25,6 +25,14 @@ class Mauth extends CI_Model
         return $result->result_array();
     }
 
+    public function findStudentByID($id)
+    {
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `grade`, `school`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` WHERE `id` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$id));
+
+        return $result->result_array();
+    }
+
     public function findCounselorByCredential($credential)
     {
         //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';

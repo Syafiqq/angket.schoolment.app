@@ -18,7 +18,7 @@ $profile['school'] = $profile['school'] === null ? '' : $profile['school'];
 $profile['school_address'] = $profile['school_address'] === null ? '' : $profile['school_address'];
 $profile['address'] = $profile['address'] === null ? '' : $profile['address'];
 $profile['birthplace'] = $profile['birthplace'] === null ? '' : $profile['birthplace'];
-$profile['datebirth'] = $profile['datebirth'] === null ? '' : $profile['datebirth'];
+$profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebirth'];
 ?>
 
 

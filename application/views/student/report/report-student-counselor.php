@@ -40,6 +40,9 @@ if (!isset($reports))
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/css/autoFill.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,36 +96,34 @@ if (!isset($reports))
                 <div class="panel-body">
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table id="report_tb" class="table table-hover">
                         <thead>
                         <tr>
                             <th style="width: 40px">No</th>
                             <th>NIM</th>
                             <th>Nama</th>
                             <th style="width: 100px">Kelas</th>
-                            <th style="width: 100px">Angkatan</th>
+                            <th style="width: 100px">Sekolah</th>
                             <th style="width: 200px">Pengisian</th>
-                            <th style="width: 300px">Laporan</th>
                             <th style="width: 100px">Cetak</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $activeURL = site_url('student/print');
                         $no = 0;
                         foreach ($students as $student)
                         {
                             ++$no;
                             $student['grade'] = $student['grade'] === null ? '-' : $student['grade'];
-                            $student['period'] = $student['period'] === null ? '-' : $student['period'];
-                            $url = site_url('report/print');
+                            $student['school'] = $student['school'] === null ? '-' : $student['school'];
+                            $url = site_url('report/publish');
 
                             echo '<tr>';
                             echo "<td>{$no}</td>";
                             echo "<td>{$student['credential']}</td>";
                             echo "<td>{$student['name']}</td>";
                             echo "<td>{$student['grade']}</td>";
-                            echo "<td>{$student['period']}</td>";
+                            echo "<td>{$student['school']}</td>";
                             echo "<form id=\"login\" action=\"{$url}\" method=\"get\">";
                             echo '<td>';
                             echo "<select id=\"answer\" name=\"answer\" class=\"form-control\">";
@@ -130,14 +131,6 @@ if (!isset($reports))
                             {
                                 $answer['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answer['answer_at'])->formatLocalized('%d %B %Y %H:%M');
                                 echo "<option value=\"{$answer['id']}\">{$answer['answer_at']}</option>";
-                            }
-                            echo '</select>';
-                            echo '</td>';
-                            echo '<td>';
-                            echo "<select id=\"report\" name=\"report\" class=\"form-control\">";
-                            foreach ($reports as $report)
-                            {
-                                echo "<option value=\"{$report['id']}\">{$report['name']}</option>";
                             }
                             echo '</select>';
                             echo '</td>';
@@ -161,7 +154,13 @@ if (!isset($reports))
 <script src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/js/student/view/view-counselor.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-autofill/js/dataTables.autoFill.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/js/autoFill.bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/js/student/report/report-counselor.min.js') ?>"></script>
 </body>
 </html>
 

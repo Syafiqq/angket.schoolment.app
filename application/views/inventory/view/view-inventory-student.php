@@ -74,14 +74,18 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <?php
-            if ($allowed)
+            if ($b_test && $b_complete)
             {
                 $url = site_url('inventory/test');
                 echo "<a class=\"btn btn-default\" href=\"{$url}\" role=\"button\">Mulai Mengerjakan</a>";
             }
+            else if($b_complete)
+            {
+                echo '<span class="label label-warning">Anda Tidak Diperkenankan Mengerjakan Sekarang, Atau Hubungi Counselor Anda</span>';
+            }
             else
             {
-                echo '<span class="label label-warning">Anda Tidak Diperkenankan Mengerjakan Sekarang</span>';
+                echo '<span class="label label-warning">Lengkapi Identitas Anda Terlebih Dahulu</span>';
             }
             ?>
         </div>
