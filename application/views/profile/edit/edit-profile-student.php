@@ -8,7 +8,13 @@
  */
 
 setlocale(LC_TIME, 'id_ID');
-$profile['period'] = $profile['period'] === null ? '' : $profile['period'];
+
+if(!isset($profile))
+{
+    $profile = [];
+}
+
+$profile['school'] = $profile['school'] === null ? '' : $profile['school'];
 $profile['grade'] = $profile['grade'] === null ? '' : $profile['grade'];
 $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
 $profile['address'] = $profile['address'] === null ? '' : $profile['address'];
@@ -110,9 +116,9 @@ $profile['datebirth'] = $profile['datebirth'] === null ? '' : $profile['datebirt
 
     <form id="edit" action="<?php echo site_url('profile/do_edit_additional') ?>" method="post" class="form-horizontal">
         <div class="form-group">
-            <label for="period" class="col-sm-2 control-label">Periode</label>
+            <label for="school" class="col-sm-2 control-label">Periode</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="period" placeholder="Periode" name="period" value="<?php echo "{$profile['period']}" ?>">
+                <input type="text" class="form-control" id="school" placeholder="Periode" name="school" value="<?php echo "{$profile['school']}" ?>">
             </div>
         </div>
         <div class="form-group">

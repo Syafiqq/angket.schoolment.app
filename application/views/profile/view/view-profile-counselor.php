@@ -10,8 +10,15 @@
 use Carbon\Carbon;
 
 setlocale(LC_TIME, 'id_ID');
+if(!isset($profile))
+{
+    $profile = [];
+}
+
 $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
 $profile['address'] = $profile['address'] === null ? '-' : $profile['address'];
+$profile['school'] = $profile['school'] === null ? '-' : $profile['school'];
+$profile['school_address'] = $profile['school_address'] === null ? '-' : $profile['school_address'];
 $profile['birthplace'] = $profile['birthplace'] === null ? '-' : $profile['birthplace'];
 $profile['datebirth'] = $profile['datebirth'] === null ? '-' : Carbon::createFromFormat('Y-m-d', $profile['datebirth'])->formatLocalized('%d %B %Y');
 $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] === '-')) ? '-' : (($profile['birthplace'] === '-') ? $profile['datebirth'] : (($profile['datebirth'] === '-') ? $profile['birthplace'] : "{$profile['birthplace']}, {$profile['datebirth']}"));
@@ -99,6 +106,18 @@ $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] 
             <label class="col-sm-2 control-label">Jenis Kelamin</label>
             <div class="col-sm-10">
                 <p class="form-control-static"><?php echo "{$profile['gender']}" ?></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Sekolah</label>
+            <div class="col-sm-10">
+                <p class="form-control-static"><?php echo "{$profile['school']}" ?></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Alamat Sekolah</label>
+            <div class="col-sm-10">
+                <p class="form-control-static"><?php echo "{$profile['school_address']}" ?></p>
             </div>
         </div>
         <div class="form-group">

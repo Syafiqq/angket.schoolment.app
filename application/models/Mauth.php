@@ -18,7 +18,8 @@ class Mauth extends CI_Model
 
     public function findStudentByCredential($credential)
     {
-        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` WHERE `credential` = ?';
+        //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` WHERE `credential` = ?';
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `grade`, `school`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` WHERE `credential` = ? LIMIT 1';
         $result = $this->db->query($query, array((string)$credential));
 
         return $result->result_array();
@@ -26,7 +27,8 @@ class Mauth extends CI_Model
 
     public function findCounselorByCredential($credential)
     {
-        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
+        //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
         $result = $this->db->query($query, array((string)$credential));
 
         return $result->result_array();
@@ -35,8 +37,9 @@ class Mauth extends CI_Model
     public function registerStudent($name, $credential, $gender, $password)
     {
         $avatar = $this->generateDefaultAvatar($gender);
-        $query = 'INSERT INTO `user_student`(`id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
-        $this->db->query($query, array((string)$credential, (string)$name, (string)$gender, (string)$password, (string)$avatar));
+        //$query = 'INSERT INTO `user_student`(`id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        $query = 'INSERT INTO `user_student`(`id`, `credential`, `name`, `gender`, `password`, `grade`, `school`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        $this->db->query($query, array((string)$credential, (string)$name, (string)$gender, (string)$password, (string)$avatar, (int)1));
 
         return $this->db->insert_id();
     }
@@ -69,7 +72,8 @@ class Mauth extends CI_Model
     public function registerCounselor($name, $credential, $gender, $password)
     {
         $avatar = $this->generateDefaultAvatar($gender);
-        $query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        //$query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        $query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
         $this->db->query($query, array((string)$credential, (string)$name, (string)$gender, (string)$password, (string)$avatar));
 
         return $this->db->insert_id();
@@ -93,10 +97,10 @@ class Mauth extends CI_Model
         $this->db->query($query, array((string)$path, (int)$id));
     }
 
-    public function updateAdditionalCounselorByID($id, $address, $birthplace, $datebirth)
+    public function updateAdditionalCounselorByID($id, $school, $schoolAddress, $address, $birthplace, $datebirth)
     {
-        $query = 'UPDATE `user_counselor` SET `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
-        $this->db->query($query, array((string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
+        $query = 'UPDATE `user_counselor` SET `school` = ?, `school_address` = ?, `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$school, (string)$schoolAddress, (string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
     }
 
     public function updateAvatarStudentByID($id, $path)
@@ -105,10 +109,10 @@ class Mauth extends CI_Model
         $this->db->query($query, array((string)$path, (int)$id));
     }
 
-    public function updateAdditionalStudentByID($id, $period, $grade, $address, $birthplace, $datebirth)
+    public function updateAdditionalStudentByID($id, $school, $grade, $address, $birthplace, $datebirth)
     {
-        $query = 'UPDATE `user_student` SET `period` = ?, `grade` = ?, `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
-        $this->db->query($query, array((int)$period, (int)$grade, (string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
+        $query = 'UPDATE `user_student` SET `school` = ?, `grade` = ?, `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$school, (int)$grade, (string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
     }
 
     public function updateStudentActivation($id, $active)
@@ -119,7 +123,8 @@ class Mauth extends CI_Model
 
     public function getAllStudent()
     {
-        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` ORDER BY `id` ASC';
+        //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` ORDER BY `id` ASC';
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `grade`, `school`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` ORDER BY `id` ASC';
         $result = $this->db->query($query);
 
         return $result->result_array();
@@ -127,7 +132,8 @@ class Mauth extends CI_Model
 
     public function getAllAnsweredStudent()
     {
-        $query = 'SELECT `user_student`.`id`, `user_student`.`credential`, `user_student`.`name`, `user_student`.`gender`, `user_student`.`password`, `user_student`.`period`, `user_student`.`grade`, `user_student`.`address`, `user_student`.`birthplace`, `user_student`.`datebirth`, `user_student`.`avatar`, `user_student`.`is_active`, `user_student`.`create_at`, `user_student`.`update_at` FROM `user_student` RIGHT OUTER JOIN `answered_question` ON `user_student`.`id` = `answered_question`.`student` GROUP BY `user_student`.`id` ORDER BY `user_student`.`id` ASC';
+        //$query = 'SELECT `user_student`.`id`, `user_student`.`credential`, `user_student`.`name`, `user_student`.`gender`, `user_student`.`password`, `user_student`.`period`, `user_student`.`grade`, `user_student`.`address`, `user_student`.`birthplace`, `user_student`.`datebirth`, `user_student`.`avatar`, `user_student`.`is_active`, `user_student`.`create_at`, `user_student`.`update_at` FROM `user_student` RIGHT OUTER JOIN `answered_question` ON `user_student`.`id` = `answered_question`.`student` GROUP BY `user_student`.`id` ORDER BY `user_student`.`id` ASC';
+        $query = 'SELECT `user_student`.`id`, `user_student`.`credential`, `user_student`.`name`, `user_student`.`gender`, `user_student`.`password`, `user_student`.`grade`, `user_student`.`school`, `user_student`.`address`, `user_student`.`birthplace`, `user_student`.`datebirth`, `user_student`.`avatar`, `user_student`.`is_active`, `user_student`.`create_at`, `user_student`.`update_at` FROM `user_student` RIGHT OUTER JOIN `answered_question` ON `user_student`.`id` = `answered_question`.`student` GROUP BY `user_student`.`id` ORDER BY `user_student`.`id` ASC';
         $result = $this->db->query($query);
 
         return $result->result_array();
