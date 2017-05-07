@@ -154,10 +154,26 @@ class Minventory extends CI_Model
         return $result->result_array();
     }
 
+    public function getAnsweredResultByID($id)
+    {
+        $query = 'SELECT `answer_id`, `category`, `value` FROM `answered_result` WHERE `answer_id` = ?';
+        $result = $this->db->query($query, [(int)$id]);
+
+        return $result->result_array();
+    }
+
     public function getAnsweredUserByAnswerID($user, $answer)
     {
         $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` WHERE `student` = ? AND `id` = ? ORDER BY `answer_at` DESC';
         $result = $this->db->query($query, [(int)$user, (int)$answer]);
+
+        return $result->result_array();
+    }
+
+    public function getAnsweredByAnswerID($answer)
+    {
+        $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` WHERE `id` = ? ORDER BY `answer_at` DESC';
+        $result = $this->db->query($query, [(int)$answer]);
 
         return $result->result_array();
     }

@@ -26,7 +26,7 @@ class Manswer extends CI_Model
 
     public function getAll()
     {
-        $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` WHERE 1';
+        $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` ORDER BY `answer_at` DESC';
         $result = $this->db->query($query);
 
         return $result->result_array();
