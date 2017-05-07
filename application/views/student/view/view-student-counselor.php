@@ -43,6 +43,9 @@ if (!isset($window))
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/css/autoFill.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -99,16 +102,16 @@ if (!isset($window))
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table id="student_tb" class="table table-hover">
                         <thead>
                         <tr>
                             <th style="width: 40px">No</th>
-                            <th>NIM</th>
+                            <th>NISN</th>
                             <th>Nama</th>
                             <th style="width: 150px">Kelas</th>
-                            <th style="width: 150px">Angkatan</th>
+                            <th style="width: 150px">Sekolah</th>
                             <th style="width: 150px">Jenis Kelamin</th>
-                            <th style="width: 150px">Jawab</th>
+                            <th style="width: 150px">Pengisian</th>
                             <th style="width: 150px">Izinkan</th>
                         </tr>
                         </thead>
@@ -120,10 +123,10 @@ if (!isset($window))
                             ++$no;
                             $student['gender'] = $student['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
                             $student['grade'] = $student['grade'] === null ? '-' : $student['grade'];
-                            $student['period'] = $student['period'] === null ? '-' : $student['period'];
-                            $student['last_answer'] = $student['last_answer'] === null ? '-' : $student['last_answer'];
-                            $activation = $student['last_answer'] === '-' ? '' : "<button data-student-id=\"{$student['id']}\" data-student-action=\"{$activeURL}\" class=\"btn btn-default do-active\" type=\"submit\">Aktifkan</button>";
-                            if ($student['last_answer'] !== '-')
+                            $student['school'] = $student['school'] === null ? '-' : $student['school'];
+                            $student['last_answer'] = $student['last_answer'] === null ? null : $student['last_answer'];
+                            $activation = $student['last_answer'] === null ? '<p>Sudah Memiliki Izin</p>' : "<button data-student-id=\"{$student['id']}\" data-student-action=\"{$activeURL}\" class=\"btn btn-default do-active\" type=\"submit\">Aktifkan</button>";
+                            if ($student['last_answer'] !== null)
                             {
                                 $student['last_answer'] = Carbon::createFromFormat('Y-m-d H:i:s', $student['last_answer']);
                                 if ((int)$student['is_active'] === 1)
@@ -142,13 +145,17 @@ if (!isset($window))
                                     }
                                 }
                             }
+                            else
+                            {
+                                $student['last_answer'] = '<p>Belum Pernah</p>';
+                            }
 
                             echo '<tr>';
                             echo "<td>{$no}</td>";
                             echo "<td>{$student['credential']}</td>";
                             echo "<td>{$student['name']}</td>";
                             echo "<td>{$student['grade']}</td>";
-                            echo "<td>{$student['period']}</td>";
+                            echo "<td>{$student['school']}</td>";
                             echo "<td>{$student['gender']}</td>";
                             echo "<td>{$student['last_answer']}</td>";
                             echo "<td>{$activation}</td>";
@@ -170,6 +177,12 @@ if (!isset($window))
 <script src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-autofill/js/dataTables.autoFill.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/js/autoFill.bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>"></script>
 <script src="<?php echo base_url('/assets/js/student/view/view-counselor.min.js') ?>"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ $profile['grade'] = $profile['grade'] === null ? '' : $profile['grade'];
 $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
 $profile['address'] = $profile['address'] === null ? '' : $profile['address'];
 $profile['birthplace'] = $profile['birthplace'] === null ? '' : $profile['birthplace'];
-$profile['datebirth'] = $profile['datebirth'] === null ? '' : $profile['datebirth'];
+$profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebirth'];
 ?>
 
 
@@ -116,9 +116,9 @@ $profile['datebirth'] = $profile['datebirth'] === null ? '' : $profile['datebirt
 
     <form id="edit" action="<?php echo site_url('profile/do_edit_additional') ?>" method="post" class="form-horizontal">
         <div class="form-group">
-            <label for="school" class="col-sm-2 control-label">Periode</label>
+            <label for="school" class="col-sm-2 control-label">Sekolah</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="school" placeholder="Periode" name="school" value="<?php echo "{$profile['school']}" ?>">
+                <input type="text" class="form-control" id="school" placeholder="Sekolah" name="school" value="<?php echo "{$profile['school']}" ?>">
             </div>
         </div>
         <div class="form-group">

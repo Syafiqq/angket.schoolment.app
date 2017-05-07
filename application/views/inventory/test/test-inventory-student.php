@@ -6,6 +6,11 @@
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
+
+if(!isset($questions))
+{
+    $questions = [];
+}
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -25,6 +30,9 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/css/autoFill.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,32 +78,42 @@
 
 <div class="container">
     <form id="test" action="<?php echo site_url('inventory/do_calculate') ?>" method="post" class="form-horizontal">
-        <?php
-        foreach ($questions as $no => $question)
-        {
-            ++$no;
-            $id = "q{$question['id']}";
-            echo '<div class="form-group">';
-            echo '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">';
-            echo "<p>{$no}</p>";
-            echo '</div>';
-            echo '<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">';
-            echo "<p>{$question['question']}</p>";
-            echo '</div>';
-            echo '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">';
-            echo "<select name=\"question[{$id}]\" class=\"form-control\">";
-            echo '<option class="option-select-disable" value="-1"></option>';
-            foreach ($options as $option)
-            {
-                echo "<option value=\"{$option['id']}\">{$option['name']}</option>";
-            }
-            echo '</select>';
-            echo '</div>';
-            echo '</div>';
-        }
-        ?>
+        <div class="table table-responsive">
+            <table id="inventory_test" class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 40px">No</th>
+                    <th>Pertanyaan</th>
+                    <th style="width: 200px">Jawaban</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $_no = 0;
+                foreach ($questions as $no => $question)
+                {
+                    ++$_no;
+                    $id = "q{$question['id']}";
+                    echo '<tr>';
+                    echo "<td>{$_no}</td>";
+                    echo "<td>{$question['question']}</td>";
+                    echo '<td>';
+                    echo "<select name=\"question[{$id}]\" class=\"form-control\">";
+                    echo '<option class="option-select-disable" value="-1"></option>';
+                    foreach ($options as $option)
+                    {
+                        echo "<option value=\"{$option['id']}\">{$option['name']}</option>";
+                    }
+                    echo '</select>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 20px">
                 <button type="submit" class="btn btn-default">Selesai</button>
             </div>
         </div>
@@ -110,6 +128,12 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-autofill/js/dataTables.autoFill.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/js/autoFill.bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/inventory/test/test-student.min.js') ?>"></script>
 </body>
 </html>

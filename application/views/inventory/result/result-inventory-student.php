@@ -98,10 +98,9 @@ if (!isset($categories))
                         <tr>
                             <th style="width: 40px">No</th>
                             <th style="width: 150px">Pengisian</th>
-                            <th style="width: 150px"><?php echo $categories[0]['name'] ?></th>
-                            <th style="width: 150px"><?php echo $categories[1]['name'] ?></th>
-                            <th style="width: 150px"><?php echo $categories[2]['name'] ?></th>
-                            <th style="width: 150px"><?php echo $categories[3]['name'] ?></th>
+                            <?php foreach ($categories as $cv)
+                                echo "<th style=\"width: 150px\">{$cv['name']}</th>"
+                                ?>
                             <th style="width: 100px">Tampilkan</th>
                         </tr>
                         </thead>
@@ -118,7 +117,7 @@ if (!isset($categories))
                             foreach ($categories as $cv)
                             {
                                 $cid = ".{$cv['id']}";
-                                printf('<td>%.4f</td>', $av['category'][$cid]);
+                                printf('<td>%.4f %%</td>', $av['category'][$cid]);
                             }
                             $url = site_url("report/display?answer={$av['id']}");
                             echo "<td><a class=\"btn btn-default\" href=\"{$url}\" role=\"button\">Tampilkan</a></td>";
