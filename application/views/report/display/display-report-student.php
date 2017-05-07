@@ -6,6 +6,38 @@
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
+
+use Carbon\Carbon;
+
+setlocale(LC_TIME, 'id_ID');
+if (!isset($profile))
+{
+    $profile = [];
+}
+
+if (!isset($categories))
+{
+    $categories = [];
+}
+
+if (!isset($result))
+{
+    $result = [];
+}
+if (!isset($answered))
+{
+    $answered = [];
+}
+
+$profile['school'] = $profile['school'] === null ? '-' : $profile['school'];
+$profile['grade'] = $profile['grade'] === null ? '-' : $profile['grade'];
+$profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
+$profile['address'] = $profile['address'] === null ? '-' : $profile['address'];
+$profile['birthplace'] = $profile['birthplace'] === null ? '-' : $profile['birthplace'];
+$profile['datebirth'] = $profile['datebirth'] === null ? '-' : Carbon::createFromFormat('Y-m-d', $profile['datebirth'])->formatLocalized('%d %B %Y');
+$profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] === '-')) ? '-' : (($profile['birthplace'] === '-') ? $profile['datebirth'] : (($profile['datebirth'] === '-') ? $profile['birthplace'] : "{$profile['birthplace']}, {$profile['datebirth']}"));
+$answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answer_at'])->formatLocalized('%d %B %Y %H:%M');
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +47,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Print</title>
+    <title>Laporan</title>
     <meta name="a temlplate" content="">
 
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('/apple-touch-icon.png') ?>">
@@ -79,8 +111,8 @@
 <div class="container" id="print_container">
     <div class="row vertical-align">
         <div class="col-sm-12 text-center">
-            <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">{THIS IS TITLE}</p>
-            <p id="content_subtitle" style="font-size: 16px">{THIS IS SUBTITLE}</p>
+            <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">INVENTORY LGBT</p>
+            <p id="content_subtitle" style="font-size: 16px">(LESBIAN, GAY, BISEXUAL, DAN TRANSGENDER)</p>
         </div>
     </div>
     <div class="row vertical-align">
@@ -88,13 +120,13 @@
             <p>Nama :</p>
         </div>
         <div class="col-sm-3 no-padding-side">
-            <p>{This is Name}</p>
+            <p><?php echo $profile['name'] ?></p>
         </div>
         <div class="col-sm-3 text-right">
             <p>TTL :</p>
         </div>
         <div class="col-sm-3 no-padding-side">
-            <p>{This is TTL}</p>
+            <p><?php echo $profile['birth'] ?></p>
         </div>
     </div>
     <div class="row vertical-align">
@@ -102,13 +134,13 @@
             <p>Jenis Kelamin :</p>
         </div>
         <div class="col-sm-3 no-padding-side">
-            <p>{This is Gender}</p>
+            <p><?php echo $profile['gender'] ?></p>
         </div>
         <div class="col-sm-3 text-right">
             <p>Kelas :</p>
         </div>
         <div class="col-sm-3 no-padding-side">
-            <p>{This is Class}</p>
+            <p><?php echo $profile['grade'] ?></p>
         </div>
     </div>
     <div class="row vertical-align">
@@ -116,160 +148,76 @@
             <p>Sekolah :</p>
         </div>
         <div class="col-sm-3 no-padding-side">
-            <p>{This is School}</p>
+            <p><?php echo $profile['school'] ?></p>
         </div>
         <div class="col-sm-3 text-right">
             <p>Tanggal Pengisian :</p>
         </div>
         <div class="col-sm-3 no-padding-side">
-            <p>{This is Date}</p>
+            <p><?php echo $answered['answer_at'] ?></p>
         </div>
     </div>
     <div class="row vertical-align" style="margin-top: 1cm">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Variabel :</p>
-        </div>
-        <div class="col-sm-8  no-padding-side">
-            <p>{This IS Variable}</p>
-        </div>
-        <div class="col-sm-1">
+        <div class="col-sm-12">
         </div>
     </div>
-    <div class="row vertical-align">
-        <div class="col-sm-1">
+    <?php
+    foreach ($result as $rv)
+    {
+        ?>
+        <div class="row vertical-align">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-2 text-right">
+                <p>Variabel :</p>
+            </div>
+            <div class="col-sm-8  no-padding-side">
+                <p><?php echo $categories[".{$rv['category']}"]['name']?></p>
+            </div>
+            <div class="col-sm-1">
+            </div>
         </div>
-        <div class="col-sm-2 text-right">
-            <p>Prosentase :</p>
+        <div class="row vertical-align">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-2 text-right">
+                <p>Prosentase :</p>
+            </div>
+            <div class="col-sm-8  no-padding-side">
+                <p><?php printf('<td>%.4f %%</td>',$rv['value']);?></p>
+            </div>
+            <div class="col-sm-1">
+            </div>
         </div>
-        <div class="col-sm-8  no-padding-side">
-            <p>{This IS Prosentasi}</p>
+        <div class="row">
+            <div class="col-sm-1 ">
+            </div>
+            <div class="col-sm-2 text-right">
+                <p>Interpretasi :</p>
+            </div>
+            <div class="col-sm-8 no-padding-side text-justified">
+                <ol>
+                    <?php foreach ($rv['interpretation'] as $iv)
+                    {
+                        echo "<li>{$iv}</li>";
+                    }
+                        ?>
+                </ol>
+            </div>
+            <div class="col-sm-1">
+            </div>
         </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1 ">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Interpretasi :</p>
-        </div>
-        <div class="col-sm-8 no-padding-side text-justified">
-            <p>{It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.}</p>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
+        <?php
+    }
+    ?>
 
-    <div class="row vertical-align" style="margin-top: .35cm">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Variabel :</p>
-        </div>
-        <div class="col-sm-8  no-padding-side">
-            <p>{This IS Variable}</p>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="row vertical-align">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Prosentase :</p>
-        </div>
-        <div class="col-sm-8  no-padding-side">
-            <p>{This IS Prosentasi}</p>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1 ">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Interpretasi :</p>
-        </div>
-        <div class="col-sm-8 no-padding-side text-justified">
-            <p>{It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.}</p>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-
-    <div class="row vertical-align" style="margin-top: .35cm">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Variabel :</p>
-        </div>
-        <div class="col-sm-8  no-padding-side">
-            <p>{This IS Variable}</p>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="row vertical-align">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Prosentase :</p>
-        </div>
-        <div class="col-sm-8  no-padding-side">
-            <p>{This IS Prosentasi}</p>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1 ">
-        </div>
-        <div class="col-sm-2 text-right">
-            <p>Interpretasi :</p>
-        </div>
-        <div class="col-sm-8 no-padding-side text-justified">
-            <p>{It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.}</p>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
     <div class="row" style="margin-top: .35cm">
         <div class="col-sm-1 ">
         </div>
         <div class="col-sm-10 no-padding-side text-justified">
-            <p>{Hasil diatas merupakan data diri (NAMA) dalam kecenderungannya terhadap LGBT. Apabila terdapat hasil yang pdirasa tidak sesuai atau memerlukan penjelasan lebih lanjut terkait kondisi diri anda, silahkan datang kepada konselor untuk mendiskusikan hal tersebt lebih lanjut.}</p>
+            <p>Hasil diatas merupakan data diri <b><?php echo $profile['name'] ?></b> dalam kecenderungannya terhadap LGBT. Apabila terdapat hasil yang pdirasa tidak sesuai atau memerlukan penjelasan lebih lanjut terkait kondisi diri anda, silahkan datang kepada konselor untuk mendiskusikan hal tersebt lebih lanjut.</p>
         </div>
         <div class="col-sm-1">
-        </div>
-    </div>
-    <div class="row" style="margin-top: .5cm">
-        <div class="col-sm-8 ">
-        </div>
-        <div class="col-sm-4 no-padding-side">
-            <p>{Malang, Date}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8 ">
-        </div>
-        <div class="col-sm-4 no-padding-side">
-            <p>{Konselor}</p>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 1.2cm">
-        <div class="col-sm-8 ">
-        </div>
-        <div class="col-sm-4 no-padding-side">
-            <p>{Name}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8 ">
-        </div>
-        <div class="col-sm-4 no-padding-side">
-            <p>{NIP}</p>
         </div>
     </div>
 </div>
