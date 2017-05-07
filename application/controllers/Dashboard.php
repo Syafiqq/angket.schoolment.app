@@ -44,7 +44,7 @@ class Dashboard extends CI_Controller
         $this->view();
     }
 
-    private function view()
+    public function view()
     {
         switch ($_SESSION['user']['auth']['role'])
         {
@@ -60,6 +60,35 @@ class Dashboard extends CI_Controller
 
                 return;
             }
+        }
+    }
+
+    public function do_generate_coupon()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            switch ($_SESSION['user']['auth']['role'])
+            {
+                case 'counselor' :
+                {
+                    $coupon = strtoupper(bin2hex(openssl_random_pseudo_bytes(4)));
+                    $this->load->model('mcoupon', 'coupon');
+                    $this->coupon->insert($_SESSION['user']['auth']['id'], $coupon);
+                    echo apiMakeCallback(API_SUCCESS, 'Generate Kupon Berhasil', ['notify' => [['Generate Kupon Berhasil', 'success']], 'coupon' => $coupon]);
+
+                    return;
+                }
+                case 'student' :
+                {
+                    echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+
+                    return;
+                }
+            }
+        }
+        else
+        {
+            echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
     }
 }

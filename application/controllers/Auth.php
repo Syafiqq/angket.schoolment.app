@@ -227,59 +227,70 @@ class Auth extends CI_Controller
                 isset($_POST['credential']) &&
                 isset($_POST['role']) &&
                 isset($_POST['gender']) &&
-                isset($_POST['password'])
+                isset($_POST['password']) &&
+                isset($_POST['coupon'])
             )
             {
-                $_POST['credential'] = strtolower($_POST['credential']);
-                $_POST['role'] = strtolower($_POST['role']);
-                if (($_POST['role'] == 'student') || ($_POST['role'] == 'counselor'))
+                $this->load->model('mcoupon', 'coupon');
+                $coupon = $this->coupon->getByCoupon($_POST['coupon']);
+                if (count($coupon) > 0)
                 {
-                    $_POST['gender'] = strtolower($_POST['gender']);
-                    if (($_POST['gender'] == 'male') || ($_POST['gender'] == 'female'))
+                    $this->coupon->deleteByCoupon($_POST['coupon']);
+                    $_POST['credential'] = strtolower($_POST['credential']);
+                    $_POST['role'] = strtolower($_POST['role']);
+                    if (($_POST['role'] == 'student') || ($_POST['role'] == 'counselor'))
                     {
-                        $this->load->model('mauth', 'auth');
-                        switch ($_POST['role'])
+                        $_POST['gender'] = strtolower($_POST['gender']);
+                        if (($_POST['gender'] == 'male') || ($_POST['gender'] == 'female'))
                         {
-                            case 'student' :
+                            $this->load->model('mauth', 'auth');
+                            switch ($_POST['role'])
                             {
-                                $result = $this->auth->findStudentByCredential($_POST['credential']);
-                                if (count($result) == 0)
+                                case 'student' :
                                 {
-                                    $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                                    $this->auth->registerStudent($_POST['name'], $_POST['credential'], $_POST['gender'], $_POST['password']);
-                                    echo apiMakeCallback(API_SUCCESS, 'Register Sukses', ['notify' => [['Register Success', 'success']]], site_url("auth/login?role={$_POST['role']}"));
+                                    $result = $this->auth->findStudentByCredential($_POST['credential']);
+                                    if (count($result) == 0)
+                                    {
+                                        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                                        $this->auth->registerStudent($_POST['name'], $_POST['credential'], $_POST['gender'], $_POST['password']);
+                                        echo apiMakeCallback(API_SUCCESS, 'Register Sukses', ['notify' => [['Register Success', 'success']]], site_url("auth/login?role={$_POST['role']}"));
+                                    }
+                                    else
+                                    {
+                                        echo apiMakeCallback(API_NOT_ACCEPTABLE, 'NISN Sudah Terdaftar', ['notify' => [['NISN Sudah Terdaftar', 'info']]]);
+                                    }
                                 }
-                                else
+                                    break;
+                                case 'counselor' :
                                 {
-                                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'NISN Sudah Terdaftar', ['notify' => [['NISN Sudah Terdaftar', 'info']]]);
+                                    $result = $this->auth->findCounselorByCredential($_POST['credential']);
+                                    if (count($result) == 0)
+                                    {
+                                        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                                        $this->auth->registerCounselor($_POST['name'], $_POST['credential'], $_POST['gender'], $_POST['password']);
+                                        echo apiMakeCallback(API_SUCCESS, 'Register Sukses', ['notify' => [['Register Sukses', 'success']]], site_url("auth/login?role={$_POST['role']}"));
+                                    }
+                                    else
+                                    {
+                                        echo apiMakeCallback(API_NOT_ACCEPTABLE, 'NIP/NIK Sudah Terdaftar', ['notify' => [['NIP/NIK Sudah Terdaftar', 'info']]]);
+                                    }
                                 }
+                                    break;
                             }
-                                break;
-                            case 'counselor' :
-                            {
-                                $result = $this->auth->findCounselorByCredential($_POST['credential']);
-                                if (count($result) == 0)
-                                {
-                                    $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                                    $this->auth->registerCounselor($_POST['name'], $_POST['credential'], $_POST['gender'], $_POST['password']);
-                                    echo apiMakeCallback(API_SUCCESS, 'Register Sukses', ['notify' => [['Register Sukses', 'success']]], site_url("auth/login?role={$_POST['role']}"));
-                                }
-                                else
-                                {
-                                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'NIP/NIK Sudah Terdaftar', ['notify' => [['NIP/NIK Sudah Terdaftar', 'info']]]);
-                                }
-                            }
-                                break;
+                        }
+                        else
+                        {
+                            echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Jenis Kelamin Tidak Diketahui', ['notify' => [['Jenis Kelamin Tidak Diketahui', 'info']]]);
                         }
                     }
                     else
                     {
-                        echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Jenis Kelamin Tidak Diketahui', ['notify' => [['Jenis Kelamin Tidak Diketahui', 'info']]]);
+                        echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Peran Tidak Diketahui', ['notify' => [['Peran Tidak Diketahui', 'info']]]);
                     }
                 }
                 else
                 {
-                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Peran Tidak Diketahui', ['notify' => [['Peran Tidak Diketahui', 'info']]]);
+                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Kupon Tidak Berlaku', ['notify' => [['Kupon Tidak Berlaku', 'info']]]);
                 }
             }
             else

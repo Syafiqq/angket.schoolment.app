@@ -62,6 +62,10 @@
                     <label for="re-password">Ulangi Password</label>
                     <input type="password" class="form-control" id="re-password" placeholder="Ulangi Password" name="re_password">
                 </div>
+                <div class="form-group">
+                    <label for="coupon">Kupon</label>
+                    <input type="text" class="form-control" id="coupon" placeholder="Kupon" name="coupon">
+                </div>
                 <input type="hidden" name="role" value="counselor">
                 <button type="submit" class="btn btn-default">Register</button>
             </form>

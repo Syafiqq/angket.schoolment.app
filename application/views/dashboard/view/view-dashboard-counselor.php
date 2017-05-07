@@ -72,6 +72,15 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button id="coupon_generator" class="btn btn-default" data-coupon-action="<?php echo site_url('dashboard/do_generate_coupon') ?>" type="button">Generate Coupon</button>
+        </div>
+    </div>
+</div>
+
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
 <script src="<?php echo base_url('/assets/js/plugins.js') ?>"></script>
