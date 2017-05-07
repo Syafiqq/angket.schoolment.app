@@ -18,7 +18,7 @@ class Mauth extends CI_Model
 
     public function findStudentByCredential($credential)
     {
-        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `on_create`, `on_update` FROM `user_student` WHERE `credential` = ?';
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` WHERE `credential` = ?';
         $result = $this->db->query($query, array((string)$credential));
 
         return $result->result_array();
@@ -26,7 +26,7 @@ class Mauth extends CI_Model
 
     public function findCounselorByCredential($credential)
     {
-        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `on_create`, `on_update` FROM `user_counselor` WHERE `credential` = ?';
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
         $result = $this->db->query($query, array((string)$credential));
 
         return $result->result_array();
@@ -35,7 +35,7 @@ class Mauth extends CI_Model
     public function registerStudent($name, $credential, $gender, $password)
     {
         $avatar = $this->generateDefaultAvatar($gender);
-        $query = 'INSERT INTO `user_student`(`id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `on_create`, `on_update`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        $query = 'INSERT INTO `user_student`(`id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
         $this->db->query($query, array((string)$credential, (string)$name, (string)$gender, (string)$password, (string)$avatar));
 
         return $this->db->insert_id();
@@ -69,7 +69,7 @@ class Mauth extends CI_Model
     public function registerCounselor($name, $credential, $gender, $password)
     {
         $avatar = $this->generateDefaultAvatar($gender);
-        $query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `on_create`, `on_update`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        $query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
         $this->db->query($query, array((string)$credential, (string)$name, (string)$gender, (string)$password, (string)$avatar));
 
         return $this->db->insert_id();
