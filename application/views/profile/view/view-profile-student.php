@@ -10,7 +10,12 @@
 use Carbon\Carbon;
 
 setlocale(LC_TIME, 'id_ID');
-$profile['period'] = $profile['period'] === null ? '-' : $profile['period'];
+if (!isset($profile))
+{
+    $profile = [];
+}
+
+$profile['school'] = $profile['school'] === null ? '-' : $profile['school'];
 $profile['grade'] = $profile['grade'] === null ? '-' : $profile['grade'];
 $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
 $profile['address'] = $profile['address'] === null ? '-' : $profile['address'];
@@ -105,9 +110,9 @@ $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] 
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Periode</label>
+            <label class="col-sm-2 control-label">Sekolah</label>
             <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['period']}" ?></p>
+                <p class="form-control-static"><?php echo "{$profile['school']}" ?></p>
             </div>
         </div>
         <div class="form-group">

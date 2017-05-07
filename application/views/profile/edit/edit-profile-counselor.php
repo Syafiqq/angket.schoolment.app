@@ -8,7 +8,14 @@
  */
 
 setlocale(LC_TIME, 'id_ID');
+if(!isset($profile))
+{
+    $profile = [];
+}
+
 $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
+$profile['school'] = $profile['school'] === null ? '' : $profile['school'];
+$profile['school_address'] = $profile['school_address'] === null ? '' : $profile['school_address'];
 $profile['address'] = $profile['address'] === null ? '' : $profile['address'];
 $profile['birthplace'] = $profile['birthplace'] === null ? '' : $profile['birthplace'];
 $profile['datebirth'] = $profile['datebirth'] === null ? '' : $profile['datebirth'];
@@ -107,6 +114,18 @@ $profile['datebirth'] = $profile['datebirth'] === null ? '' : $profile['datebirt
     </form>
 
     <form id="edit" action="<?php echo site_url('profile/do_edit_additional') ?>" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label for="school" class="col-sm-2 control-label">Sekolah</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="school" placeholder="Sekolah" name="school" value="<?php echo "{$profile['school']}" ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="school_address" class="col-sm-2 control-label">Alamat Sekolah</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="school_address" placeholder="Alamat Sekolah" name="school_address" value="<?php echo "{$profile['school_address']}" ?>">
+            </div>
+        </div>
         <div class="form-group">
             <label for="address" class="col-sm-2 control-label">Alamat</label>
             <div class="col-sm-10">
