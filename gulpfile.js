@@ -37,6 +37,21 @@ gulp.task('watch-minify-js', function ()
     });
 });
 
+gulp.task('watch-minify-css', function ()
+{
+    // Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event
+    return watch('raw/css/**/*.css', function (cb)
+    {
+        return gulp.src('raw/css/**/*.css')
+            .pipe(cleanCSS({compatibility: 'ie8'}))
+            .pipe(rename({
+                suffix: ".min",
+                extname: ".css"
+            }))
+            .pipe(gulp.dest('assets/css'));
+    });
+});
+
 gulp.task('minify-css', function ()
 {
     return gulp.src('raw/css/**/*.css')
