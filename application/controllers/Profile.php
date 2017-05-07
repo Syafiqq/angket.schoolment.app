@@ -136,9 +136,11 @@ class Profile extends CI_Controller
             if (isset($_POST['address']) &&
                 isset($_POST['birthplace']) &&
                 isset($_POST['datebirth']) &&
+                isset($_POST['school']) &&
                 ($_SESSION['user']['auth']['role'] === 'student' ?
-                    (isset($_POST['period']) && isset($_POST['grade']))
-                    : true)
+                    (isset($_POST['grade'])) : true) &&
+                ($_SESSION['user']['auth']['role'] === 'counselor' ?
+                    (isset($_POST['school_address'])) : true)
             )
             {
                 $this->load->model('mauth', 'auth');
@@ -146,14 +148,13 @@ class Profile extends CI_Controller
                 {
                     case 'counselor' :
                     {
-                        $this->auth->updateAdditionalCounselorByID($_SESSION['user']['auth']['id'], $_POST['address'], $_POST['birthplace'], $_POST['datebirth']);
-
+                        $this->auth->updateAdditionalCounselorByID($_SESSION['user']['auth']['id'], $_POST['school'], $_POST['school_address'], $_POST['address'], $_POST['birthplace'], $_POST['datebirth']);
+                        $_SESSION['user']['auth']['school_address'] = $_POST['school_address'];
                         break;
                     }
                     case 'student' :
                     {
-                        $this->auth->updateAdditionalStudentByID($_SESSION['user']['auth']['id'], $_POST['period'], $_POST['grade'], $_POST['address'], $_POST['birthplace'], $_POST['datebirth']);
-                        $_SESSION['user']['auth']['period'] = $_POST['period'];
+                        $this->auth->updateAdditionalStudentByID($_SESSION['user']['auth']['id'], $_POST['school'], $_POST['grade'], $_POST['address'], $_POST['birthplace'], $_POST['datebirth']);
                         $_SESSION['user']['auth']['grade'] = $_POST['grade'];
                         break;
                     }
@@ -161,6 +162,7 @@ class Profile extends CI_Controller
                 $_SESSION['user']['auth']['address'] = $_POST['address'];
                 $_SESSION['user']['auth']['birthplace'] = $_POST['birthplace'];
                 $_SESSION['user']['auth']['datebirth'] = $_POST['datebirth'];
+                $_SESSION['user']['auth']['school'] = $_POST['school'];
                 echo apiMakeCallback(API_SUCCESS, 'Update Berhasil', ['notify' => [['Update Berhasil', 'success']]], site_url('profile/edit'));
             }
             else
