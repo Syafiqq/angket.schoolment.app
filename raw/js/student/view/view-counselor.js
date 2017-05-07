@@ -8,6 +8,8 @@
 
 (function ($)
 {
+    $('table#student_tb').DataTable();
+
     $(function ()
     {
         $("button.do-active").on('click', function ()

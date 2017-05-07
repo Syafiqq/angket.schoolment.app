@@ -39,17 +39,10 @@
         }
     });
 
-    $('input#period').datetimepicker({
-        format: 'YYYY',
-        useCurrent: false,
-        defaultDate: $(this).attr("value") ? moment($(this).attr("value")) : false,
-        maxDate: moment()
-    });
-
     $('input#datebirth').datetimepicker({
         format: 'YYYY-MM-DD',
         useCurrent: false,
-        defaultDate: moment($(this).attr("value")),
+        defaultDate: $(this).attr("value") ? moment($(this).attr("value")) : false,
         maxDate: moment()
     });
 
