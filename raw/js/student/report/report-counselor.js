@@ -8,6 +8,9 @@
 
 (function ($)
 {
+    $('table#report_tb').DataTable();
+
+
     $(function ()
     {
         $("a#logout").on('click', function (event)
