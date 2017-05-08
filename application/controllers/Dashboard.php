@@ -50,13 +50,13 @@ class Dashboard extends CI_Controller
         {
             case 'counselor' :
             {
-                $this->load->view('dashboard/view/view-dashboard-counselor');
+                $this->load->view('dashboard/view/counselor-view-dashboard');
 
                 return;
             }
             case 'student' :
             {
-                $this->load->view('dashboard/view/view-dashboard-student');
+                $this->load->view('dashboard/view/student-view-dashboard');
 
                 return;
             }

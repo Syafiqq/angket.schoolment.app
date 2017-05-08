@@ -117,7 +117,7 @@ class Report extends CI_Controller
                         $counselor = $_SESSION['user']['auth'];
 
 
-                        $this->load->view('report/print/print-report-counselor', compact('counselor', 'profile', 'categories', 'result', 'answered'));
+                        $this->load->view('report/publish/counselor-publish-report', compact('counselor', 'profile', 'categories', 'result', 'answered'));
                     }
                     else
                     {
@@ -132,7 +132,7 @@ class Report extends CI_Controller
                 break;
             case 'student' :
             {
-                $this->load->view('report/print/print-report-student');
+                redirect('/inventory/result');
 
                 return;
             }
@@ -215,7 +215,7 @@ class Report extends CI_Controller
 
                         $profile = $_SESSION['user']['auth'];
 
-                        $this->load->view('report/display/display-report-student', compact('profile', 'categories', 'result', 'answered'));
+                        $this->load->view('report/display/student-display-report', compact('profile', 'categories', 'result', 'answered'));
 
                         return;
                     }

@@ -49,13 +49,13 @@ class Profile extends CI_Controller
         {
             case 'counselor' :
             {
-                $this->load->view('profile/view/view-profile-counselor', ['profile' => $_SESSION['user']['auth']]);
+                $this->load->view('profile/view/counselor-view-profile', ['profile' => $_SESSION['user']['auth']]);
 
                 return;
             }
             case 'student' :
             {
-                $this->load->view('profile/view/view-profile-student', ['profile' => $_SESSION['user']['auth']]);
+                $this->load->view('profile/view/student-view-profile', ['profile' => $_SESSION['user']['auth']]);
 
                 return;
             }
@@ -68,13 +68,13 @@ class Profile extends CI_Controller
         {
             case 'counselor' :
             {
-                $this->load->view('profile/edit/edit-profile-counselor', ['profile' => $_SESSION['user']['auth']]);
+                $this->load->view('profile/edit/counselor-edit-profile', ['profile' => $_SESSION['user']['auth']]);
 
                 return;
             }
             case 'student' :
             {
-                $this->load->view('profile/edit/edit-profile-student', ['profile' => $_SESSION['user']['auth']]);
+                $this->load->view('profile/edit/student-edit-profile', ['profile' => $_SESSION['user']['auth']]);
 
                 return;
             }

@@ -54,13 +54,13 @@ class Auth extends CI_Controller
             {
                 case 'counselor' :
                 {
-                    $this->load->view('auth/login/login-counselor');
+                    $this->load->view('auth/login/counselor-login-auth');
 
                     return;
                 }
                 case 'student' :
                 {
-                    $this->load->view('auth/login/login-student');
+                    $this->load->view('auth/login/student-login-auth');
 
                     return;
                 }
@@ -83,13 +83,13 @@ class Auth extends CI_Controller
             {
                 case 'counselor' :
                 {
-                    $this->load->view('auth/register/register-counselor');
+                    $this->load->view('auth/register/counselor-register-auth');
 
                     return;
                 }
                 case 'student' :
                 {
-                    $this->load->view('auth/register/register-student');
+                    $this->load->view('auth/register/student-register-auth');
 
                     return;
                 }
@@ -115,13 +115,13 @@ class Auth extends CI_Controller
                 {
                     case 'counselor' :
                     {
-                        $this->load->view('auth/recover/recover-counselor-confirm', ['token' => urldecode($_GET['token'])]);
+                        $this->load->view('auth/recover/counselor-recover-confirm-auth', ['token' => urldecode($_GET['token'])]);
 
                         return;
                     }
                     case 'student' :
                     {
-                        $this->load->view('auth/recover/recover-student-confirm', ['token' => urldecode($_GET['token'])]);
+                        $this->load->view('auth/recover/student-recover-confirm-auth', ['token' => urldecode($_GET['token'])]);
 
                         return;
                     }
@@ -135,13 +135,13 @@ class Auth extends CI_Controller
                 {
                     case 'counselor' :
                     {
-                        $this->load->view('auth/recover/recover-counselor');
+                        $this->load->view('auth/recover/counselor-recover-auth');
 
                         return;
                     }
                     case 'student' :
                     {
-                        $this->load->view('auth/recover/recover-student');
+                        $this->load->view('auth/recover/sutdent-recover-auth');
 
                         return;
                     }

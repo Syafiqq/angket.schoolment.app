@@ -56,7 +56,7 @@ class Inventory extends CI_Controller
                 $favourables = $this->inventory->getFavourable();
                 $categories = $this->inventory->getCategory();
                 $questions = $this->inventory->getQuestion();
-                $this->load->view('inventory/view/view-inventory-counselor', compact('favourables', 'categories', 'questions'));
+                $this->load->view('inventory/view/counselor-view-inventory', compact('favourables', 'categories', 'questions'));
 
                 return;
             }
@@ -64,7 +64,7 @@ class Inventory extends CI_Controller
             {
                 $b_test = $this->allowedToTakeTest();
                 $b_complete = $this->isStudentIdentityIsComplete();
-                $this->load->view('inventory/view/view-inventory-student', compact('b_test', 'b_complete'));
+                $this->load->view('inventory/view/student-view-inventory', compact('b_test', 'b_complete'));
 
                 return;
             }
@@ -143,7 +143,7 @@ class Inventory extends CI_Controller
                         }
                     }
                     $options = $this->inventory->getOptions();
-                    $this->load->view('inventory/test/test-inventory-student', compact('questions', 'options'));
+                    $this->load->view('inventory/test/student-test-inventory', compact('questions', 'options'));
                 }
                 else
                 {
@@ -219,7 +219,7 @@ class Inventory extends CI_Controller
                     $answered[".{$rv['answer_id']}"]['category'][".{$rv['category']}"] = $rv['value'];
                 }
                 unset($_answered, $result);
-                $this->load->view('inventory/result/result-inventory-student', compact('answered', 'categories'));
+                $this->load->view('inventory/result/student-result-inventory', compact('answered', 'categories'));
 
                 return;
             }
@@ -235,20 +235,20 @@ class Inventory extends CI_Controller
                 $this->load->model('minventory', 'inventory');
                 $categories = $this->inventory->getCategory();
                 $favourables = $this->inventory->getFavourable();
-                $this->load->view('inventory/add/add-inventory-counselor', compact('categories', 'favourables'));
+                $this->load->view('inventory/add/counselor-add-inventory', compact('categories', 'favourables'));
 
                 return;
             }
             case 'student' :
             {
-                $this->load->view('inventory/add/add-inventory-student');
+                redirect('/inventory');
 
                 return;
             }
         }
     }
 
-    public function edit_question($id)
+    public function edit($id)
     {
         switch ($_SESSION['user']['auth']['role'])
         {
@@ -261,7 +261,7 @@ class Inventory extends CI_Controller
                     $question = $question[0];
                     $categories = $this->inventory->getCategory();
                     $favourables = $this->inventory->getFavourable();
-                    $this->load->view('inventory/edit/edit-inventory-counselor', compact('categories', 'favourables', 'question'));
+                    $this->load->view('inventory/edit/counselor-edit-inventory', compact('categories', 'favourables', 'question'));
                 }
                 else
                 {
@@ -272,7 +272,7 @@ class Inventory extends CI_Controller
             }
             case 'student' :
             {
-                $this->load->view('inventory/edit/edit-inventory-student');
+                redirect('/inventory');
 
                 return;
             }

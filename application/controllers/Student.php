@@ -68,13 +68,13 @@ class Student extends CI_Controller
                     $students[$id]['last_answer'] = isset($answered[".{$st['id']}"]) ? $answered[".{$st['id']}"]['answer_at'] : null;
                 }
                 unset($answered, $_answered);
-                $this->load->view('student/view/view-student-counselor', compact('students', 'window', 'now'));
+                $this->load->view('student/view/counselor-view-student', compact('students', 'window', 'now'));
 
                 return;
             }
             case 'student' :
             {
-                $this->load->view('student/view/view-student-student');
+                redirect('/inventory');
 
                 return;
             }
@@ -104,13 +104,13 @@ class Student extends CI_Controller
                     array_push($students[".{$answer['student']}"]['answered'], $answer);
                 }
                 unset($_students, $answered, $answer, $student);
-                $this->load->view('student/report/report-student-counselor', compact('students', 'reports'));
+                $this->load->view('student/report/counselor-report-student', compact('students', 'reports'));
 
                 return;
             }
             case 'student' :
             {
-                $this->load->viwe('student/report/report-student-student');
+                redirect('/inventory');
 
                 return;
             }
