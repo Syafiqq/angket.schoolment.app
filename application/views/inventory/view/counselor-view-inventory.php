@@ -126,7 +126,7 @@ unset($_categories);
                         $activeURL = site_url('inventory/do_change_active');
                         foreach ($questions as $no => $question)
                         {
-                            $url = site_url("inventory/question/edit/{$question['id']}");
+                            $url = site_url("inventory/edit/{$question['id']}");
                             ++$no;
                             echo '<tr>';
                             echo "<td>{$no}</td>";
