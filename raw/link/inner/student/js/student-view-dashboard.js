@@ -1,1 +1,0 @@
-../../js/dashboard/view/student-view-dashboard.js

@@ -1,1 +1,0 @@
-../../views/report/publish/counselor-publish-report.php

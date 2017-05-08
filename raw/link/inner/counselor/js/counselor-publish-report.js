@@ -1,1 +1,0 @@
-../../js/report/publish/counselor-publish-report.js

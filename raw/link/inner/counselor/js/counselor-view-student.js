@@ -1,1 +1,0 @@
-../../js/student/view/counselor-view-student.js

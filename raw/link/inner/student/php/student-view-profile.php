@@ -1,1 +1,0 @@
-../../views/profile/view/student-view-profile.php

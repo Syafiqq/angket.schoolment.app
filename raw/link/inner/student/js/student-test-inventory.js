@@ -1,1 +1,0 @@
-../../js/inventory/test/student-test-inventory.js
