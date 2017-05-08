@@ -1,0 +1,1 @@
+../../views/inventory/view/counselor-view-inventory.php

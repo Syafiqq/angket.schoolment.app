@@ -1,0 +1,1 @@
+../../views/inventory/result/student-result-inventory.php

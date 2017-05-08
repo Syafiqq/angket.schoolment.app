@@ -1,0 +1,1 @@
+../../views/profile/edit/student-edit-profile.php

@@ -1,0 +1,1 @@
+../../js/profile/view/counselor-view-profile.js

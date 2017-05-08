@@ -1,0 +1,1 @@
+../../js/profile/view/student-view-profile.js

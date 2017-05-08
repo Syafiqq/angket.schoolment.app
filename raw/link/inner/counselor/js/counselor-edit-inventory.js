@@ -1,0 +1,1 @@
+../../js/inventory/edit/counselor-edit-inventory.js
