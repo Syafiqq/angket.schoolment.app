@@ -3,6 +3,7 @@ var watch = require('gulp-watch');
 var cleanCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var htmlmin = require('gulp-htmlmin');
 var pump = require('pump');
 
 gulp.task('minify-js', function (cb)
@@ -17,6 +18,24 @@ gulp.task('minify-js', function (cb)
         ],
         cb
     );
+});
+
+gulp.task('minify-css', function ()
+{
+    return gulp.src('./raw/**/*.css', {base: './raw/'})
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(rename({
+            suffix: ".min",
+            extname: ".css"
+        }))
+        .pipe(gulp.dest('./assets/'));
+});
+
+gulp.task('minify-html', function ()
+{
+    return gulp.src('./raw/views/**/*.php', {base: './raw/views/'})
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./application/views/'));
 });
 
 gulp.task('watch-minify-js', function ()
@@ -40,7 +59,7 @@ gulp.task('watch-minify-js', function ()
 gulp.task('watch-minify-css', function ()
 {
     // Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event
-    return watch('./raw/**/*.css', function (cb)
+    return watch('./raw/**/*.css', function ()
     {
         return gulp.src('./raw/**/*.css', {base: './raw/'})
             .pipe(cleanCSS({compatibility: 'ie8'}))
@@ -52,13 +71,13 @@ gulp.task('watch-minify-css', function ()
     });
 });
 
-gulp.task('minify-css', function ()
+gulp.task('watch-minify-html', function ()
 {
-    return gulp.src('./raw/**/*.css', {base: './raw/'})
-        .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(rename({
-            suffix: ".min",
-            extname: ".css"
-        }))
-        .pipe(gulp.dest('./assets/'));
+    // Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event
+    return watch('./raw/views/**/*.php', function ()
+    {
+        return gulp.src('./raw/views/**/*.php', {base: './raw/views/'})
+            .pipe(htmlmin({collapseWhitespace: true}))
+            .pipe(gulp.dest('./application/views/'));
+    });
 });
