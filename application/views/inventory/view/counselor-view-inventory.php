@@ -46,8 +46,8 @@ unset($_categories);
     <!-- Place favicon.ico in the root directory -->
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet">
@@ -165,7 +165,7 @@ unset($_categories);
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
-<script src="<?php echo base_url('/assets/js/plugins.js') ?>"></script>
+<script src="<?php echo base_url('/assets/js/plugins.min.js') ?>"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
@@ -176,7 +176,7 @@ unset($_categories);
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/js/autoFill.bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/js/inventory/view/view-counselor.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/js/inventory/view/counselor-view-inventory.min.js') ?>"></script>
 </body>
 </html>
 

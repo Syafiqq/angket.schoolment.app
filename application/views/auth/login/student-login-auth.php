@@ -21,8 +21,8 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
 
@@ -61,7 +61,6 @@
                 <input type="hidden" name="role" value="student">
                 <button type="submit" class="btn btn-default">Login</button>
             </form>
-            <audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
         </div>
     </div>
 
@@ -69,14 +68,14 @@
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
-<script src="<?php echo base_url('/assets/js/plugins.js') ?>"></script>
+<script src="<?php echo base_url('/assets/js/plugins.min.js') ?>"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/assets/js/auth/login-student.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/js/auth/login/student-login-auth.min.js') ?>"></script>
 
 </body>
 </html>

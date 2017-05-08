@@ -54,8 +54,8 @@ $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answ
     <!-- Place favicon.ico in the root directory -->
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
 
@@ -224,11 +224,11 @@ $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answ
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
-<script src="<?php echo base_url('/assets/js/plugins.js') ?>"></script>
+<script src="<?php echo base_url('/assets/js/plugins.min.js') ?>"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/js/report/display/display-student.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/js/report/display/student-display-report.min.js') ?>"></script>
 </body>
 </html>
