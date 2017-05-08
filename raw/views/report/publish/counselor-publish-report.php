@@ -63,7 +63,7 @@ $now = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now('Asia/Jakarta'))->for
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('/assets/css/report/counselor-publish-report.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/css/report/publish/counselor-publish-report.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
