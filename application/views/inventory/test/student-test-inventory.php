@@ -7,7 +7,7 @@
  * Github       : syafiqq
  */
 
-if(!isset($questions))
+if (!isset($questions))
 {
     $questions = [];
 }
