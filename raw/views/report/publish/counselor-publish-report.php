@@ -150,7 +150,7 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
         <div class="row vertical-align">
             <div class="col-sm-12 text-center">
                 <p id="content_welcome" class="margin-bottom-4" style="font-weight: bold; font-size: 20px">LAPORAN HASIL INVENTORI</p>
-                <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">BERPIKIR KRITIS AKADEMI</p>
+                <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">BERPIKIR KRITIS AKADEMIK</p>
             </div>
         </div>
         <div class="row">
@@ -207,7 +207,7 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
                 <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 4px">HASIL ANALISA</p>
                 <p id="content_title" style="margin: 4px; font-size: 16px;">Berdasarkan pengisian inventori “Berpikir Kritis Akademik”
                     <b><?php echo strtoupper($profile['name']) ?></b>&nbsp;memiliki kemampuan berpikir kritis sebesar
-                    <b><?php printf("%.4g%%", $result['detail']['value']) ?></b>
+                    <b><?php printf("%.4g%%", $result['value']) ?></b>
                 </p>
             </div>
         </div>
@@ -236,7 +236,7 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
                     <tbody>
                     <?php foreach ($grading as $kg => $vg)
                     {
-                        $isBold = $result['detail']['value'] >= $vg['interval']['min'] ? ($result['detail']['value'] <= $vg['interval']['max'] ? 'bold-normal' : '') : '';
+                        $isBold = $result['value'] >= $vg['interval']['min'] ? ($result['value'] <= $vg['interval']['max'] ? 'bold-normal' : '') : '';
                         $suggest = strlen($isBold) > 0 ? $vg['suggest'] : $suggest;
                         echo '<tr>';
                         echo "<td class=\"font-size-12px text-center {$isBold}\">{$vg['interval']['value']}</td>";
