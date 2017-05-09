@@ -23,7 +23,7 @@ if (!isset($categories))
 
 if (!isset($result))
 {
-    $result = [];
+    $result = 0;
 }
 if (!isset($answered))
 {
@@ -34,6 +34,7 @@ if (!isset($counslor))
     $counslor = [];
 }
 
+$suggest = '';
 $profile['school'] = $profile['school'] === null ? '-' : $profile['school'];
 $profile['grade'] = $profile['grade'] === null ? '-' : $profile['grade'];
 $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
@@ -42,7 +43,10 @@ $profile['birthplace'] = $profile['birthplace'] === null ? '-' : $profile['birth
 $profile['datebirth'] = $profile['datebirth'] === null ? '-' : Carbon::createFromFormat('Y-m-d', $profile['datebirth'])->formatLocalized('%d %B %Y');
 $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] === '-')) ? '-' : (($profile['birthplace'] === '-') ? $profile['datebirth'] : (($profile['datebirth'] === '-') ? $profile['birthplace'] : "{$profile['birthplace']}, {$profile['datebirth']}"));
 $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answer_at'])->formatLocalized('%d %B %Y %H:%M');
-$now = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now('Asia/Jakarta'))->formatLocalized('%d %B %Y')
+$now = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now('Asia/Jakarta'))->formatLocalized('%d %B %Y');
+$counselor['school'] = $counselor['school'] === null ? '-' : $counselor['school'];
+$counselor['head'] = $counselor['head'] === null ? '-' : $counselor['head'];
+$counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $counselor['head_credential'];
 ?>
 
 <!DOCTYPE html>
@@ -121,11 +125,13 @@ $now = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now('Asia/Jakarta'))->for
                 <img src="<?php echo base_url('/assets/img/avatar/logo/logo.png') ?>" alt="UM" class="img-rounded img-responsive center-block" style="width: 3.5cm; height: 3.5cm">
             </div>
             <div class="col-sm-9">
-                <p id="header_department">KEMENTERIAN RISET, TEKNOLOGI, DAN PENDIDIKAN TINGGI</p>
-                <p id="header_university">UNIVERSITAS NEGERI MALANG (UM)</p>
-                <p id="header_faculty">FAKULTAS ILMU PENDIDIKAN</p>
-                <p id="header_u_address">Jalan Semarang 5 Malang 65145</p>
-                <p id="header_u_desc">Telepon: 0341-566962, Laman: www.um.ac.id</p>
+                <p class="margin-bottom-2" id="header_department">KEMENTERIAN RISET, TEKNOLOGI, DAN PENDIDIKAN TINGGI</p>
+                <p class="margin-bottom-2" id="header_university">UNIVERSITAS NEGERI MALANG (UM)</p>
+                <p class="margin-bottom-2" id="header_faculty">FAKULTAS ILMU PENDIDIKAN</p>
+                <p class="margin-bottom-2" id="header_faculty">JURUSAN BIMBINGAN DAN KONSELING</p>
+                <p></p>
+                <p class="margin-bottom-2" id="header_u_address">Jalan Semarang 5 Malang 65145</p>
+                <p class="margin-bottom-2" id="header_u_desc">Telepon: 0341-566962, Laman: www.um.ac.id</p>
             </div>
         </div><!--/row-->
         <div class="row vertical-align">
@@ -143,145 +149,162 @@ $now = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now('Asia/Jakarta'))->for
         </div>
         <div class="row vertical-align">
             <div class="col-sm-12 text-center">
-                <p id="content_welcome" style="font-weight: bold; font-size: 20px">LAPORAN HASIL PENGISIAN</p>
-                <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">INVENTORY LGBT</p>
-                <p id="content_subtitle" style="font-size: 16px">(LESBIAN, GAY, BISEXUAL, DAN TRANSGENDER)</p>
+                <p id="content_welcome" class="margin-bottom-4" style="font-weight: bold; font-size: 20px">LAPORAN HASIL INVENTORI</p>
+                <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">BERPIKIR KRITIS AKADEMI</p>
             </div>
         </div>
-        <div class="row vertical-align">
-            <div class="col-sm-3 text-right">
-                <p>Nama :</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p><?php echo $profile['name'] ?></p>
-            </div>
-            <div class="col-sm-3 text-right">
-                <p>TTL :</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p><?php echo $profile['birth'] ?></p>
-            </div>
-        </div>
-        <div class="row vertical-align">
-            <div class="col-sm-3 text-right">
-                <p>Jenis Kelamin :</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p><?php echo $profile['gender'] ?></p>
-            </div>
-            <div class="col-sm-3 text-right">
-                <p>Kelas :</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p><?php echo $profile['grade'] ?></p>
-            </div>
-        </div>
-        <div class="row vertical-align">
-            <div class="col-sm-3 text-right">
-                <p>Sekolah :</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p><?php echo $profile['school'] ?></p>
-            </div>
-            <div class="col-sm-3 text-right">
-                <p>Tanggal Pengisian :</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p><?php echo $answered['answer_at'] ?></p>
-            </div>
-        </div>
-        <div class="row vertical-align" style="margin-top: .5cm">
+        <div class="row">
             <div class="col-sm-12">
+                &nbsp;
             </div>
         </div>
-        <?php
-        foreach ($result as $rv)
-        {
-            ?>
-            <div class="row vertical-align">
-                <div class="col-sm-1">
-                </div>
-                <div class="col-sm-2 text-right">
-                    <p>Variabel :</p>
-                </div>
-                <div class="col-sm-8  no-padding-side">
-                    <p><?php echo $categories[".{$rv['category']}"]['name'] ?></p>
-                </div>
-                <div class="col-sm-1">
-                </div>
+        <div class="row vertical-align">
+            <div class="col-sm-3 text-left">
+                <p class="margin-left-1-cm">Nama</p>
             </div>
-            <div class="row vertical-align">
-                <div class="col-sm-1">
-                </div>
-                <div class="col-sm-2 text-right">
-                    <p>Prosentase :</p>
-                </div>
-                <div class="col-sm-8  no-padding-side">
-                    <p><?php printf('<td>%.4f %%</td>', $rv['value']); ?></p>
-                </div>
-                <div class="col-sm-1">
-                </div>
+            <div class="col-sm-3 no-padding-side">
+                <p>: <?php echo $profile['name'] ?></p>
             </div>
-            <div class="row">
-                <div class="col-sm-1 ">
-                </div>
-                <div class="col-sm-2 text-right">
-                    <p>Interpretasi :</p>
-                </div>
-                <div class="col-sm-8 no-padding-side text-justified">
-                    <ol>
-                        <?php foreach ($rv['interpretation'] as $iv)
-                        {
-                            echo "<li>{$iv}</li>";
-                        }
-                        ?>
-                    </ol>
-                </div>
-                <div class="col-sm-1">
-                </div>
+            <div class="col-sm-3 text-left">
+                <p>Sekolah</p>
             </div>
-            <?php
-        }
-        ?>
-
-        <div class="row" style="margin-top: .35cm">
-            <div class="col-sm-1 ">
+            <div class="col-sm-3 no-padding-side">
+                <p>: <?php echo $profile['school'] ?></p>
             </div>
-            <div class="col-sm-10 no-padding-side text-justified">
-                <p>Hasil diatas merupakan data diri
-                    <b><?php echo $profile['name'] ?></b>
-                   dalam kecenderungannya terhadap LGBT. Apabila terdapat hasil yang pdirasa tidak sesuai atau memerlukan penjelasan lebih lanjut terkait kondisi diri anda, silahkan datang kepada konselor untuk mendiskusikan hal tersebt lebih lanjut.
+        </div>
+        <div class="row vertical-align">
+            <div class="col-sm-3 text-left">
+                <p class="margin-left-1-cm">NIS</p>
+            </div>
+            <div class="col-sm-3 no-padding-side">
+                <p>: <?php echo $profile['credential'] ?></p>
+            </div>
+            <div class="col-sm-3 text-left">
+                <p>Jenis Kelamin</p>
+            </div>
+            <div class="col-sm-3 no-padding-side">
+                <p>: <?php echo $profile['gender'] ?></p>
+            </div>
+        </div>
+        <div class="row vertical-align">
+            <div class="col-sm-3 text-left">
+                <p class="margin-left-1-cm">Kelas</p>
+            </div>
+            <div class="col-sm-3 no-padding-side">
+                <p>: <?php echo $profile['grade'] ?></p>
+            </div>
+            <div class="col-sm-3 text-left">
+                <p>Tanggal Pengisian</p>
+            </div>
+            <div class="col-sm-3 no-padding-side">
+                <p>: <?php echo $answered['answer_at'] ?></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-10 text-center">
+                <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 4px">HASIL ANALISA</p>
+                <p id="content_title" style="margin: 4px; font-size: 16px;">Berdasarkan pengisian inventori “Berpikir Kritis Akademik”
+                    <b><?php echo strtoupper($profile['name']) ?></b>&nbsp;memiliki kemampuan berpikir kritis sebesar
+                    <b><?php printf("%.4g%%", $result['detail']['value']) ?></b>
                 </p>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <table class="color-transparent custom-table">
+                    <thead>
+                    <tr>
+                        <th width="150" class="text-center font-size-14px">
+                            <b>Interval Persentase</b>
+                        </th>
+                        <th width="150" class="text-center font-size-14px">
+                            <b>Klasifikasi</b>
+                        </th>
+                        <th class="text-center font-size-14px">
+                            <b>Interpretasi</b>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($grading as $kg => $vg)
+                    {
+                        $isBold = $result['detail']['value'] >= $vg['interval']['min'] ? ($result['detail']['value'] <= $vg['interval']['max'] ? 'bold-normal' : '') : '';
+                        $suggest = strlen($isBold) > 0 ? $vg['suggest'] : $suggest;
+                        echo '<tr>';
+                        echo "<td class=\"font-size-12px text-center {$isBold}\">{$vg['interval']['value']}</td>";
+                        echo "<td class=\"font-size-12px text-center {$isBold}\">{$vg['class']}</td>";
+                        echo "<td class=\"font-size-12px {$isBold}\">";
+                        echo "<b>{$vg['interpretation']['key']}</b><ol>";
+                        foreach ($vg['interpretation']['value'] as $kiv => $viv)
+                        {
+                            echo "<li>{$viv}</li>";
+                        }
+                        echo '</ol>';
+                        echo '</td>';
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-1">
+            </div>
+            <div class="col-sm-10 text-left">
+                <p style="margin: 4px; font-size: 16px;">
+                    <b>Saran : </b> <?php echo sprintf($suggest, '<b>'.strtoupper($profile['name']).'</b>') ?>
+                </p>
             </div>
         </div>
         <div class="row" style="margin-top: .5cm">
             <div class="col-sm-8 ">
             </div>
             <div class="col-sm-4 no-padding-side">
-                <p>Malang, <?php echo $now ?></p>
+                <p class="margin-bottom-2">Malang, <?php echo $now ?></p>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8 ">
+            <div class="col-sm-1 ">
             </div>
             <div class="col-sm-4 no-padding-side">
-                <p>Konselor</p>
+                <p class="margin-bottom-2">Kepala Sekolah SMA <?php echo $counselor['school']?></p>
+            </div>
+            <div class="col-sm-3 ">
+            </div>
+            <div class="col-sm-4 no-padding-side">
+                <p class="margin-bottom-2">Konselor</p>
             </div>
         </div>
         <div class="row" style="margin-top: 1.2cm">
-            <div class="col-sm-8 ">
+            <div class="col-sm-1 ">
             </div>
             <div class="col-sm-4 no-padding-side">
-                <p><?php echo $counselor['name'] ?></p>
+                <p class="margin-bottom-2"><?php echo $counselor['head']?></p>
+            </div>
+            <div class="col-sm-3 ">
+            </div>
+            <div class="col-sm-4 no-padding-side">
+                <p class="margin-bottom-2"><?php echo $counselor['name']?></p>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8 ">
+            <div class="col-sm-1 ">
             </div>
             <div class="col-sm-4 no-padding-side">
-                <p><?php echo $counselor['credential'] ?></p>
+                <p class="margin-bottom-2"><?php echo $counselor['head_credential']?></p>
+            </div>
+            <div class="col-sm-3 ">
+            </div>
+            <div class="col-sm-4 no-padding-side">
+                <p class="margin-bottom-2"><?php echo $counselor['credential']?></p>
             </div>
         </div>
     </div>
