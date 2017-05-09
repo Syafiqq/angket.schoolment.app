@@ -57,123 +57,157 @@ if (!isset($window))
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
 <body>
-<nav class="navbar navbar-default sidebar" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">B-Kritis<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Edit</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Inventory <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>">Tambah Inventory</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Data Siswa <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktifkan Siswa</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Nilai Siswa</a></li>
-                    </ul>
-                </li>
-                <li ><a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Panel heading</div>
-                    <div class="panel-body">
-                        <div class="col-sm-2 col-sm-offset-10">
-                            <a class="btn btn-default" href="<?php echo site_url('student/report') ?>" role="button">Cetak</a>
-                        </div>
+<div class="container-fluid">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="<?php echo base_url($profile['avatar']) ?>" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        <?php echo $profile['name'] ?>
                     </div>
-                    <div class="table-responsive">
-                        <table id="student_tb" class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th style="width: 40px">No</th>
-                                <th>NISN</th>
-                                <th>Nama</th>
-                                <th style="width: 150px">Kelas</th>
-                                <th style="width: 150px">Sekolah</th>
-                                <th style="width: 150px">Jenis Kelamin</th>
-                                <th style="width: 150px">Pengisian</th>
-                                <th style="width: 150px">Izinkan</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $activeURL = site_url('student/do_activate');
-                            foreach ($students as $no => $student)
-                            {
-                                ++$no;
-                                $student['gender'] = $student['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
-                                $student['grade'] = $student['grade'] === null ? '-' : $student['grade'];
-                                $student['school'] = $student['school'] === null ? '-' : $student['school'];
-                                $student['last_answer'] = $student['last_answer'] === null ? null : $student['last_answer'];
-                                $activation = $student['last_answer'] === null ? '<p>Sudah Memiliki Izin</p>' : "<button data-student-id=\"{$student['id']}\" data-student-action=\"{$activeURL}\" class=\"btn btn-default do-active\" type=\"submit\">Aktifkan</button>";
-                                if ($student['last_answer'] !== null)
-                                {
-                                    $student['last_answer'] = Carbon::createFromFormat('Y-m-d H:i:s', $student['last_answer']);
-                                    if ((int)$student['is_active'] === 1)
+                    <div class="profile-usertitle-job">
+                        KONSELOR
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                    <a id="logout" type="button" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">
+                                <i class="glyphicon glyphicon-home"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Rubah Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">
+                                <i class="glyphicon glyphicon-list"></i>
+                                Lihat Inventory
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>" target="_blank">
+                                <i class="glyphicon glyphicon-list"></i>
+                                Tambah
+                                <i>Item</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">
+                                <i class="glyphicon glyphicon-flag"></i>
+                                Aktivasi Siswa
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">
+                                <i class="glyphicon glyphicon-flag"></i>
+                                Lihat Nilai Siswa
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Panel heading</div>
+                            <div class="panel-body">
+                                <div class="col-sm-2 col-sm-offset-10">
+                                    <a class="btn btn-default" href="<?php echo site_url('student/report') ?>" role="button">Cetak</a>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="student_tb" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 40px">No</th>
+                                        <th>NISN</th>
+                                        <th>Nama</th>
+                                        <th style="width: 150px">Kelas</th>
+                                        <th style="width: 150px">Sekolah</th>
+                                        <th style="width: 150px">Jenis Kelamin</th>
+                                        <th style="width: 150px">Pengisian</th>
+                                        <th style="width: 150px">Izinkan</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $activeURL = site_url('student/do_activate');
+                                    foreach ($students as $no => $student)
                                     {
-                                        $student['last_answer'] = "<span class=\"label label-success\">{$student['last_answer']->formatLocalized('%d %B %Y %H:%M')}</span>";
-                                    }
-                                    else
-                                    {
-                                        if ($student['last_answer']->diffInDays($now) <= $window)
+                                        ++$no;
+                                        $student['gender'] = $student['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
+                                        $student['grade'] = $student['grade'] === null ? '-' : $student['grade'];
+                                        $student['school'] = $student['school'] === null ? '-' : $student['school'];
+                                        $student['last_answer'] = $student['last_answer'] === null ? null : $student['last_answer'];
+                                        $activation = $student['last_answer'] === null ? '<p>Sudah Memiliki Izin</p>' : "<button data-student-id=\"{$student['id']}\" data-student-action=\"{$activeURL}\" class=\"btn btn-default do-active\" type=\"submit\">Aktifkan</button>";
+                                        if ($student['last_answer'] !== null)
                                         {
-                                            $student['last_answer'] = "<span class=\"label label-warning\">{$student['last_answer']->formatLocalized('%d %B %Y %H:%M')}</span>";
+                                            $student['last_answer'] = Carbon::createFromFormat('Y-m-d H:i:s', $student['last_answer']);
+                                            if ((int)$student['is_active'] === 1)
+                                            {
+                                                $student['last_answer'] = "<span class=\"label label-success\">{$student['last_answer']->formatLocalized('%d %B %Y %H:%M')}</span>";
+                                            }
+                                            else
+                                            {
+                                                if ($student['last_answer']->diffInDays($now) <= $window)
+                                                {
+                                                    $student['last_answer'] = "<span class=\"label label-warning\">{$student['last_answer']->formatLocalized('%d %B %Y %H:%M')}</span>";
+                                                }
+                                                else
+                                                {
+                                                    $student['last_answer'] = "<span class=\"label label-success\">{$student['last_answer']->formatLocalized('%d %B %Y %H:%M')}</span>";
+                                                }
+                                            }
                                         }
                                         else
                                         {
-                                            $student['last_answer'] = "<span class=\"label label-success\">{$student['last_answer']->formatLocalized('%d %B %Y %H:%M')}</span>";
+                                            $student['last_answer'] = '<p>Belum Pernah</p>';
                                         }
-                                    }
-                                }
-                                else
-                                {
-                                    $student['last_answer'] = '<p>Belum Pernah</p>';
-                                }
 
-                                echo '<tr>';
-                                echo "<td>{$no}</td>";
-                                echo "<td>{$student['credential']}</td>";
-                                echo "<td>{$student['name']}</td>";
-                                echo "<td>{$student['grade']}</td>";
-                                echo "<td>{$student['school']}</td>";
-                                echo "<td>{$student['gender']}</td>";
-                                echo "<td>{$student['last_answer']}</td>";
-                                echo "<td>{$activation}</td>";
-                                echo '</tr>';
-                            }
-                            ?>
-                            </tbody>
-                        </table>
+                                        echo '<tr>';
+                                        echo "<td>{$no}</td>";
+                                        echo "<td>{$student['credential']}</td>";
+                                        echo "<td>{$student['name']}</td>";
+                                        echo "<td>{$student['grade']}</td>";
+                                        echo "<td>{$student['school']}</td>";
+                                        echo "<td>{$student['gender']}</td>";
+                                        echo "<td>{$student['last_answer']}</td>";
+                                        echo "<td>{$activation}</td>";
+                                        echo '</tr>';
+                                    }
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

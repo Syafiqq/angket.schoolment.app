@@ -75,160 +75,193 @@ $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answ
     </style>
 </head>
 <body>
-<nav class="navbar navbar-default sidebar" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">B-Kritis<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Edit</a></li>
+<div class="container-fluid">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="<?php echo base_url($profile['avatar']) ?>" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        <?php echo $profile['name'] ?>
+                    </div>
+                    <div class="profile-usertitle-job">
+                        SISWA
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                    <a id="logout" type="button" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">
+                                <i class="glyphicon glyphicon-home"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Rubah Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">
+                                <i class="glyphicon glyphicon-list"></i>
+                                Lihat Inventory
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Ftest') ?>" target="_blank">
+                                <i class="glyphicon glyphicon-list"></i>
+                                Pengerjaan
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fresult') ?>" target="_blank">
+                                <i class="glyphicon glyphicon-list"></i>
+                                Hasil
+                            </a>
+                        </li>
                     </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Inventory <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Ftest') ?>">Pengerjaan</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fresult') ?>">Hasil</a></li>
-                    </ul>
-                </li>
-                <li ><a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span></a></li>
-            </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
         </div>
-    </div>
-</nav>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="row vertical-align">
+                    <div class="col-sm-12 text-center">
+                        <p id="content_welcome" class="margin-bottom-4" style="font-weight: bold; font-size: 20px">HASIL INVENTORI</p>
+                        <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">BERPIKIR KRITIS AKADEMIK</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row vertical-align">
+                    <div class="col-sm-2  col-sm-offset-1 text-left">
+                        <p class="margin-left-1-cm">Nama</p>
+                    </div>
+                    <div class="col-sm-3 no-padding-side">
+                        <p>: <?php echo $profile['name'] ?></p>
+                    </div>
+                    <div class="col-sm-2  col-sm-offset-1 text-left">
+                        <p>Sekolah</p>
+                    </div>
+                    <div class="col-sm-3 no-padding-side">
+                        <p>: <?php echo $profile['school'] ?></p>
+                    </div>
+                </div>
+                <div class="row vertical-align">
+                    <div class="col-sm-2 col-sm-offset-1 text-left">
+                        <p class="margin-left-1-cm">NIS</p>
+                    </div>
+                    <div class="col-sm-3 no-padding-side">
+                        <p>: <?php echo $profile['credential'] ?></p>
+                    </div>
+                    <div class="col-sm-2  col-sm-offset-1 text-left">
+                        <p>Jenis Kelamin</p>
+                    </div>
+                    <div class="col-sm-3 no-padding-side">
+                        <p>: <?php echo $profile['gender'] ?></p>
+                    </div>
+                </div>
+                <div class="row vertical-align">
+                    <div class="col-sm-2  col-sm-offset-1 text-left">
+                        <p class="margin-left-1-cm">Kelas</p>
+                    </div>
+                    <div class="col-sm-3 no-padding-side">
+                        <p>: <?php echo $profile['grade'] ?></p>
+                    </div>
+                    <div class="col-sm-2  col-sm-offset-1 text-left">
+                        <p>Tanggal Pengisian</p>
+                    </div>
+                    <div class="col-sm-3 no-padding-side">
+                        <p>: <?php echo $answered['answer_at'] ?></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-10 text-center">
+                        <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 4px">HASIL ANALISA</p>
+                        <p id="content_title" style="margin: 4px; font-size: 16px;">Berdasarkan pengisian inventori “Berpikir Kritis Akademik”
+                            <b><?php echo strtoupper($profile['name']) ?></b>&nbsp;memiliki kemampuan berpikir kritis sebesar
+                            <b><?php printf("%.4g%%", $result['value']) ?></b>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
 
-<div class="main">
-    <div class="container" id="print_container">
-        <div class="row vertical-align">
-            <div class="col-sm-12 text-center">
-                <p id="content_welcome" class="margin-bottom-4" style="font-weight: bold; font-size: 20px">HASIL INVENTORI</p>
-                <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">BERPIKIR KRITIS AKADEMIK</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                &nbsp;
-            </div>
-        </div>
-        <div class="row vertical-align">
-            <div class="col-sm-2  col-sm-offset-1 text-left">
-                <p class="margin-left-1-cm">Nama</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p>: <?php echo $profile['name'] ?></p>
-            </div>
-            <div class="col-sm-2  col-sm-offset-1 text-left">
-                <p>Sekolah</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p>: <?php echo $profile['school'] ?></p>
-            </div>
-        </div>
-        <div class="row vertical-align">
-            <div class="col-sm-2 col-sm-offset-1 text-left">
-                <p class="margin-left-1-cm">NIS</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p>: <?php echo $profile['credential'] ?></p>
-            </div>
-            <div class="col-sm-2  col-sm-offset-1 text-left">
-                <p>Jenis Kelamin</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p>: <?php echo $profile['gender'] ?></p>
-            </div>
-        </div>
-        <div class="row vertical-align">
-            <div class="col-sm-2  col-sm-offset-1 text-left">
-                <p class="margin-left-1-cm">Kelas</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p>: <?php echo $profile['grade'] ?></p>
-            </div>
-            <div class="col-sm-2  col-sm-offset-1 text-left">
-                <p>Tanggal Pengisian</p>
-            </div>
-            <div class="col-sm-3 no-padding-side">
-                <p>: <?php echo $answered['answer_at'] ?></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1">
-            </div>
-            <div class="col-sm-10 text-center">
-                <p id="content_welcome" style="font-weight: bold; font-size: 16px; margin: 4px">HASIL ANALISA</p>
-                <p id="content_title" style="margin: 4px; font-size: 16px;">Berdasarkan pengisian inventori “Berpikir Kritis Akademik”
-                    <b><?php echo strtoupper($profile['name']) ?></b>&nbsp;memiliki kemampuan berpikir kritis sebesar
-                    <b><?php printf("%.4g%%", $result['value']) ?></b>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th width="150" class="text-center font-size-14px">
-                            <b>Interval Persentase</b>
-                        </th>
-                        <th width="150" class="text-center font-size-14px">
-                            <b>Klasifikasi</b>
-                        </th>
-                        <th class="text-center font-size-14px">
-                            <b>Interpretasi</b>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($grading as $kg => $vg)
-                    {
-                        $isBold = $result['value'] >= $vg['interval']['min'] ? ($result['value'] <= $vg['interval']['max'] ? 'bold-normal' : '') : '';
-                        $suggest = strlen($isBold) > 0 ? $vg['suggest'] : $suggest;
-                        echo '<tr>';
-                        echo "<td class=\"font-size-12px text-center {$isBold}\">{$vg['interval']['value']}</td>";
-                        echo "<td class=\"font-size-12px text-center {$isBold}\">{$vg['class']}</td>";
-                        echo "<td class=\"font-size-12px {$isBold}\">";
-                        echo "<b>{$vg['interpretation']['key']}</b><ol>";
-                        foreach ($vg['interpretation']['value'] as $kiv => $viv)
-                        {
-                            echo "<li>{$viv}</li>";
-                        }
-                        echo '</ol>';
-                        echo '</td>';
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1">
-            </div>
-            <div class="col-sm-10 text-left">
-                <p style="margin: 4px; font-size: 16px;">
-                    <b>Saran :</b> <?php echo sprintf($suggest, 'anda') ?>
-                </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th width="150" class="text-center font-size-14px">
+                                    <b>Interval Persentase</b>
+                                </th>
+                                <th width="150" class="text-center font-size-14px">
+                                    <b>Klasifikasi</b>
+                                </th>
+                                <th class="text-center font-size-14px">
+                                    <b>Interpretasi</b>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($grading as $kg => $vg)
+                            {
+                                $isBold = $result['value'] >= $vg['interval']['min'] ? ($result['value'] <= $vg['interval']['max'] ? 'bold-normal' : '') : '';
+                                $suggest = strlen($isBold) > 0 ? $vg['suggest'] : $suggest;
+                                echo '<tr>';
+                                echo "<td class=\"font-size-12px text-center {$isBold}\">{$vg['interval']['value']}</td>";
+                                echo "<td class=\"font-size-12px text-center {$isBold}\">{$vg['class']}</td>";
+                                echo "<td class=\"font-size-12px {$isBold}\">";
+                                echo "<b>{$vg['interpretation']['key']}</b><ol>";
+                                foreach ($vg['interpretation']['value'] as $kiv => $viv)
+                                {
+                                    echo "<li>{$viv}</li>";
+                                }
+                                echo '</ol>';
+                                echo '</td>';
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-10 text-left">
+                        <p style="margin: 4px; font-size: 16px;">
+                            <b>Saran :</b> <?php echo sprintf($suggest, 'anda') ?>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

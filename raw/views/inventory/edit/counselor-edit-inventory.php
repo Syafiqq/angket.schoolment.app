@@ -55,111 +55,148 @@ if (!isset($question))
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
 <body>
-<nav class="navbar navbar-default sidebar" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+<div class="container-fluid">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="<?php echo base_url($profile['avatar']) ?>" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        <?php echo $profile['name'] ?>
+                    </div>
+                    <div class="profile-usertitle-job">
+                        KONSELOR
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                    <a id="logout" type="button" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">
+                                <i class="glyphicon glyphicon-home"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Rubah Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">
+                                <i class="glyphicon glyphicon-list"></i>
+                                Lihat Inventory
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>" target="_blank">
+                                <i class="glyphicon glyphicon-list"></i>
+                                Tambah
+                                <i>Item</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">
+                                <i class="glyphicon glyphicon-flag"></i>
+                                Aktivasi Siswa
+                            </a>
+                        </li>
+                        <li>
+                            <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">
+                                <i class="glyphicon glyphicon-flag"></i>
+                                Lihat Nilai Siswa
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">B-Kritis<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Edit</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Inventory <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>">Tambah Inventory</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Data Siswa <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktifkan Siswa</a></li>
-                        <li class="divider"></li>
-                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Nilai Siswa</a></li>
-                    </ul>
-                </li>
-                <li ><a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span></a></li>
-            </ul>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="row">
+                    <form id="add" action="<?php echo site_url('inventory/do_edit') ?>" method="post" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="question" class="col-sm-2 control-label">Pertanyaan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control option-text-disable" id="question" placeholder="Pertanyaan" name="question" value="<?php echo $question['question'] ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category" class="col-sm-2 control-label">Kategori</label>
+                            <div class="col-sm-10">
+                                <select id="category" name="category" class="form-control">
+                                    <?php
+                                    foreach ($categories as $category)
+                                    {
+                                        $category['description'] = ucfirst($category['description']);
+                                        $selected = $category['id'] === $question['category'] ? 'selected' : '';
+                                        echo "<option value=\"{$category['id']}\" {$selected}>{$category['description']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="favour" class="col-sm-2 control-label">Favourable</label>
+                            <div class="col-sm-10">
+                                <select id="favour" name="favour" class="form-control">
+                                    <?php
+                                    foreach ($favourables as $favourable)
+                                    {
+                                        $favourable['description'] = ucfirst($favourable['description']);
+                                        $selected = $favourable['id'] === $question['favour'] ? 'selected' : '';
+                                        echo "<option value=\"{$favourable['id']}\" {$selected}>{$favourable['description']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="active" class="col-sm-2 control-label">Aktif</label>
+                            <div class="col-sm-10">
+                                <?php
+                                echo "<select id=\"active\" name=\"active\" class=\"form-control\">";
+                                foreach ([['id' => 1, 'description' => 'Aktif'], ['id' => 0, 'description' => 'Tidak Aktif']] as $active)
+                                {
+                                    $selected = $active['id'] === (int)$question['is_active'] ? 'selected' : '';
+                                    echo "<option value=\"{$active['id']}\" {$selected}>{$active['description']}</option>";
+                                }
+                                echo '</select>';
+                                ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="hidden" name="id" value="<?php echo $question['id'] ?>">
+                                <button type="submit" class="btn btn-default">Simpan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
-
-<div class="main">
-    <div class="container">
-        <form id="add" action="<?php echo site_url('inventory/do_edit') ?>" method="post" class="form-horizontal">
-            <div class="form-group">
-                <label for="question" class="col-sm-2 control-label">Pertanyaan</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control option-text-disable" id="question" placeholder="Pertanyaan" name="question" value="<?php echo $question['question'] ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="category" class="col-sm-2 control-label">Kategori</label>
-                <div class="col-sm-10">
-                    <select id="category" name="category" class="form-control">
-                        <?php
-                        foreach ($categories as $category)
-                        {
-                            $category['description'] = ucfirst($category['description']);
-                            $selected = $category['id'] === $question['category'] ? 'selected' : '';
-                            echo "<option value=\"{$category['id']}\" {$selected}>{$category['description']}</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="favour" class="col-sm-2 control-label">Favourable</label>
-                <div class="col-sm-10">
-                    <select id="favour" name="favour" class="form-control">
-                        <?php
-                        foreach ($favourables as $favourable)
-                        {
-                            $favourable['description'] = ucfirst($favourable['description']);
-                            $selected = $favourable['id'] === $question['favour'] ? 'selected' : '';
-                            echo "<option value=\"{$favourable['id']}\" {$selected}>{$favourable['description']}</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="active" class="col-sm-2 control-label">Aktif</label>
-                <div class="col-sm-10">
-                    <?php
-                    echo "<select id=\"active\" name=\"active\" class=\"form-control\">";
-                    foreach ([['id' => 1, 'description' => 'Aktif'], ['id' => 0, 'description' => 'Tidak Aktif']] as $active)
-                    {
-                        $selected = $active['id'] === (int)$question['is_active'] ? 'selected' : '';
-                        echo "<option value=\"{$active['id']}\" {$selected}>{$active['description']}</option>";
-                    }
-                    echo '</select>';
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <input type="hidden" name="id" value="<?php echo $question['id'] ?>">
-                    <button type="submit" class="btn btn-default">Simpan</button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
+
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
