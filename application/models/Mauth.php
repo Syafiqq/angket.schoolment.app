@@ -36,7 +36,8 @@ class Mauth extends CI_Model
     public function findCounselorByCredential($credential)
     {
         //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
-        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
+        //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `head`, `head_credential`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
         $result = $this->db->query($query, array((string)$credential));
 
         return $result->result_array();
@@ -81,7 +82,8 @@ class Mauth extends CI_Model
     {
         $avatar = $this->generateDefaultAvatar($gender);
         //$query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
-        $query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        //$query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, ?,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
+        $query = 'INSERT INTO `user_counselor`(`id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `head`, `head_credential`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at`) VALUES (NULL, ?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ?,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);';
         $this->db->query($query, array((string)$credential, (string)$name, (string)$gender, (string)$password, (string)$avatar));
 
         return $this->db->insert_id();
@@ -105,10 +107,10 @@ class Mauth extends CI_Model
         $this->db->query($query, array((string)$path, (int)$id));
     }
 
-    public function updateAdditionalCounselorByID($id, $school, $schoolAddress, $address, $birthplace, $datebirth)
+    public function updateAdditionalCounselorByID($id, $school, $schoolAddress, $head, $headCredential, $address, $birthplace, $datebirth)
     {
-        $query = 'UPDATE `user_counselor` SET `school` = ?, `school_address` = ?, `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
-        $this->db->query($query, array((string)$school, (string)$schoolAddress, (string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
+        $query = 'UPDATE `user_counselor` SET `school` = ?, `school_address` = ?, `head` = ?, `head_credential` = ?, `address`= ?, `birthplace`= ?, `datebirth`= ? WHERE `id` = ?';
+        $this->db->query($query, array((string)$school, (string)$schoolAddress, (string)$head, (string)$headCredential, (string)$address, (string)$birthplace, (string)$datebirth, (int)$id));
     }
 
     public function updateAvatarStudentByID($id, $path)
