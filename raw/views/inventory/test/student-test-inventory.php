@@ -86,7 +86,10 @@ if (!isset($questions))
                 <tr>
                     <th style="width: 40px">No</th>
                     <th>Pertanyaan</th>
-                    <th style="width: 200px">Jawaban</th>
+                    <th class="_mini-text" style="width: 50px">T&nbsp;S<br>I&nbsp;E<br>D&nbsp;S<br>A&nbsp;U<br>K&nbsp;A<br>&nbsp;&nbsp;I</th>
+                    <th class="_mini-text" style="width: 50px">K&nbsp;S<br>U&nbsp;E<br>R&nbsp;S<br>A&nbsp;U<br>N&nbsp;A<br>G&nbsp;I</th>
+                    <th class="_mini-text" style="width: 50px">&nbsp;S<br>&nbsp;E<br>&nbsp;S<br>&nbsp;U<br>&nbsp;A<br>&nbsp;I</th>
+                    <th class="_mini-text" style="width: 50px">S&nbsp;S<br>A&nbsp;E<br>N&nbsp;S<br>G&nbsp;U<br>A&nbsp;A<br>T&nbsp;I</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -99,15 +102,11 @@ if (!isset($questions))
                     echo '<tr>';
                     echo "<td>{$_no}</td>";
                     echo "<td>{$question['question']}</td>";
-                    echo '<td>';
-                    echo "<select name=\"question[{$id}]\" class=\"form-control\">";
-                    echo '<option class="option-select-disable" value="-1"></option>';
-                    foreach ($options as $option)
+                    foreach ($options as $ko => $option)
                     {
-                        echo "<option value=\"{$option['id']}\">{$option['name']}</option>";
+                        $checked = $ko == 0 ? 'checked' : '';
+                        echo "<td><div class=\"radio\"><label><input type=\"radio\" name=\"question[{$id}]\" value=\"{$option['id']}\" aria-label=\"{$option['id']}\" {$checked}></label></div></td>";
                     }
-                    echo '</select>';
-                    echo '</td>';
                     echo '</tr>';
                 }
                 ?>
