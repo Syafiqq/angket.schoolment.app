@@ -62,8 +62,9 @@ class Inventory extends CI_Controller
             }
             case 'student' :
             {
+                $this->load->helper('identity_checking');
                 $b_test = $this->allowedToTakeTest();
-                $b_complete = $this->isStudentIdentityIsComplete();
+                $b_complete = isStudentIdentityIsComplete($_SESSION['user']['auth']);
                 $this->load->view('inventory/view/student-view-inventory', compact('b_test', 'b_complete'));
 
                 return;
@@ -118,30 +119,13 @@ class Inventory extends CI_Controller
             }
             case 'student' :
             {
+                $this->load->helper('identity_checking');
                 $allowed = $this->allowedToTakeTest();
-                $allowed &= $this->isStudentIdentityIsComplete();
+                $allowed &= isStudentIdentityIsComplete($_SESSION['user']['auth']);
                 if ($allowed)
                 {
                     $this->load->model('minventory', 'inventory');
                     $questions = $this->inventory->getQuestionByActive(1);
-                    $isMale = $_SESSION['user']['auth']['gender'] === 'male';
-                    foreach ($questions as $qk => $qv)
-                    {
-                        if ($isMale)
-                        {
-                            if ((int)$qv['category'] === 1)
-                            {
-                                unset($questions[$qk]);
-                            }
-                        }
-                        else
-                        {
-                            if ((int)$qv['category'] === 2)
-                            {
-                                unset($questions[$qk]);
-                            }
-                        }
-                    }
                     $options = $this->inventory->getOptions();
                     $this->load->view('inventory/test/student-test-inventory', compact('questions', 'options'));
                 }
@@ -172,24 +156,6 @@ class Inventory extends CI_Controller
                 $answered = [];
                 $result = $this->inventory->getAnsweredResultByUser($_SESSION['user']['auth']['id']);
                 $categories = $this->inventory->getCategory();
-                $isMale = $_SESSION['user']['auth']['gender'] === 'male';
-                foreach ($categories as $ck => $cv)
-                {
-                    if ($isMale)
-                    {
-                        if ((int)$cv['id'] === 1)
-                        {
-                            unset($categories[$ck]);
-                        }
-                    }
-                    else
-                    {
-                        if ((int)$cv['id'] === 2)
-                        {
-                            unset($categories[$ck]);
-                        }
-                    }
-                }
                 foreach ($_answered as $av)
                 {
                     $answered[".{$av['id']}"] = $av;
@@ -202,20 +168,6 @@ class Inventory extends CI_Controller
 
                 foreach ($result as $rv)
                 {
-                    if ($isMale)
-                    {
-                        if ((int)$rv['category'] === 1)
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        if ((int)$rv['category'] === 2)
-                        {
-                            continue;
-                        }
-                    }
                     $answered[".{$rv['answer_id']}"]['category'][".{$rv['category']}"] = $rv['value'];
                 }
                 unset($_answered, $result);
@@ -408,24 +360,6 @@ class Inventory extends CI_Controller
         {
             $this->load->model('minventory', 'inventory');
             $_questions = $this->inventory->getQuestion();
-            $isMale = $_SESSION['user']['auth']['gender'] === 'male';
-            foreach ($_questions as $qk => $qv)
-            {
-                if ($isMale)
-                {
-                    if ((int)$qv['category'] === 1)
-                    {
-                        unset($_questions[$qk]);
-                    }
-                }
-                else
-                {
-                    if ((int)$qv['category'] === 2)
-                    {
-                        unset($_questions[$qk]);
-                    }
-                }
-            }
             $question = [];
             foreach ($_questions as $q)
             {
@@ -509,22 +443,5 @@ class Inventory extends CI_Controller
         {
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
-    }
-
-    private function isStudentIdentityIsComplete()
-    {
-        $complete = false;
-        if (
-            (strlen($_SESSION['user']['auth']['grade']) > 0) &&
-            (strlen($_SESSION['user']['auth']['school']) > 0) &&
-            (strlen($_SESSION['user']['auth']['address']) > 0) &&
-            (strlen($_SESSION['user']['auth']['birthplace']) > 0) &&
-            (strlen($_SESSION['user']['auth']['datebirth']) > 0)
-        )
-        {
-            $complete = true;
-        }
-
-        return $complete;
     }
 }
