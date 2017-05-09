@@ -101,11 +101,10 @@ if (!isset($reports))
                         <thead>
                         <tr>
                             <th style="width: 40px">No</th>
-                            <th>NIM</th>
+                            <th style="width: 150px">NIM</th>
                             <th>Nama</th>
                             <th style="width: 100px">Kelas</th>
                             <th style="width: 100px">Sekolah</th>
-                            <th style="width: 200px">Pengisian</th>
                             <th style="width: 100px">Cetak</th>
                         </tr>
                         </thead>
@@ -117,7 +116,7 @@ if (!isset($reports))
                             ++$no;
                             $student['grade'] = $student['grade'] === null ? '-' : $student['grade'];
                             $student['school'] = $student['school'] === null ? '-' : $student['school'];
-                            $url = site_url('report/publish');
+                            $url = site_url('student/detail');
 
                             echo '<tr>';
                             echo "<td>{$no}</td>";
@@ -126,16 +125,7 @@ if (!isset($reports))
                             echo "<td>{$student['grade']}</td>";
                             echo "<td>{$student['school']}</td>";
                             echo "<form id=\"login\" action=\"{$url}\" method=\"get\">";
-                            echo '<td>';
-                            echo "<select id=\"answer\" name=\"answer\" class=\"form-control\">";
-                            foreach ($student['answered'] as $answer)
-                            {
-                                $answer['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answer['answer_at'])->formatLocalized('%d %B %Y %H:%M');
-                                echo "<option value=\"{$answer['id']}\">{$answer['answer_at']}</option>";
-                            }
-                            echo '</select>';
-                            echo '</td>';
-                            echo "<td><button type=\"submit\" class=\"btn btn-default\">Cetak</button></td>";
+                            echo "<td><input type='hidden' name='student' class='hidden' value='{$student['id']}'><button type=\"submit\" class=\"btn btn-default\">Detail</button></td>";
                             echo '</form>';
                             echo '</tr>';
                         }
