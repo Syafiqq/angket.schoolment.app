@@ -46,17 +46,18 @@ class Dashboard extends CI_Controller
 
     public function view()
     {
+        $profile = $_SESSION['user']['auth'];
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
             {
-                $this->load->view('dashboard/view/counselor-view-dashboard');
+                $this->load->view('dashboard/view/counselor-view-dashboard', compact('profile'));
 
                 return;
             }
             case 'student' :
             {
-                $this->load->view('dashboard/view/student-view-dashboard');
+                $this->load->view('dashboard/view/student-view-dashboard', compact('profile'));
 
                 return;
             }

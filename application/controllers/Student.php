@@ -48,6 +48,7 @@ class Student extends CI_Controller
 
     public function view()
     {
+        $profile = $_SESSION['user']['auth'];
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
@@ -68,7 +69,7 @@ class Student extends CI_Controller
                     $students[$id]['last_answer'] = isset($answered[".{$st['id']}"]) ? $answered[".{$st['id']}"]['answer_at'] : null;
                 }
                 unset($answered, $_answered);
-                $this->load->view('student/view/counselor-view-student', compact('students', 'window', 'now'));
+                $this->load->view('student/view/counselor-view-student', compact('profile', 'students', 'window', 'now'));
 
                 return;
             }
@@ -83,6 +84,8 @@ class Student extends CI_Controller
 
     public function detail()
     {
+        $profile = $_SESSION['user']['auth'];
+
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
@@ -113,7 +116,7 @@ class Student extends CI_Controller
                         $answered[".{$rv['answer_id']}"]['category'][".{$rv['category']}"] = $rv['value'];
                     }
                     unset($_answered, $result);
-                    $this->load->view('student/detail/counselor-detail-student', compact('answered', 'categories', 'profile'));
+                    $this->load->view('student/detail/counselor-detail-student', compact('profile', 'answered', 'categories', 'profile'));
 
                     return;
                 }
@@ -135,6 +138,8 @@ class Student extends CI_Controller
 
     public function report()
     {
+        $profile = $_SESSION['user']['auth'];
+
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
@@ -156,7 +161,7 @@ class Student extends CI_Controller
                     array_push($students[".{$answer['student']}"]['answered'], $answer);
                 }
                 unset($_students, $answered, $answer, $student);
-                $this->load->view('student/report/counselor-report-student', compact('students', 'reports'));
+                $this->load->view('student/report/counselor-report-student', compact('profile', 'students', 'reports'));
 
                 return;
             }
