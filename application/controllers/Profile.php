@@ -55,7 +55,11 @@ class Profile extends CI_Controller
             }
             case 'student' :
             {
-                $this->load->view('profile/view/student-view-profile', ['profile' => $_SESSION['user']['auth']]);
+                $this->load->model('minventory', 'inventory');
+                $have_entry = $this->inventory->getAnsweredUser($_SESSION['user']['auth']['id']);
+                $have_entry = count($have_entry) > 0;
+                $profile = $_SESSION['user']['auth'];
+                $this->load->view('profile/view/student-view-profile', compact('profile', 'have_entry'));
 
                 return;
             }
@@ -74,7 +78,11 @@ class Profile extends CI_Controller
             }
             case 'student' :
             {
-                $this->load->view('profile/edit/student-edit-profile', ['profile' => $_SESSION['user']['auth']]);
+                $this->load->model('minventory', 'inventory');
+                $have_entry = $this->inventory->getAnsweredUser($_SESSION['user']['auth']['id']);
+                $have_entry = count($have_entry) > 0;
+                $profile = $_SESSION['user']['auth'];
+                $this->load->view('profile/edit/student-edit-profile', compact('profile', 'have_entry'));
 
                 return;
             }
@@ -140,7 +148,9 @@ class Profile extends CI_Controller
                 ($_SESSION['user']['auth']['role'] === 'student' ?
                     (isset($_POST['grade'])) : true) &&
                 ($_SESSION['user']['auth']['role'] === 'counselor' ?
-                    (isset($_POST['school_address'])) : true)
+                    (isset($_POST['school_address']) &&
+                        isset($_POST['head']) &&
+                        isset($_POST['head_credential'])) : true)
             )
             {
                 $this->load->model('mauth', 'auth');
@@ -148,8 +158,10 @@ class Profile extends CI_Controller
                 {
                     case 'counselor' :
                     {
-                        $this->auth->updateAdditionalCounselorByID($_SESSION['user']['auth']['id'], $_POST['school'], $_POST['school_address'], $_POST['address'], $_POST['birthplace'], $_POST['datebirth']);
+                        $this->auth->updateAdditionalCounselorByID($_SESSION['user']['auth']['id'], $_POST['school'], $_POST['school_address'], $_POST['head'], $_POST['head_credential'], $_POST['address'], $_POST['birthplace'], $_POST['datebirth']);
                         $_SESSION['user']['auth']['school_address'] = $_POST['school_address'];
+                        $_SESSION['user']['auth']['head'] = $_POST['head'];
+                        $_SESSION['user']['auth']['head_credential'] = $_POST['head_credential'];
                         break;
                     }
                     case 'student' :

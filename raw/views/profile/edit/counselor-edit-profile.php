@@ -16,6 +16,8 @@ if (!isset($profile))
 $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
 $profile['school'] = $profile['school'] === null ? '' : $profile['school'];
 $profile['school_address'] = $profile['school_address'] === null ? '' : $profile['school_address'];
+$profile['head'] = $profile['head'] === null ? '' : $profile['head'];
+$profile['head_credential'] = $profile['head_credential'] === null ? '' : $profile['head_credential'];
 $profile['address'] = $profile['address'] === null ? '' : $profile['address'];
 $profile['birthplace'] = $profile['birthplace'] === null ? '' : $profile['birthplace'];
 $profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebirth'];
@@ -125,6 +127,18 @@ $profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebi
             <label for="school_address" class="col-sm-2 control-label">Alamat Sekolah</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="school_address" placeholder="Alamat Sekolah" name="school_address" value="<?php echo "{$profile['school_address']}" ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="head" class="col-sm-2 control-label">Kepala Sekolah</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="head" placeholder="Kepala Sekolah" name="head" value="<?php echo "{$profile['head']}" ?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="head_credential" class="col-sm-2 control-label">NIP/NIK Kepala Sekolah</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="head_credential" placeholder="NIP/NIK Kepala Sekolah" name="head_credential" value="<?php echo "{$profile['head_credential']}" ?>">
             </div>
         </div>
         <div class="form-group">
