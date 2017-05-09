@@ -57,6 +57,7 @@
     "datatables.net-keytable-bs": "^2.2.1",
     "datatables.net-responsive": "^2.1.1",
     "datatables.net-rowgroup-bs": "^1.0.0",
-    "datatables.net-rowreorder": "^1.2.0"
+    "datatables.net-rowreorder": "^1.2.0",
+    "jquery-backstretch": "^2.1.15"
   }
 }
