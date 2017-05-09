@@ -80,7 +80,7 @@
                 $url = site_url('inventory/test');
                 echo "<a class=\"btn btn-default\" href=\"{$url}\" role=\"button\">Mulai Mengerjakan</a>";
             }
-            else if($b_complete)
+            else if ($b_complete)
             {
                 echo '<span class="label label-warning">Anda Tidak Diperkenankan Mengerjakan Sekarang, Atau Hubungi Counselor Anda</span>';
             }

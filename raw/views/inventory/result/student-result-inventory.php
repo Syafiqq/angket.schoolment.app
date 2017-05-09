@@ -101,7 +101,7 @@ if (!isset($categories))
                             <th style="width: 150px">Pengisian</th>
                             <?php foreach ($categories as $cv)
                                 echo "<th style=\"width: 150px\">{$cv['name']}</th>"
-                                ?>
+                            ?>
                             <th style="width: 100px">Tampilkan</th>
                         </tr>
                         </thead>

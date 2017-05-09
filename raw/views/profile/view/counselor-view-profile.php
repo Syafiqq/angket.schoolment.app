@@ -10,7 +10,7 @@
 use Carbon\Carbon;
 
 setlocale(LC_TIME, 'id_ID');
-if(!isset($profile))
+if (!isset($profile))
 {
     $profile = [];
 }

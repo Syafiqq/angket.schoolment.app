@@ -173,7 +173,7 @@ $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answ
                 <p>Variabel :</p>
             </div>
             <div class="col-sm-8  no-padding-side">
-                <p><?php echo $categories[".{$rv['category']}"]['name']?></p>
+                <p><?php echo $categories[".{$rv['category']}"]['name'] ?></p>
             </div>
             <div class="col-sm-1">
             </div>
@@ -185,7 +185,7 @@ $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answ
                 <p>Prosentase :</p>
             </div>
             <div class="col-sm-8  no-padding-side">
-                <p><?php printf('<td>%.4f %%</td>',$rv['value']);?></p>
+                <p><?php printf('<td>%.4f %%</td>', $rv['value']); ?></p>
             </div>
             <div class="col-sm-1">
             </div>
@@ -202,7 +202,7 @@ $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answ
                     {
                         echo "<li>{$iv}</li>";
                     }
-                        ?>
+                    ?>
                 </ol>
             </div>
             <div class="col-sm-1">
@@ -216,7 +216,10 @@ $answered['answer_at'] = Carbon::createFromFormat('Y-m-d H:i:s', $answered['answ
         <div class="col-sm-1 ">
         </div>
         <div class="col-sm-10 no-padding-side text-justified">
-            <p>Hasil diatas merupakan data diri <b><?php echo $profile['name'] ?></b> dalam kecenderungannya terhadap LGBT. Apabila terdapat hasil yang pdirasa tidak sesuai atau memerlukan penjelasan lebih lanjut terkait kondisi diri anda, silahkan datang kepada konselor untuk mendiskusikan hal tersebt lebih lanjut.</p>
+            <p>Hasil diatas merupakan data diri
+                <b><?php echo $profile['name'] ?></b>
+               dalam kecenderungannya terhadap LGBT. Apabila terdapat hasil yang pdirasa tidak sesuai atau memerlukan penjelasan lebih lanjut terkait kondisi diri anda, silahkan datang kepada konselor untuk mendiskusikan hal tersebt lebih lanjut.
+            </p>
         </div>
         <div class="col-sm-1">
         </div>
