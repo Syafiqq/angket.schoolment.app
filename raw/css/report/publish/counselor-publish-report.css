@@ -134,6 +134,24 @@ page[size="A5"][layout="portrait"] {
     height: 14.8cm;
 }
 
+.margin-bottom-2 {
+    margin-bottom: 2px;
+}
+
+.margin-bottom-4 {
+    margin-bottom: 4px;
+}
+
+
+.margin-left-1-cm {
+    margin-left: 1cm;
+}
+
+.color-transparent {
+    background-color: transparent !important;
+    -webkit-print-color-adjust: exact;
+}
+
 @page {
     size: A4;
     margin: 0;
@@ -277,4 +295,38 @@ page[size="A5"][layout="portrait"] {
         border: transparent 0 !important;
     }
 
+    .margin-bottom-2 {
+        margin-bottom: 2px;
+    }
+
+    .margin-bottom-4 {
+        margin-bottom: 4px;
+    }
+
+    .color-transparent {
+        background-color: transparent !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+.custom-table {
+    border: solid black 1px;
+    width: 100%;
+}
+
+.custom-table th, .custom-table td {
+    border: solid black 1px;
+    padding: 2px 4px 2px 4px;
+}
+
+.font-size-12px {
+    font-size: 12px;
+}
+
+.font-size-14px {
+    font-size: 12px;
+}
+
+.bold-normal {
+    font-weight: bold;
 }
