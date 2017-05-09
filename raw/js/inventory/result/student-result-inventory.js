@@ -8,6 +8,9 @@
 
 (function ($)
 {
+    $('table#result_tb').DataTable({
+        paging: false
+    });
     $(function ()
     {
         $("a#logout").on('click', function (event)
