@@ -9,7 +9,8 @@
 (function ($)
 {
     $('table#inventory_test').DataTable({
-        paging: false
+        paging: false,
+        fixedHeader: true
     });
     $(function ()
     {

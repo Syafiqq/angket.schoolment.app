@@ -33,6 +33,7 @@ if (!isset($questions))
     <link href="<?php echo base_url('/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/css/autoFill.bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/inventory/test/student-test-inventory.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -135,6 +136,7 @@ if (!isset($questions))
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/js/autoFill.bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/inventory/test/student-test-inventory.min.js') ?>"></script>
 </body>
 </html>
