@@ -60,64 +60,12 @@ class Report extends CI_Controller
                         $answered = $answered[0];
                         $profile = $this->auth->findStudentByID($answered['student']);
                         $profile = $profile[0];
-                        $_categories = $this->inventory->getCategory();
-                        $categories = [];
-                        foreach ($_categories as $_cv)
-                        {
-                            $categories[".{$_cv['id']}"] = $_cv;
-                        }
+                        $this->load->helper('conclusion_interpretation');
+                        $grading = interpretCritical();
                         $result = $this->inventory->getAnsweredResultByID($answered['id']);
-                        $isMale = $profile === 'male';
-                        foreach ($result as $kr => $vr)
-                        {
-                            if ($isMale)
-                            {
-                                if ((int)$vr['category'] === 1)
-                                {
-                                    unset($result[$kr]);
-                                    continue;
-                                }
-                            }
-                            else
-                            {
-                                if ((int)$vr['category'] === 2)
-                                {
-                                    unset($result[$kr]);
-                                    continue;
-                                }
-                            }
-
-                            $this->load->helper('conclusion_interpretation');
-
-                            switch ((int)$vr['category'])
-                            {
-                                case 1 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretLesbian($vr['value']);
-                                }
-                                    break;
-                                case 2 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretGay($vr['value']);
-                                }
-                                    break;
-                                case 3 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretBisexual($vr['value']);
-                                }
-                                    break;
-                                case 4 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretTransGender($vr['value']);
-                                }
-                                    break;
-                            }
-                        }
-
+                        $result['detail'] = ['answer_id' => 3, 'value' => 23.5];
                         $counselor = $_SESSION['user']['auth'];
-
-
-                        $this->load->view('report/publish/counselor-publish-report', compact('counselor', 'profile', 'categories', 'result', 'answered'));
+                        $this->load->view('report/publish/counselor-publish-report', compact('counselor', 'profile', 'result', 'grading', 'answered'));
                     }
                     else
                     {
