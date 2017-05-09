@@ -81,6 +81,58 @@ class Student extends CI_Controller
         }
     }
 
+    public function detail()
+    {
+        switch ($_SESSION['user']['auth']['role'])
+        {
+            case 'counselor' :
+            {
+                if(isset($_GET['student']))
+                {
+                    $this->load->model('minventory', 'inventory');
+                    $this->load->model('mauth', 'auth');
+
+                    $profile = $this->auth->findStudentByID($_GET['student']);
+                    $profile = $profile[0];
+                    $_answered = $this->inventory->getAnsweredUser($_GET['student']);
+                    $answered = [];
+                    $result = $this->inventory->getAnsweredResultByUser($_GET['student']);
+                    $categories = $this->inventory->getCategory();
+                    foreach ($_answered as $av)
+                    {
+                        $answered[".{$av['id']}"] = $av;
+                        $answered[".{$av['id']}"]['category'] = [];
+                        foreach ($categories as $cv)
+                        {
+                            $answered[".{$av['id']}"]['category'][".{$cv['id']}"] = 0;
+                        }
+                    }
+
+                    foreach ($result as $rv)
+                    {
+                        $answered[".{$rv['answer_id']}"]['category'][".{$rv['category']}"] = $rv['value'];
+                    }
+                    unset($_answered, $result);
+                    $this->load->view('student/detail/counselor-detail-student', compact('answered', 'categories', 'profile'));
+
+                    return;
+                }
+                else
+                {
+                    redirect('/student');
+
+                    return;
+                }
+            }
+            case 'student' :
+            {
+                redirect('/inventory');
+
+                return;
+            }
+        }
+    }
+
     public function report()
     {
         switch ($_SESSION['user']['auth']['role'])
