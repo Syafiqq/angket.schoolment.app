@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/css/auth/login/student-login-auth.min.css') ?>" rel="stylesheet">
 
     <style>
         .audiojs {

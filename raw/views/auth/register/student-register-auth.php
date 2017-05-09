@@ -22,7 +22,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/normalize.min.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/auth/register/student-register-auth.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
 
