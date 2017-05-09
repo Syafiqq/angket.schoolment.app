@@ -432,7 +432,7 @@ class Inventory extends CI_Controller
                 $this->load->model('mauth', 'auth');
                 $this->auth->updateStudentActivation($aq, 0);
                 $_SESSION['user']['auth']['is_active'] = 0;
-                echo apiMakeCallback(API_SUCCESS, 'Pengerjaan Selesai', ['notify' => [['Pengerjaan Selesai', 'success']]], site_url('/inventory'));
+                echo apiMakeCallback(API_SUCCESS, 'Pengerjaan Selesai', ['notify' => [['Pengerjaan Selesai', 'success']]], site_url('/inventory/result'));
             }
             else
             {
