@@ -62,8 +62,12 @@ class Report extends CI_Controller
                         $profile = $profile[0];
                         $this->load->helper('conclusion_interpretation');
                         $grading = interpretCritical();
-                        $result = $this->inventory->getAnsweredResultByID($answered['id']);
-                        $result['detail'] = ['answer_id' => 3, 'value' => 23.5];
+                        $_result = $this->inventory->getAnsweredResultByID($answered['id']);
+                        $result = ['answer_id' => $answered['id'], 'value' => 0.0];
+                        foreach ($_result as $_vr)
+                        {
+                            $result['value'] += $_vr['value'];
+                        }
                         $counselor = $_SESSION['user']['auth'];
                         $this->load->view('report/publish/counselor-publish-report', compact('counselor', 'profile', 'result', 'grading', 'answered'));
                     }
@@ -107,63 +111,17 @@ class Report extends CI_Controller
                     if (count($answered) > 0)
                     {
                         $answered = $answered[0];
-                        $_categories = $this->inventory->getCategory();
-                        $categories = [];
-                        foreach ($_categories as $_cv)
+                        $this->load->helper('conclusion_interpretation');
+                        $grading = interpretCritical();
+                        $_result = $this->inventory->getAnsweredResultByID($answered['id']);
+                        $result = ['answer_id' => $answered['id'], 'value' => 0.0];
+                        foreach ($_result as $_vr)
                         {
-                            $categories[".{$_cv['id']}"] = $_cv;
+                            $result['value'] += $_vr['value'];
                         }
-                        $result = $this->inventory->getAnsweredResultByID($answered['id']);
-                        $isMale = $_SESSION['user']['auth']['gender'] === 'male';
-                        foreach ($result as $kr => $vr)
-                        {
-                            if ($isMale)
-                            {
-                                if ((int)$vr['category'] === 1)
-                                {
-                                    unset($result[$kr]);
-                                    continue;
-                                }
-                            }
-                            else
-                            {
-                                if ((int)$vr['category'] === 2)
-                                {
-                                    unset($result[$kr]);
-                                    continue;
-                                }
-                            }
-
-                            $this->load->helper('conclusion_interpretation');
-
-                            switch ((int)$vr['category'])
-                            {
-                                case 1 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretLesbian($vr['value']);
-                                }
-                                    break;
-                                case 2 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretGay($vr['value']);
-                                }
-                                    break;
-                                case 3 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretBisexual($vr['value']);
-                                }
-                                    break;
-                                case 4 :
-                                {
-                                    $result[$kr]['interpretation'] = interpretTransGender($vr['value']);
-                                }
-                                    break;
-                            }
-                        }
-
                         $profile = $_SESSION['user']['auth'];
 
-                        $this->load->view('report/display/student-display-report', compact('profile', 'categories', 'result', 'answered'));
+                        $this->load->view('report/display/student-display-report', compact('profile', 'result', 'grading', 'answered'));
 
                         return;
                     }
