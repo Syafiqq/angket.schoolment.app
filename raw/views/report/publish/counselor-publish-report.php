@@ -118,6 +118,8 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+
 <page class="page" size="A4" id="printable-area">
     <div class="container" id="print_container">
         <div class="row vertical-align">

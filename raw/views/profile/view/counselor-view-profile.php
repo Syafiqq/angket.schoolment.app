@@ -56,103 +56,119 @@ $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] 
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-default sidebar" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo site_url('dashboard') ?>">Site</a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                <li class="active"><a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">B-Kritis<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a></li>
+                        <li class="divider"></li>
+                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Edit</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="<?php echo site_url('profile') ?>">Profile</a>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Inventory <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a></li>
+                        <li class="divider"></li>
+                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>">Tambah Inventory</a></li>
+                    </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Data Siswa <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktifkan Siswa</a></li>
+                        <li class="divider"></li>
+                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Nilai Siswa</a></li>
+                    </ul>
+                </li>
+                <li ><a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span></a></li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
 
-<div class="container">
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="avatar" class="col-sm-2 control-label">Avatar</label>
-            <div class="col-sm-10">
-                <img src="<?php echo base_url("{$profile['avatar']}") ?>" alt="<?php echo base_url("{$profile['avatar']}") ?>" class="img-thumbnail" id="avatar" height="256" width="256">
+<div class="main">
+    <div class="container">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="avatar" class="col-sm-2 control-label">Avatar</label>
+                <div class="col-sm-10">
+                    <img src="<?php echo base_url("{$profile['avatar']}") ?>" alt="<?php echo base_url("{$profile['avatar']}") ?>" class="img-thumbnail" id="avatar" height="256" width="256">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Nama</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['name']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Nama</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['name']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">NIP/NIK</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['credential']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">NIP/NIK</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['credential']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Jenis Kelamin</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['gender']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Jenis Kelamin</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['gender']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Sekolah</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['school']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Sekolah</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['school']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Alamat Sekolah</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['school_address']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Alamat Sekolah</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['school_address']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Kepala Sekolah</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['head']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Kepala Sekolah</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['head']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">NIP/NIK Kepala Sekolah</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['head_credential']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">NIP/NIK Kepala Sekolah</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['head_credential']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Alamat</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['address']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Alamat</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['address']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Tempat, Tanggal Lahir</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo "{$profile['birth']}" ?></p>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Tempat, Tanggal Lahir</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo "{$profile['birth']}" ?></p>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <a class="btn btn-default" href="<?php echo site_url('profile/edit') ?>" role="button">Ubah</a>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a class="btn btn-default" href="<?php echo site_url('profile/edit') ?>" role="button">Ubah</a>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>

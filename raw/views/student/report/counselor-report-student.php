@@ -54,84 +54,95 @@ if (!isset($reports))
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-default sidebar" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo site_url('dashboard') ?>">Site</a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="<?php echo site_url('inventory') ?>">Inventory</a>
+                <li class="active"><a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">B-Kritis<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a></li>
+                        <li class="divider"></li>
+                        <li><a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Edit</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="<?php echo site_url('student') ?>">Siswa</a>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Inventory <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a></li>
+                        <li class="divider"></li>
+                        <li><a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>">Tambah Inventory</a></li>
+                    </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Data Siswa <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktifkan Siswa</a></li>
+                        <li class="divider"></li>
+                        <li><a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Nilai Siswa</a></li>
+                    </ul>
+                </li>
+                <li ><a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-off"></span></a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
-                </li>
-                <li>
-                    <a href="<?php echo site_url('profile') ?>">Profile</a>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Panel heading</div>
-                <div class="panel-body">
-                </div>
-                <div class="table-responsive">
-                    <table id="report_tb" class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th style="width: 40px">No</th>
-                            <th style="width: 150px">NIM</th>
-                            <th>Nama</th>
-                            <th style="width: 100px">Kelas</th>
-                            <th style="width: 100px">Sekolah</th>
-                            <th style="width: 100px">Cetak</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $no = 0;
-                        foreach ($students as $student)
-                        {
-                            ++$no;
-                            $student['grade'] = $student['grade'] === null ? '-' : $student['grade'];
-                            $student['school'] = $student['school'] === null ? '-' : $student['school'];
-                            $url = site_url('student/detail');
 
-                            echo '<tr>';
-                            echo "<td>{$no}</td>";
-                            echo "<td>{$student['credential']}</td>";
-                            echo "<td>{$student['name']}</td>";
-                            echo "<td>{$student['grade']}</td>";
-                            echo "<td>{$student['school']}</td>";
-                            echo "<form id=\"login\" action=\"{$url}\" method=\"get\">";
-                            echo "<td><input type='hidden' name='student' class='hidden' value='{$student['id']}'><button type=\"submit\" class=\"btn btn-default\">Detail</button></td>";
-                            echo '</form>';
-                            echo '</tr>';
-                        }
-                        ?>
-                        </tbody>
-                    </table>
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Panel heading</div>
+                    <div class="panel-body">
+                    </div>
+                    <div class="table-responsive">
+                        <table id="report_tb" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th style="width: 40px">No</th>
+                                <th style="width: 150px">NIM</th>
+                                <th>Nama</th>
+                                <th style="width: 100px">Kelas</th>
+                                <th style="width: 100px">Sekolah</th>
+                                <th style="width: 100px">Cetak</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $no = 0;
+                            foreach ($students as $student)
+                            {
+                                ++$no;
+                                $student['grade'] = $student['grade'] === null ? '-' : $student['grade'];
+                                $student['school'] = $student['school'] === null ? '-' : $student['school'];
+                                $url = site_url('student/detail');
+
+                                echo '<tr>';
+                                echo "<td>{$no}</td>";
+                                echo "<td>{$student['credential']}</td>";
+                                echo "<td>{$student['name']}</td>";
+                                echo "<td>{$student['grade']}</td>";
+                                echo "<td>{$student['school']}</td>";
+                                echo "<form id=\"login\" action=\"{$url}\" method=\"get\">";
+                                echo "<td><input type='hidden' name='student' class='hidden' value='{$student['id']}'><button type=\"submit\" class=\"btn btn-default\">Detail</button></td>";
+                                echo '</form>';
+                                echo '</tr>';
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
