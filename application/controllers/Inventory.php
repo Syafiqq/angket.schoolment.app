@@ -444,4 +444,103 @@ class Inventory extends CI_Controller
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
     }
+
+    public function jump()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_GET['tab']))
+            {
+                $path = urldecode($_GET['tab']);
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'counselor' :
+                    {
+                        switch ($path)
+                        {
+                            case 'inventory' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            case 'inventory/add' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            default:
+                            {
+                                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+                            }
+                                break;
+                        }
+
+                        return;
+                    }
+                    case 'student' :
+                    {
+                        switch ($path)
+                        {
+                            case 'inventory' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            case 'inventory/test' :
+                            {
+                                $this->load->helper('identity_checking');
+                                $allowed = $this->allowedToTakeTest();
+                                if ($allowed)
+                                {
+                                    $allowed &= isStudentIdentityIsComplete($_SESSION['user']['auth']);
+                                    if ($allowed)
+                                    {
+                                        echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                                    }
+                                    else
+                                    {
+                                        echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Access Denied', ['notify' => [['Data diri anda belum lengkap', 'info']]]);
+                                    }
+                                }
+                                else
+                                {
+                                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Access Denied', ['notify' => [['Anda Tidak Diperkenankan Mengerjakan<br> Silahkan Hubungi Konselor Anda', 'info']]]);
+                                }
+                            }
+                                break;
+                            case 'inventory/result' :
+                            {
+                                $this->load->model('minventory', 'inventory');
+                                $answered = $this->inventory->getAnsweredUser($_SESSION['user']['auth']['id']);
+                                if (count($answered) > 0)
+                                {
+                                    echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                                }
+                                else
+                                {
+                                    echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Access Denied', ['notify' => [['Anda belum memiliki data', 'info']]]);
+                                }
+                            }
+                                break;
+                            default:
+                            {
+                                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+                            }
+                                break;
+                        }
+
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+            }
+        }
+        else
+        {
+            echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+        }
+    }
 }

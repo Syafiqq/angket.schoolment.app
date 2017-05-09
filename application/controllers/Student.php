@@ -87,7 +87,7 @@ class Student extends CI_Controller
         {
             case 'counselor' :
             {
-                if(isset($_GET['student']))
+                if (isset($_GET['student']))
                 {
                     $this->load->model('minventory', 'inventory');
                     $this->load->model('mauth', 'auth');
@@ -183,6 +183,57 @@ class Student extends CI_Controller
             else
             {
                 echo apiMakeCallback(API_NOT_ACCEPTABLE, 'Data Kurang Lengkap', ['notify' => [['Data Kurang Lengkap', 'info']]]);
+            }
+        }
+        else
+        {
+            echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+        }
+    }
+
+    public function jump()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_GET['tab']))
+            {
+                $path = urldecode($_GET['tab']);
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'counselor' :
+                    {
+                        switch ($path)
+                        {
+                            case 'student' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            case 'student/report' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            default:
+                            {
+                                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+                            }
+                                break;
+                        }
+
+                        return;
+                    }
+                    case 'student' :
+                    {
+                        echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
             }
         }
         else

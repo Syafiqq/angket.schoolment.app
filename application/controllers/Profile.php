@@ -187,4 +187,72 @@ class Profile extends CI_Controller
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
     }
+
+    public function jump()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_GET['tab']))
+            {
+                $path = urldecode($_GET['tab']);
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'counselor' :
+                    {
+                        switch ($path)
+                        {
+                            case 'profile' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            case 'profile/edit' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            default:
+                            {
+                                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+                            }
+                                break;
+                        }
+
+                        return;
+                    }
+                    case 'student' :
+                    {
+                        switch ($path)
+                        {
+                            case 'profile' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            case 'profile/edit' :
+                            {
+                                echo apiMakeCallback(API_SUCCESS, "Jump To [{$path}]", [], site_url("/{$path}"));
+                            }
+                                break;
+                            default:
+                            {
+                                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+                            }
+                                break;
+                        }
+
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+            }
+        }
+        else
+        {
+            echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+        }
+    }
 }

@@ -132,4 +132,27 @@ class Report extends CI_Controller
             }
         }
     }
+
+    public function jump()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            switch ($_SESSION['user']['auth']['role'])
+            {
+                case 'counselor' :
+                {
+                    return;
+                }
+                case 'student' :
+                {
+                    echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
+        }
+    }
 }
