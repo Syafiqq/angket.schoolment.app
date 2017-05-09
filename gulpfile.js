@@ -33,7 +33,7 @@ gulp.task('minify-css', function ()
 
 gulp.task('minify-html', function ()
 {
-    return gulp.src('./raw/views/**/*.php', {base: './raw/views/'})
+    return gulp.src('./raw/views/**/*.{php,html}', {base: './raw/views/'})
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('./application/views/'));
 });
@@ -74,9 +74,9 @@ gulp.task('watch-minify-css', function ()
 gulp.task('watch-minify-html', function ()
 {
     // Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event
-    return watch('./raw/views/**/*.php', function ()
+    return watch('./raw/views/**/*.{php,html}', function ()
     {
-        return gulp.src('./raw/views/**/*.php', {base: './raw/views/'})
+        return gulp.src('./raw/views/**/*.{php,html}', {base: './raw/views/'})
             .pipe(htmlmin({collapseWhitespace: true}))
             .pipe(gulp.dest('./application/views/'));
     });
