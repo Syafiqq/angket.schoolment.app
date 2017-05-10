@@ -37,23 +37,84 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <form id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
-                <div class="form-group">
-                    <label for="credential">NIP/NIK</label>
-                    <input type="number" class="form-control" id="credential" placeholder="NIP/NIK" name="credential" value="125150200111112">
+
+    <form class="well form-horizontal" id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Contact Us Today!</legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="credential">NIP/NIK</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="credential" placeholder="NIP/NIK" name="credential" type="number" class="form-control">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="12345">
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="password">Password</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                    </div>
                 </div>
-                <input type="hidden" name="role" value="counselor">
-                <button type="submit" class="btn btn-default">Login</button>
-            </form>
-        </div>
-    </div>
+            </div>
+            <input type="hidden" name="role" value="counselor">
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-warning">Login
+                        <span class="glyphicon glyphicon-send"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 50px">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <b>Klik</b>
+                    <a href="<?php echo site_url('/auth/login?role=student') ?>" type="submit" class="btn btn-warning">Siswa
+                        <span class="glyphicon glyphicon-send"></span>
+                    </a>
+                    <b>&nbsp;Apabila Anda Siswa ?</b>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <b>Klik</b>
+                    <a href="<?php echo site_url('/auth/register?role=counselor') ?>" type="submit" class="btn btn-warning">Daftar
+                        <span class="glyphicon glyphicon-send"></span>
+                    </a>
+                    <b>&nbsp;Apabila Belum Punya Akun ?</b>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <b>Klik</b>
+                    <a href="<?php echo site_url('/auth/recover?role=counselor') ?>" type="submit" class="btn btn-warning">Lupa
+                        <span class="glyphicon glyphicon-send"></span>
+                    </a>
+                    <b>&nbsp;Apabila Anda Lupa ?</b>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
 </div>
+<audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -63,6 +124,7 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/auth/login/counselor-login-auth.min.js') ?>"></script>
 
 </body>

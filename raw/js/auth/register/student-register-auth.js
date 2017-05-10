@@ -8,6 +8,11 @@
 
 (function ($)
 {
+    audiojs.events.ready(function ()
+    {
+        var aj = audiojs.createAll();
+    });
+
     $(function ()
     {
         $("form#register").on('submit', function (event)

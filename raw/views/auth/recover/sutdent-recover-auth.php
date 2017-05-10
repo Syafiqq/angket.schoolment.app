@@ -38,34 +38,87 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <form id="recover" action="<?php echo site_url('auth/do_recover') ?>" method="post">
-                <div class="form-group">
-                    <label for="name">Nama</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nama" name="name">
+    <form class="well form-horizontal" id="recover" action="<?php echo site_url('auth/do_recover') ?>" method="post">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Contact Us Today!</legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Nama</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="name" placeholder="Nama" name="name" type="text" class="form-control">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="credential">NISN</label>
-                    <input type="number" class="form-control" id="credential" placeholder="NISN" name="credential">
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="credential">NISN</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="credential" placeholder="NISN" name="credential" type="number" class="form-control">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="role">Jenis Kelamin</label>
-                    <select id="role" name="gender" class="form-control">
-                        <option value="male">Pria</option>
-                        <option value="female">Wanita</option>
-                    </select>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="role">Jenis Kelamin</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select id="role" name="gender" class="form-control selectpicker">
+                            <option value="male">Pria</option>
+                            <option value="female">Wanita</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="created">Tanggal Pembuatan Akun</label>
-                    <input type="text" class="form-control" id="created" name="created"/>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="created">Tanggal Pembuatan Akun</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="text" class="form-control" id="created" placeholder="Password" name="created">
+                    </div>
                 </div>
-                <input type="hidden" name="role" value="student">
-                <button type="submit" class="btn btn-default">Recover</button>
-            </form>
-        </div>
-    </div>
+            </div>
+
+            <input type="hidden" name="role" value="student">
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-warning">Register
+                        <span class="glyphicon glyphicon-send"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 50px">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <b>Klik</b>
+                    <a href="<?php echo site_url('/auth/register?role=counselor') ?>" type="submit" class="btn btn-warning">Daftar
+                        <span class="glyphicon glyphicon-send"></span>
+                    </a>
+                    <b>&nbsp;Apabila Belum Punya Akun ?</b>
+                </div>
+            </div>
+
+
+        </fieldset>
+    </form>
 </div>
+<audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -77,7 +130,7 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/moment/min/moment.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/auth/recover/student-recover-auth.min.js') ?>"></script>
-
 </body>
 </html>

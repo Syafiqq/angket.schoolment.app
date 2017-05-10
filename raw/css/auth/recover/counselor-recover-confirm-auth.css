@@ -1,0 +1,9 @@
+
+.audiojs {
+    background: transparent;
+    box-shadow: none;
+}
+
+.audiojs div {
+    display: none;
+}

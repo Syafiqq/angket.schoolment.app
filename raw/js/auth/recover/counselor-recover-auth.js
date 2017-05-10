@@ -12,6 +12,10 @@
         format: 'YYYY-MM-DD',
         maxDate: moment()
     });
+    audiojs.events.ready(function ()
+    {
+        var aj = audiojs.createAll();
+    });
 
     $(function ()
     {
