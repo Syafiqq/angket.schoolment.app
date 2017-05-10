@@ -7,7 +7,10 @@
  */
 
 (function ($)
+{    audiojs.events.ready(function ()
 {
+    var aj = audiojs.createAll();
+});
     $('input#imageupload').fileupload({
         dataType: 'json',
         done: function (e, data)

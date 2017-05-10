@@ -123,47 +123,13 @@ if (!isset($questions))
                                 <tr>
                                     <th style="width: 40px">No</th>
                                     <th>Pertanyaan</th>
-                                    <th class="_mini-text" style="width: 50px">T&nbsp;S
-                                        <br>
-                                                                               I&nbsp;E
-                                        <br>
-                                                                               D&nbsp;S
-                                        <br>
-                                                                               A&nbsp;U
-                                        <br>
-                                                                               K&nbsp;A
-                                        <br>&nbsp;&nbsp;I
+                                    <th class="_mini-text" style="width: 50px">TS
                                     </th>
-                                    <th class="_mini-text" style="width: 50px">K&nbsp;S
-                                        <br>
-                                                                               U&nbsp;E
-                                        <br>
-                                                                               R&nbsp;S
-                                        <br>
-                                                                               A&nbsp;U
-                                        <br>
-                                                                               N&nbsp;A
-                                        <br>
-                                                                               G&nbsp;I
+                                    <th class="_mini-text" style="width: 50px">KS
                                     </th>
-                                    <th class="_mini-text" style="width: 50px">&nbsp;S
-                                        <br>&nbsp;E
-                                        <br>&nbsp;S
-                                        <br>&nbsp;U
-                                        <br>&nbsp;A
-                                        <br>&nbsp;I
+                                    <th class="_mini-text" style="width: 50px">S
                                     </th>
-                                    <th class="_mini-text" style="width: 50px">S&nbsp;S
-                                        <br>
-                                                                               A&nbsp;E
-                                        <br>
-                                                                               N&nbsp;S
-                                        <br>
-                                                                               G&nbsp;U
-                                        <br>
-                                                                               A&nbsp;A
-                                        <br>
-                                                                               T&nbsp;I
+                                    <th class="_mini-text" style="width: 50px">SS
                                     </th>
                                 </tr>
                                 </thead>
@@ -199,6 +165,7 @@ if (!isset($questions))
         </div>
     </div>
 </div>
+<audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -215,6 +182,7 @@ if (!isset($questions))
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/inventory/test/student-test-inventory.min.js') ?>"></script>
 </body>
 </html>

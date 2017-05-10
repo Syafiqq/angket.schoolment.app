@@ -8,7 +8,10 @@
 
 
 (function ($)
+{    audiojs.events.ready(function ()
 {
+    var aj = audiojs.createAll();
+});
     $(function ()
     {
         $("a#logout").on('click', function (event)
@@ -93,7 +96,7 @@
                         }
                         if (data['data'].hasOwnProperty('coupon'))
                         {
-                            alert('Nomor Kupon Registrasi = \n' + data['data']['coupon'])
+                            alert('Nomor Kode Registrasi = \n' + data['data']['coupon'])
                         }
                     }
                 })

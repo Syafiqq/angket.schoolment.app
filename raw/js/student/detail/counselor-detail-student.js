@@ -7,7 +7,10 @@
  */
 
 (function ($)
+{    audiojs.events.ready(function ()
 {
+    var aj = audiojs.createAll();
+});
     $('table#detail_tb').DataTable({
         paging: false
     });

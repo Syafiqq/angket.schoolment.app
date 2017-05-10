@@ -7,7 +7,10 @@
  */
 
 (function ($)
+{    audiojs.events.ready(function ()
 {
+    var aj = audiojs.createAll();
+});
     $('table#inventory_tb').DataTable();
     $(function ()
     {

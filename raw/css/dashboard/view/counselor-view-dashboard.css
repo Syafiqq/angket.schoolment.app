@@ -2,6 +2,14 @@ body {
     background: #F1F3FA;
 }
 
+.audiojs {
+    background: transparent;
+    box-shadow: none;
+}
+
+.audiojs div {
+    display: none;
+}
 /* Profile container */
 .profile {
     margin: 20px 0;

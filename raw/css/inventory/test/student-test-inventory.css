@@ -4,6 +4,14 @@ th._mini-text
     font-family: "Courier New", serif;
 }
 
+.audiojs {
+    background: transparent;
+    box-shadow: none;
+}
+
+.audiojs div {
+    display: none;
+}
 body {
     background: #F1F3FA;
 }

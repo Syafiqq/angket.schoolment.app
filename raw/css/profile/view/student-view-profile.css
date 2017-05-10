@@ -105,3 +105,12 @@ body {
     background: #fff;
     min-height: 460px;
 }
+
+.audiojs {
+    background: transparent;
+    box-shadow: none;
+}
+
+.audiojs div {
+    display: none;
+}

@@ -118,7 +118,7 @@
             <div class="profile-content">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <button id="coupon_generator" class="btn btn-default" data-coupon-action="<?php echo site_url('dashboard/do_generate_coupon') ?>" type="button">Generate Coupon</button>
+                        <button id="coupon_generator" class="btn btn-default" data-coupon-action="<?php echo site_url('dashboard/do_generate_coupon') ?>" type="button">Generate Kode Pendaftaran</button>
                     </div>
                 </div>
             </div>
@@ -126,6 +126,7 @@
     </div>
 </div>
 
+<audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -134,6 +135,7 @@
 <script src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
+<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
 <script src="<?php echo base_url('/assets/js/dashboard/view/counselor-view-dashboard.min.js') ?>"></script>
 </body>
 </html>
