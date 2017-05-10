@@ -32,7 +32,7 @@ counselor_css=(
     "../../../../css/inventory/view/counselor-view-inventory.css"
     "../../../../css/profile/edit/counselor-edit-profile.css"
     "../../../../css/profile/view/counselor-view-profile.css"
-    "../../../../css/report/counselor-publish-report.css"
+    "../../../../css/report/publish/counselor-publish-report.css"
     "../../../../css/student/report/counselor-report-student.css"
     "../../../../css/student/view/counselor-view-student.css"
     "../../../../css/student/detail/counselor-detail-student.css"
