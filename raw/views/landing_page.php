@@ -18,7 +18,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>Inventory Bipolar Siswa</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/assets/baked/freelancer/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,8 @@
 
 </head>
 
-<body id="page-top" class="index">
-<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+<body id="page-top" class="index" >
+<div id="skipnav"><a href="#maincontent">Lewati menuju konten utama</a></div>
 
 <!-- Navigation -->
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -49,9 +49,9 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                <span class="sr-only">Navigasi</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand" href="#page-top">Inventori Bipolar Siswa</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -61,13 +61,10 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">Portfolio</a>
+                    <a href="#about">Pengantar</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">About</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#contact">Contact</a>
+                    <a href="#portfolio">Profil Pengembang</a>
                 </li>
             </ul>
         </div>
@@ -77,27 +74,59 @@
 </nav>
 
 <!-- Header -->
-<header>
+<header style="background-image:url(/assets/baked/freelancer/img/backhome.png) !important; size:1366x768">
     <div class="container" id="maincontent" tabindex="-1">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive" src="/assets/baked/freelancer/img/profile.png" alt="">
+                <img class="img-responsive" src="/assets/baked/freelancer/img/profile.png"  width=300 height=300 alt="">
                 <div class="intro-text">
-                    <h1 class="name">Start Bootstrap</h1>
+                    <h1 class="name">Inventori Bipolar Siswa SMA</h1>
                     <hr class="star-light">
-                    <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                    <span class="skills">Aplikasi Asesmen Non-Tes Bimbingan dan Konseling</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+
+<!-- About Section -->
+<section class="success" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Pengantar</h2>
+                <hr class="star-light">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-2">
+                <p>FreGangguan bipolar adalah suatu gangguan suasana hati (mood atau perasaan) yang sangat ekstrim dengan dua kutub, yakni depresi (perasaan sedih berlebihan) dan mania (perasaan bahagia berlebihan) yang mengganggu keadaan individu dan merupakan pemicu upaya bunuh diri. Gangguan ini termasuk gangguan otak yang menyebabkan perubahan perubahan yang tidak biasa pada suasana hati, energi, aktivitas, dan kemampuan untuk melakukan tugas-tugas harian. Perasaan mereka mudah naik dan turun secara berlebihan dibandingkan manusia normal pada umumnya (Franky, 2013) .</p>
+            </div>
+            <div class="col-lg-4">
+                <p>Herditya (2012) mengatakan hal yang sama bahwa bipolar adalah bagian integral dari psikologi    klinis. Terdapat dua jenis bipolar yaitu mania dan depresi. Gangguan bipolar adalah gangguan mood dengan yang berupa mania (peningkatan mood dan peningkatan aktivitas) dan depresi (penurunan mood dan penurunan aktivitas). Mania ditandai dengan suasana hati gembira, reaktivitas (peningkatan aktivitas), agresivitas, peningkatan aktivitas psikomotor, dan penurunan kebutuhan untuk tidur berlangsung untuk jangka waktu minimal satu minggu.</p>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <a href="<?php echo site_url('auth/login')?>" class="btn btn-lg btn-outline">
+                    <i class="fa fa-download" href=""></i> Masuk Aplikasi
+                </a>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <a href="<?php echo site_url('auth/register')?>" class="btn btn-lg btn-outline">
+                    <i class="fa fa-download" href=""></i> Daftar Akun
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Portfolio</h2>
+                <h2>Profil Pengembang</h2>
                 <hr class="star-primary">
             </div>
         </div>
@@ -109,7 +138,7 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="/assets/baked/freelancer/img/portfolio/cabin.png" class="img-responsive" alt="Cabin">
+                    <img src="/assets/baked/freelancer/img/portfolio/P-Nur.JPG" class="img-responsive" style="margin:auto" alt="Cabin">
                 </a>
             </div>
             <div class="col-sm-4 portfolio-item">
@@ -119,7 +148,7 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="/assets/baked/freelancer/img/portfolio/cake.png" class="img-responsive" alt="Slice of cake">
+                    <img src="/assets/baked/freelancer/img/portfolio/fa.jpg" class="img-responsive" style="margin:auto" alt="Slice of cake">
                 </a>
             </div>
             <div class="col-sm-4 portfolio-item">
@@ -129,9 +158,11 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="/assets/baked/freelancer/img/portfolio/circus.png" class="img-responsive" alt="Circus tent">
+                    <img src="/assets/baked/freelancer/img/portfolio/l.jpg" class="img-responsive" style="margin:auto" alt="Circus tent">
                 </a>
             </div>
+        </div>
+        <div class="row">
             <div class="col-sm-4 portfolio-item">
                 <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
                     <div class="caption">
@@ -139,7 +170,7 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="/assets/baked/freelancer/img/portfolio/game.png" class="img-responsive" alt="Game controller">
+                    <img src="/assets/baked/freelancer/img/portfolio/f.jpg" class="img-responsive" style="margin:auto" alt="Game controller">
                 </a>
             </div>
             <div class="col-sm-4 portfolio-item">
@@ -149,7 +180,7 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="/assets/baked/freelancer/img/portfolio/safe.png" class="img-responsive" alt="Safe">
+                    <img src="/assets/baked/freelancer/img/portfolio/m.jpg" class="img-responsive" style="margin:auto" alt="Safe">
                 </a>
             </div>
             <div class="col-sm-4 portfolio-item">
@@ -159,92 +190,36 @@
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="/assets/baked/freelancer/img/portfolio/submarine.png" class="img-responsive" alt="Submarine">
+                    <img src="/assets/baked/freelancer/img/portfolio/k.jpg" class="img-responsive" style="margin:auto" alt="Submarine">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 portfolio-item">
+                <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="/assets/baked/freelancer/img/portfolio/s.png" class="img-responsive" style="margin:auto" alt="Submarine">
+                </a>
+            </div>
+            <div class="col-sm-4 portfolio-item">
+                <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            <i class="fa fa-search-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="/assets/baked/freelancer/img/portfolio/h.jpg" class="img-responsive" style="margin:auto" alt="Submarine">
                 </a>
             </div>
         </div>
     </div>
-</section>
-
-<!-- About Section -->
-<section class="success" id="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>About</h2>
-                <hr class="star-light">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-lg-offset-2">
-                <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-            </div>
-            <div class="col-lg-4">
-                <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-            </div>
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <a href="#" class="btn btn-lg btn-outline">
-                    <i class="fa fa-download"></i> Download Theme
-                </a>
-            </div>
-        </div>
     </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Contact Me</h2>
-                <hr class="star-primary">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                <form name="sentMessage" id="contactForm" novalidate>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="email">Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label for="message">Message</label>
-                            <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="success"></div>
-                    <div class="row">
-                        <div class="form-group col-xs-12">
-                            <button type="submit" class="btn btn-success btn-lg">Send</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -252,27 +227,27 @@
         <div class="container">
             <div class="row">
                 <div class="footer-col col-md-4">
-                    <h3>Location</h3>
-                    <p>3481 Melrose Place
-                        <br>Beverly Hills, CA 90210</p>
+                    <h3>Universitas Negeri Malang</h3>
+                    <p>Jl. Semarang No. 5
+                        <br>Malang</p>
                 </div>
                 <div class="footer-col col-md-4">
-                    <h3>Around the Web</h3>
+                    <h3></h3>
                     <ul class="list-inline">
                         <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
+                            <a href="#" class="btn-social btn-outline"><span class="sr-only"></span><i class="fa fa-fw fa-"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Google Plus</span><i class="fa fa-fw fa-google-plus"></i></a>
+                            <a href="#" class="btn-social btn-outline"><span class="sr-only"> </span><i class="fa fa-fw fa--"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
+                            <a href="#" class="btn-social btn-outline"><span class="sr-only"></span><i class="fa fa-fw fa-"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
+                            <a href="#" class="btn-social btn-outline"><span class="sr-only"> </span><i class="fa fa-fw fa-"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
+                            <a href="#" class="btn-social btn-outline"><span class="sr-only"></span><i class="fa fa-fw fa-"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -287,7 +262,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Your Website 2016
+                    &copy; konseling-bipolar.esy.es 2017
                 </div>
             </div>
         </div>
@@ -314,25 +289,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
-                        <h2>Project Title</h2>
+                        <h2>Prof. Dr. Hj. Nur Hidayah, M.Pd</h2>
                         <hr class="star-primary">
-                        <img src="/assets/baked/freelancer/img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                        <img src="/assets/baked/freelancer/img/portfolio/P-Nur.JPG" class="img-responsive img-centered" alt="">
+                        <p>Lahir di Gresik, 17 Agustus 1959 dan Bertempat tinggal di Perum Permata Hijau D/57. Memiliki Hobby Membaca dan Motto “ Be Your Self”. Telah selesai menempuh Pendidikan S-1, S-2, S-3 jurusan Bimbingan dan Konseling dan telah menjadi dosen dan guru besar Bimbingan dan Konseling Universitas Megeri Malang </a></p>
                         <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                            <li>Email
+                                <strong><a>nur.hidayah.fip@um.ac.id </a>
                                 </strong>
                             </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
-                                </strong>
-                            </li>
+
                         </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>
@@ -351,25 +319,17 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
-                        <h2>Project Title</h2>
+                        <h2>Feny Andriyanti</h2>
                         <hr class="star-primary">
-                        <img src="/assets/baked/freelancer/img/portfolio/cake.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                        <img src="/assets/baked/freelancer/img/portfolio/fa.jpg" class="img-responsive img-centered" alt="">
+                        <p>Lahir di Sidoarjo, 17 Juni 1995 dan beralamat di Ds. Janti, Kec. Tarik,Kab.Sidoarjo. Memiliki Hobby Browsing dan Motto Inginkan yang Terbaik dan Lakukan yang Terbaik</p>
                         <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
+                            <li>Email
+                                <strong><a >Feny.andriyanti95@gmail.com     </a>
                                 </strong>
                             </li>
                         </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>
@@ -388,25 +348,17 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
-                        <h2>Project Title</h2>
+                        <h2>Maghfirotul Amalia</h2>
                         <hr class="star-primary">
-                        <img src="/assets/baked/freelancer/img/portfolio/circus.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                        <img src="/assets/baked/freelancer/img/portfolio/l.jpg" class="img-responsive img-centered" alt="">
+                        <p>Lahir di Malang, 06 April 1995 dan beralamat Jl Raya Pang. Sudirman No.74 Bululawang-Malang. Memiliki Hobi berwisata kuliner dan Motto Selalu Berpikir Besar dan Bertindak Mulai Sekarang</p>
                         <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
+                            <li>Email
+                                <strong><a >amalia_maghfirotul@yahoo.com</a>
                                 </strong>
                             </li>
                         </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>
@@ -425,25 +377,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
-                        <h2>Project Title</h2>
+                        <h2>Fauzi Okta Dyanto</h2>
                         <hr class="star-primary">
-                        <img src="/assets/baked/freelancer/img/portfolio/game.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                        <img src="/assets/baked/freelancer/img/portfolio/f.jpg" class="img-responsive img-centered" alt="">
+                        <p> Lahir di Blitar 16 Oktober 1996 dan beralamat di Jl. Jendral Sudirman no.25 desa Ponggok, kec. Ponggok, kab. Blitar. Memiliki Hobi bermain Sepak Bola dan memiliki motto "There I no limit of struggling"
+                        </p>
                         <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
+                            <li>Email
+                                <strong><a href="http://startbootstrap.com">fauziokta92@gmail.com </a>
                                 </strong>
                             </li>
                         </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>
@@ -462,25 +407,104 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
-                        <h2>Project Title</h2>
+                        <h2>Maya Enggar Siara</h2>
                         <hr class="star-primary">
-                        <img src="/assets/baked/freelancer/img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                        <img src="/assets/baked/freelancer/img/portfolio/m.jpg" class="img-responsive img-centered" alt="">
+                        <p>Lahir di Malang 30 September 1996 dan beralamat di Jl. Sersan sapar rt 13 rw. 02 kedawung Pojok, Dampit. Memiliki hobi singing dan memiliki motto "Work Hard, Play Hard, Be happy" </p>
                         <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
+                            <li>Email
+                                <strong><a href="http://startbootstrap.com">mayaenggar30@gmail.com</a>
                                 </strong>
                             </li>
                         </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>Kania Shintia Duday</h2>
+                        <hr class="star-primary">
+                        <img src="/assets/baked/freelancer/img/portfolio/k.jpg" class="img-responsive img-centered" alt="">
+                        <p>Lahir di Biak Papua 10 Desember 1996 dan beralamatkan di Jl. Timika Indah 2 Perumahan PT.Freeport. Memiliki hobi Traveling dan Motto "Learn From Yesterday, Live For Today, Hope for Tomorrow" </p>
+                        <ul class="list-inline item-details">
+                            <li>Email
+                                <strong><a href="http://startbootstrap.com">kaniashintia@yahoo.com </a>
+                                </strong>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>Muhammad Syafiq, S.Kom</h2>
+                        <hr class="star-primary">
+                        <img src="/assets/baked/freelancer/img/portfolio/s.png" class="img-responsive img-centered" alt="">
+                        <p>Lahir di Pasuruan, 16 Desember 1993 dan beralamat di Jl. Apel I No. 449 Bangil, Pasuruan. Memiliki Motto Hidup Bermakna seperti Larry. Telah menyelesaikan Pendidikan S-1 Teknik Informatika Universitas Brawijaya</p>
+                        <ul class="list-inline item-details">
+                            <li>Email
+                                <strong><a href="http://startbootstrap.com"> id.muhammad.syafiq@gmail.com</a>
+                                </strong>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>Husni Hanafi, S.Pd</h2>
+                        <hr class="star-primary">
+                        <img src="/assets/baked/freelancer/img/portfolio/h.jpg" class="img-responsive img-centered" alt="">
+                        <p>Lahir di Biak Papua 10 Desember 1996 dan beralamatkan di Jl. Timika Indah 2 Perumahan PT.Freeport. Memiliki hobi Traveling dan Motto "Learn From Yesterday, Live For Today, Hope for Tomorrow" </p>
+                        <ul class="list-inline item-details">
+                            <li>Email
+                                <strong><a href="http://startbootstrap.com">husnihanafi.19@gmail.com</a>
+                                </strong>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>
