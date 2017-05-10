@@ -28,14 +28,11 @@ if (!function_exists('interpretCritical'))
                 ],
                 'class' => 'Tinggi',
                 'interpretation' => [
-                    'key' => 'Siswa sudah mampu untuk selalu:',
+                    'key' => 'Siswa memiliki kecenderungan Bipolar sebagai Berikut:',
                     'value' => [
-                        'Menganalisis materi pelajaran',
-                        'Menginterpretasi materi pelajaran',
-                        'Mengevaluasi materi pelajaran',
-                        'Mengambil keputusan terhadap materi yang dipelajari',
-                        'Eksplanasi (penjelasan)',
-                        'Meregulasi diri'
+                        'Siswa kurang bisa mengendalikan mood senang dan mood depresi',
+                        'Siswa berbicara sesuka hati ketika mood bahagia tanpa memikirkan perasaan orang',
+
                     ]
                 ],
                 'suggest' => 'Kemampuan berpikir kritis akademik %s <b>Sudah Tinggi</b>, pertahankan!'
@@ -48,14 +45,11 @@ if (!function_exists('interpretCritical'))
                 ],
                 'class' => 'Sedang',
                 'interpretation' => [
-                    'key' => 'Siswa memiliki kemampuan yang cukup dalam:',
+                    'key' => 'Siswa memiliki kecenderungan Bipolar sebagai berikut:',
                     'value' => [
-                        'Menganalisis materi pelajaran',
-                        'Menginterpretasi materi pelajaran',
-                        'Mengevaluasi materi pelajaran',
-                        'Mengambil keputusan terhadap materi yang dipelajari',
-                        'Eksplanasi (penjelasan)',
-                        'Meregulasi diri'
+                        'Siswa pantas menjadi ketua OSIS',
+                        'Siswa marah ketika ada teman mengejek penampilan',
+
                     ]
                 ],
                 'suggest' => 'Kemampuan berpikir kritis akademik %s adalah <b>Cukup</b>, perlu ditingkatkan'
@@ -68,14 +62,11 @@ if (!function_exists('interpretCritical'))
                 ],
                 'class' => 'Rendah',
                 'interpretation' => [
-                    'key' => 'Siswa masih kurang dalam:',
+                    'key' => 'Siswa memiliki kecenderungan bipolar sebagai berikut:',
                     'value' => [
-                        'Menganalisis materi pelajaran',
-                        'Menginterpretasi materi pelajaran',
-                        'Mengevaluasi materi pelajaran',
-                        'Mengambil keputusan terhadap materi yang dipelajari',
-                        'Eksplanasi (penjelasan)',
-                        'Meregulasi diri'
+                        'bisa mengendalikan mood mania dan depresi',
+                        'Saya befikiran ke hal yang positif'
+
                     ]
                 ],
                 'suggest' => 'Kemampuan berpikir kritis akademik . %s adalah <b>Kurang</b>, perlu banyak latihan dalam belajar '
