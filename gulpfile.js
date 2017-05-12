@@ -8,7 +8,7 @@ var pump = require('pump');
 
 gulp.task('move-assets-exclude-css-js', function ()
 {
-    return gulp.src(['./raw/**', '!./raw/{link,link/**,views,views/**}', '!./raw/**/(*.css|*.js)'], {base: './raw/'})
+    return gulp.src(['./raw/**', '!./raw/{link,link/**,views,views/**}'], {base: './raw/'})
         .pipe(gulp.dest('./assets/'));
 });
 
@@ -47,9 +47,9 @@ gulp.task('minify-html', function ()
 gulp.task('watch-move-assets-exclude-css-js', function ()
 {
     // Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event
-    return watch(['./raw/**', '!./raw/{link,link/**,views,views/**}', '!./raw/**/(*.css|*.js)'], function ()
+    return watch(['./raw/**', '!./raw/{link,link/**,views,views/**}'], function ()
     {
-        return gulp.src(['./raw/**', '!./raw/{link,link/**,views,views/**}', '!./raw/**/(*.css|*.js)'], {base: './raw/'})
+        return gulp.src(['./raw/**', '!./raw/{link,link/**,views,views/**}'], {base: './raw/'})
             .pipe(gulp.dest('./assets/'));
     });
 });
