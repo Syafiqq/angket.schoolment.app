@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller
+class Test extends CI_Controller
 {
 
     /**
@@ -19,24 +19,38 @@ class Welcome extends CI_Controller
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function index()
+    public function __construct()
     {
+        parent::__construct();
         $this->load->helper('url');
 
-        $this->load->view('landing_page');
+    }
+
+    public function index()
+    {
+        $this->load->view('baked/cardiovaskular');
     }
 
     public function boilerplate()
     {
-        $this->load->helper('url');
+        $this->load->helper('cookie');
+        echo get_cookie('cookie_name');
 
         $this->load->view('boilerplate');
     }
 
     public function bootstrap()
     {
-        $this->load->helper('url');
-
         $this->load->view('bootstrap');
+    }
+
+    public function baked_musicplaylist()
+    {
+        $this->load->view('baked/musicplaylist');
+    }
+
+    public function baked_cardiovaskular()
+    {
+        $this->load->view('baked/cardiovaskular');
     }
 }
