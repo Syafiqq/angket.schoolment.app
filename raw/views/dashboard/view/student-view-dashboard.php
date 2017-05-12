@@ -6,6 +6,16 @@
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
+
+
+use Carbon\Carbon;
+
+setlocale(LC_TIME, 'id_ID');
+$profile['assets']['record']['total'] = $profile['assets']['record']['total'] === null ? 'Belum Pernah' : $profile['assets']['record']['total'];
+$profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] === null ? ['date' => 'Belum Pernah', 'value' => 'Belum Pernah'] : ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['latest']['date'])->formatLocalized('%d %B %Y'), 'value' => sprintf('%.4g%%', $profile['assets']['record']['latest']['value'])];
+$profile['assets']['record']['highest'] = $profile['assets']['record']['highest'] === null ? ['date' => 'Belum Pernah', 'value' => 'Belum Pernah'] : ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['highest']['date'])->formatLocalized('%d %B %Y'), 'value' => sprintf('%.4g%%', $profile['assets']['record']['highest']['value'])];
+$profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] === null ? ['date' => 'Belum Pernah', 'value' => 'Belum Pernah'] : ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['lowest']['date'])->formatLocalized('%d %B %Y'), 'value' => sprintf('%.4g%%', $profile['assets']['record']['lowest']['value'])];
+
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -25,6 +35,11 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/components-font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/Ionicons/css/ionicons.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/skins/skin-blue.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/bootstrap3_player/css/bootstrap3_player.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/dashboard/view/student-view-dashboard.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,85 +50,199 @@
     <![endif]-->
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
-<body>
-<div class="container-fluid">
-    <div class="row profile">
-        <div class="col-md-3">
-            <div class="profile-sidebar">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img src="<?php echo base_url($profile['avatar']) ?>" class="img-responsive" alt="">
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>" class="navbar-brand _nav-a-link">
+                        <b>Schoolment</b>
+                    </a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
                 </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        <?php echo $profile['name'] ?>
-                    </div>
-                    <div class="profile-usertitle-job">
-                        SISWA
-                    </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-                    <a id="logout" type="button" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
-                </div>
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul class="nav">
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
                         <li class="active">
-                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">
-                                <i class="glyphicon glyphicon-home"></i>
-                                Dashboard
+                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
+                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Profil
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Profil
+                                <span class="caret"></span>
                             </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Ubah</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Rubah Profil
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Inventori
+                                <span class="caret"></span>
                             </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Lihat Inventory
-                            </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Ftest') ?>" target="_blank">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Pengerjaan
-                            </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fresult') ?>" target="_blank">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Hasil
-                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Ftest') ?>">Pengerjaan</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fresult') ?>">Hasil</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
-                <!-- END MENU -->
+                <!-- /.navbar-collapse -->
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a id="logout" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-custom-menu -->
             </div>
-        </div>
-        <div class="col-md-9">
-            <div class="profile-content">
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+        <div class="container" style="margin-bottom: 60px">
+            <!-- Main content -->
+            <section class="content">
+
                 <div class="row">
+                    <div class="col-md-3">
+
+                        <!-- Profile Image -->
+                        <div class="box box-primary">
+                            <div class="box-body box-profile">
+                                <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url($profile['avatar']) ?>" alt="User profile picture">
+
+                                <h3 class="profile-username text-center"><?php echo $profile['name'] ?></h3>
+
+                                <p class="text-muted text-center"><?php echo strlen($profile['school']) <= 0 ?  '[Data Tidak Lengkap]' : $profile['school'] ?></p>
+
+                                <ul class="list-group list-group-unbordered">
+                                    <li class="list-group-item">
+                                        <b>Jumlah Pengerjaan</b>
+                                        <a class="pull-right"><?php echo $profile['assets']['record']['total'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Terakhir</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo $profile['assets']['record']['latest']['value'] ?>"><?php echo $profile['assets']['record']['latest']['date'] ?></abbr>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Tertinggi</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo $profile['assets']['record']['highest']['date'] ?>"><?php echo $profile['assets']['record']['highest']['value'] ?></abbr>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Terendah</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo $profile['assets']['record']['lowest']['date'] ?>"><?php echo $profile['assets']['record']['lowest']['value'] ?></abbr>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+
+                        <!-- About Me Box -->
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Musik Pengantar</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <ol id="plList">
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music1.mp3') ?>">Musik 1</li>
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music2.mp3') ?>">Musik 2</li>
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music3.mp3') ?>">Musik 3</li>
+                                </ol>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Selamat Datang</h3>
+                                <div class="box-tools pull-right">
+                                    <!-- Buttons, labels, and many other things can be placed here! -->
+                                    <!-- Here is a label for example -->
+                                    <span class="label label-primary"></span>
+                                </div><!-- /.box-tools -->
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>Copyright &copy; 2014-<?php echo Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now())->format('Y') ?>.</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>
+                                <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+                                .
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            All rights reserved.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10 _cs-audio">
+                    <audio preload id="music" controls="controls">Browser anda tidak support untuk memutar Musik</audio>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- /.container -->
+    </footer>
 </div>
-<audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
-
+<!-- ./wrapper -->
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
 <script src="<?php echo base_url('/assets/js/plugins.min.js') ?>"></script>
@@ -121,8 +250,11 @@
 <script src="<?php echo base_url('/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/js/dashboard/view/student-view-dashboard.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/fastclick/fastclick.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/bootstrap3_player/js/bootstrap3_player.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/js/dashboard/view/student-view-dashboard.min.js') ?>"></script>
 </body>
 </html>
 
