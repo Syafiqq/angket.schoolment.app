@@ -49,6 +49,7 @@ class Inventory extends CI_Controller
     public function view()
     {
         $profile = $_SESSION['user']['auth'];
+
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
@@ -57,6 +58,7 @@ class Inventory extends CI_Controller
                 $favourables = $this->inventory->getFavourable();
                 $categories = $this->inventory->getCategory();
                 $questions = $this->inventory->getQuestion();
+                $profile['assets']['record'] = $this->generateCounselorRecord();
                 $this->load->view('inventory/view/counselor-view-inventory', compact('favourables', 'categories', 'questions', 'profile'));
 
                 return;
@@ -66,6 +68,7 @@ class Inventory extends CI_Controller
                 $this->load->helper('identity_checking');
                 $b_test = $this->allowedToTakeTest();
                 $b_complete = isStudentIdentityIsComplete($_SESSION['user']['auth']);
+                $profile['assets'] = $_SESSION['user']['data'];
                 $this->load->view('inventory/view/student-view-inventory', compact('b_test', 'b_complete', 'profile'));
 
                 return;
@@ -111,6 +114,7 @@ class Inventory extends CI_Controller
     public function test()
     {
         $profile = $_SESSION['user']['auth'];
+        $profile['assets'] = $_SESSION['user']['data'];
 
         switch ($_SESSION['user']['auth']['role'])
         {
@@ -145,6 +149,8 @@ class Inventory extends CI_Controller
     public function result()
     {
         $profile = $_SESSION['user']['auth'];
+        $profile['assets'] = $_SESSION['user']['data'];
+
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
@@ -190,6 +196,7 @@ class Inventory extends CI_Controller
         {
             case 'counselor' :
             {
+                $profile['assets']['record'] = $this->generateCounselorRecord();
                 $this->load->model('minventory', 'inventory');
                 $categories = $this->inventory->getCategory();
                 $favourables = $this->inventory->getFavourable();
@@ -214,6 +221,7 @@ class Inventory extends CI_Controller
         {
             case 'counselor' :
             {
+                $profile['assets']['record'] = $this->generateCounselorRecord();
                 $this->load->model('minventory', 'inventory');
                 $question = $this->inventory->getQuestionByID($id);
                 if (count($question) > 0)
@@ -440,6 +448,48 @@ class Inventory extends CI_Controller
                 $this->load->model('mauth', 'auth');
                 $this->auth->updateStudentActivation($aq, 0);
                 $_SESSION['user']['auth']['is_active'] = 0;
+                $_detail = [];
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'student' :
+                    {
+                        $result = $this->inventory->getAnsweredQuestionByUserID($_SESSION['user']['auth']['id']);
+                        if(count($result) > 0)
+                        {
+                            $_detail['total'] = count($result);
+                            $_detail['latest'] = ['date' => $result[0]['answer_at'], 'value' => $this->inventory->getAnsweredResultSummaryByID($result[0]['id'])[0]['value']];
+
+                            $_result = $this->inventory->getHighestSummaryByUserID($_SESSION['user']['auth']['id']);
+                            foreach ($result as $vr)
+                            {
+                                if((int)$vr['id'] === (int)$_result[0]['answer_id'])
+                                {
+                                    $_detail['highest'] = ['date' => $vr['answer_at'], 'value' => $_result[0]['value']];
+                                    break;
+                                }
+                            }
+
+                            $_result = $this->inventory->getLowestSummaryByUserID($_SESSION['user']['auth']['id']);
+                            foreach ($result as $vr)
+                            {
+                                if((int)$vr['id'] === (int)$_result[0]['answer_id'])
+                                {
+                                    $_detail['lowest'] = ['date' => $vr['answer_at'], 'value' => $_result[0]['value']];
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            $_detail['total'] = null;
+                            $_detail['latest'] = null;
+                            $_detail['highest'] = null;
+                            $_detail['lowest'] = null;
+                        }
+                        $_SESSION['user']['data']['record'] = $_detail;
+                    }
+                        break;
+                }
                 echo apiMakeCallback(API_SUCCESS, 'Pengerjaan Selesai', ['notify' => [['Pengerjaan Selesai', 'success']]], site_url('/inventory/result'));
             }
             else
@@ -496,6 +546,9 @@ class Inventory extends CI_Controller
                                 break;
                             case 'inventory/test' :
                             {
+                                $_role = $_SESSION['user']['auth']['role'];
+                                $_SESSION['user']['auth'] = $this->auth->findStudentByID($_SESSION['user']['auth']['id'])[0];
+                                $_SESSION['user']['auth']['role'] = $_role;
                                 $this->load->helper('identity_checking');
                                 $allowed = $this->allowedToTakeTest();
                                 if ($allowed)
@@ -550,5 +603,58 @@ class Inventory extends CI_Controller
         {
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
+    }
+
+    private function generateCounselorRecord()
+    {
+        $this->load->model('mauth', 'auth');
+        $this->load->model('minventory', 'inventory');
+        $detail = [];
+        $_counselor = $this->auth->getAllCounselor();
+        $_student = $this->auth->getAllStudent();
+        $_question = $this->inventory->getQuestion();
+        $_latest = $this->inventory->getLatestAnswer();
+
+        $dispatcher = ['male' => 0, 'female' => 0];
+        foreach ($_counselor as $_vc)
+        {
+            if($_vc['gender'] === 'female')
+            {
+                ++$dispatcher['female'];
+            }
+            else
+            {
+                ++$dispatcher['male'];
+            }
+        }
+        $detail['counselor'] = $dispatcher;
+        $dispatcher = ['male' => 0, 'female' => 0];
+        foreach ($_student as $_vs)
+        {
+            if($_vs['gender'] === 'female')
+            {
+                ++$dispatcher['female'];
+            }
+            else
+            {
+                ++$dispatcher['male'];
+            }
+        }
+        $detail['student'] = $dispatcher;
+        $dispatcher = ['active' => 0, 'inactive' => 0];
+        foreach ($_question as $_vq)
+        {
+            if((int)$_vq['is_active'] === 1)
+            {
+                ++$dispatcher['active'];
+            }
+            else
+            {
+                ++$dispatcher['inactive'];
+            }
+        }
+        $detail['question'] = $dispatcher;
+        $detail['latest'] = $_latest;
+        return $detail;
     }
 }

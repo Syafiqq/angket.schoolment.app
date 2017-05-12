@@ -120,6 +120,7 @@ class Report extends CI_Controller
                             $result['value'] += $_vr['value'];
                         }
                         $profile = $_SESSION['user']['auth'];
+                        $profile['assets'] = $_SESSION['user']['data'];
 
                         $this->load->view('report/display/student-display-report', compact('profile', 'result', 'grading', 'answered'));
 

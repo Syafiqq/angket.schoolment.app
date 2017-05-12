@@ -53,6 +53,8 @@ class Student extends CI_Controller
         {
             case 'counselor' :
             {
+                $profile['assets']['record'] = $this->generateCounselorRecord();
+
                 $this->load->model('mauth', 'auth');
                 $this->load->model('manswer', 'answer');
                 $students = $this->auth->getAllStudent();
@@ -85,11 +87,11 @@ class Student extends CI_Controller
     public function detail()
     {
         $profile = $_SESSION['user']['auth'];
-
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
             {
+
                 if (isset($_GET['student']))
                 {
                     $this->load->model('minventory', 'inventory');
@@ -116,6 +118,7 @@ class Student extends CI_Controller
                         $answered[".{$rv['answer_id']}"]['category'][".{$rv['category']}"] = $rv['value'];
                     }
                     unset($_answered, $result);
+                    $profile['assets']['record'] = $this->generateCounselorRecord();
                     $this->load->view('student/detail/counselor-detail-student', compact('profile', 'answered', 'categories', 'profile'));
 
                     return;
@@ -144,6 +147,8 @@ class Student extends CI_Controller
         {
             case 'counselor' :
             {
+                $profile['assets']['record'] = $this->generateCounselorRecord();
+
                 $this->load->model('mauth', 'auth');
                 $this->load->model('manswer', 'answer');
                 $this->load->model('mreport', 'report');
@@ -245,5 +250,58 @@ class Student extends CI_Controller
         {
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
+    }
+
+    private function generateCounselorRecord()
+    {
+        $this->load->model('mauth', 'auth');
+        $this->load->model('minventory', 'inventory');
+        $detail = [];
+        $_counselor = $this->auth->getAllCounselor();
+        $_student = $this->auth->getAllStudent();
+        $_question = $this->inventory->getQuestion();
+        $_latest = $this->inventory->getLatestAnswer();
+
+        $dispatcher = ['male' => 0, 'female' => 0];
+        foreach ($_counselor as $_vc)
+        {
+            if($_vc['gender'] === 'female')
+            {
+                ++$dispatcher['female'];
+            }
+            else
+            {
+                ++$dispatcher['male'];
+            }
+        }
+        $detail['counselor'] = $dispatcher;
+        $dispatcher = ['male' => 0, 'female' => 0];
+        foreach ($_student as $_vs)
+        {
+            if($_vs['gender'] === 'female')
+            {
+                ++$dispatcher['female'];
+            }
+            else
+            {
+                ++$dispatcher['male'];
+            }
+        }
+        $detail['student'] = $dispatcher;
+        $dispatcher = ['active' => 0, 'inactive' => 0];
+        foreach ($_question as $_vq)
+        {
+            if((int)$_vq['is_active'] === 1)
+            {
+                ++$dispatcher['active'];
+            }
+            else
+            {
+                ++$dispatcher['inactive'];
+            }
+        }
+        $detail['question'] = $dispatcher;
+        $detail['latest'] = $_latest;
+        return $detail;
     }
 }
