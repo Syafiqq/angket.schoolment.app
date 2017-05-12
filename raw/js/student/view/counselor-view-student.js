@@ -9,10 +9,6 @@
 (function ($)
 {
     $('table#student_tb').DataTable();
-    audiojs.events.ready(function ()
-    {
-        var aj = audiojs.createAll();
-    });
     $(function ()
     {
         $("button.do-active").on('click', function ()
@@ -152,6 +148,56 @@
                     });
                 })
         });
+
+        var supportsAudio = !!document.createElement('audio').canPlayType;
+        if (supportsAudio)
+        {
+            var audio_container = 'ol#plList',
+                index = 0,
+                trackCount = $(audio_container).children().length,
+                playing = false,
+                audio = $('#music').bind('play', function ()
+                {
+                    playing = true;
+                }).bind('pause', function ()
+                {
+                    playing = false;
+                }).bind('ended', function ()
+                {
+                    if ((index + 1) < trackCount)
+                    {
+                        index++;
+                        loadTrack(index);
+                        audio.play();
+                    } else
+                    {
+                        audio.pause();
+                        index = 0;
+                        playTrack(index);
+                    }
+                }).get(0),
+                li = $(audio_container).find('li').click(function ()
+                {
+                    var id = parseInt($(this).index());
+                    if (id !== index)
+                    {
+                        playTrack(id);
+                    }
+                }),
+                loadTrack = function (id)
+                {
+                    $('.plSel').removeClass('plSel');
+                    var li = $(audio_container).find('li').eq(id).addClass('plSel');
+                    index = id;
+                    audio.src = li.attr('data-audio')
+                },
+                playTrack = function (id)
+                {
+                    loadTrack(id);
+                    audio.play();
+                };
+            playTrack(index);
+        }
     });
     /*
      * Run right away
