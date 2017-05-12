@@ -34,7 +34,7 @@ class Auth extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('api_facade');
         $this->load->library('session');
-        unset($_SESSION['user']['auth']);
+        unset($_SESSION['user']);
         if (isset($_SESSION['user']['auth']))
         {
             redirect('/dashboard');
@@ -191,6 +191,49 @@ class Auth extends CI_Controller
                         {
                             $_SESSION['user']['auth'] = $result[0];
                             $_SESSION['user']['auth']['role'] = $_POST['role'];
+                            $this->load->model('minventory', 'inventory');
+                            $_detail = [];
+                            switch ($_POST['role'])
+                            {
+                                case 'student' :
+                                {
+                                    $result = $this->inventory->getAnsweredQuestionByUserID($_SESSION['user']['auth']['id']);
+                                    if(count($result) > 0)
+                                    {
+                                        $_detail['total'] = count($result);
+                                        $_detail['latest'] = ['date' => $result[0]['answer_at'], 'value' => $this->inventory->getAnsweredResultSummaryByID($result[0]['id'])[0]['value']];
+
+                                        $_result = $this->inventory->getHighestSummaryByUserID($_SESSION['user']['auth']['id']);
+                                        foreach ($result as $vr)
+                                        {
+                                            if((int)$vr['id'] === (int)$_result[0]['answer_id'])
+                                            {
+                                                $_detail['highest'] = ['date' => $vr['answer_at'], 'value' => $_result[0]['value']];
+                                                break;
+                                            }
+                                        }
+
+                                        $_result = $this->inventory->getLowestSummaryByUserID($_SESSION['user']['auth']['id']);
+                                        foreach ($result as $vr)
+                                        {
+                                            if((int)$vr['id'] === (int)$_result[0]['answer_id'])
+                                            {
+                                                $_detail['lowest'] = ['date' => $vr['answer_at'], 'value' => $_result[0]['value']];
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        $_detail['total'] = null;
+                                        $_detail['latest'] = null;
+                                        $_detail['highest'] = null;
+                                        $_detail['lowest'] = null;
+                                    }
+                                    $_SESSION['user']['data']['record'] = $_detail;
+                                }
+                                    break;
+                            }
                             echo apiMakeCallback(API_SUCCESS, 'Accepted', ['notify' => [['Login Sukses', 'success']]], site_url('dashboard'));
                         }
                         else
@@ -443,7 +486,7 @@ class Auth extends CI_Controller
 
     public function do_logout()
     {
-        unset($_SESSION['user']['auth']);
+        unset($_SESSION['user']);
         echo apiMakeCallback(API_SUCCESS, 'Logout Sukses', ['notify' => [['Logout Sukses', 'success']]], site_url('/'));
     }
 }
