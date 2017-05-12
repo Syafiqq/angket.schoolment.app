@@ -547,6 +547,7 @@ class Inventory extends CI_Controller
                             case 'inventory/test' :
                             {
                                 $_role = $_SESSION['user']['auth']['role'];
+                                $this->load->model('mauth', 'auth');
                                 $_SESSION['user']['auth'] = $this->auth->findStudentByID($_SESSION['user']['auth']['id'])[0];
                                 $_SESSION['user']['auth']['role'] = $_role;
                                 $this->load->helper('identity_checking');
