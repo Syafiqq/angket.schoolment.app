@@ -31,7 +31,7 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Inventory</title>
     <meta name="a temlplate" content="">
-    <meta property="uuid" content="<?php echo $profile['id']?>">
+    <meta property="uuid" content="<?php echo $profile['id'] ?>">
 
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('/apple-touch-icon.png') ?>">
     <!-- Place favicon.ico in the root directory -->
@@ -147,7 +147,7 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
 
                                 <h3 class="profile-username text-center"><?php echo $profile['name'] ?></h3>
 
-                                <p class="text-muted text-center"><?php echo strlen($profile['school']) <= 0 ?  '[Data Tidak Lengkap]' : $profile['school'] ?></p>
+                                <p class="text-muted text-center"><?php echo strlen($profile['school']) <= 0 ? '[Data Tidak Lengkap]' : $profile['school'] ?></p>
 
                                 <ul class="list-group list-group-unbordered">
                                     <li class="list-group-item">
@@ -217,14 +217,6 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                                                     <tr>
                                                         <th style="width: 40px">No</th>
                                                         <th>Pertanyaan</th>
-                                                        <th class="_mini-text" style="width: 50px">TS
-                                                        </th>
-                                                        <th class="_mini-text" style="width: 50px">KS
-                                                        </th>
-                                                        <th class="_mini-text" style="width: 50px">S
-                                                        </th>
-                                                        <th class="_mini-text" style="width: 50px">SS
-                                                        </th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -236,12 +228,27 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                                                         $id = "q{$question['id']}";
                                                         echo '<tr>';
                                                         echo "<td>{$_no}</td>";
-                                                        echo "<td>{$question['question']}</td>";
+                                                        echo '<td>';
+                                                        echo '<div class="row">';
+                                                        echo '<div class="col-sm-12">';
+                                                        echo "<p>{$question['question']}</p>";
+                                                        echo '</div>';
+                                                        echo '</div>';
                                                         foreach ($options as $ko => $option)
                                                         {
-                                                            $checked = $ko == 0 ? 'checked' : '';
-                                                            echo "<td><div class=\"radio\"><label><input type=\"radio\" name=\"question[{$id}]\" value=\"{$option['id']}\" aria-label=\"{$option['id']}\" {$checked}></label></div></td>";
+                                                            $checked = $ko == 0 ? '' : '';
+                                                            echo '<div class="row">';
+                                                            echo '<div class="col-lg-12">';
+                                                            echo '<div class="input-group">';
+                                                            echo '<span class="input-group-addon">';
+                                                            echo "<input type=\"radio\" name=\"question[{$id}]\" value=\"{$option['id']}\" aria-label=\"{$option['id']}\">";
+                                                            echo '</span>';
+                                                            echo "<input type=\"text\" class=\"form-control\" aria-label=\"{$option['id']}\" value=\"{$option['name']}\" disabled='disabled'>";
+                                                            echo '</div>';
+                                                            echo '</div>';
+                                                            echo '</div>';
                                                         }
+                                                        echo '</td>';
                                                         echo '</tr>';
                                                     }
                                                     ?>

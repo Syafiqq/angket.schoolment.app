@@ -8,11 +8,13 @@
 
 (function ($)
 {
-
     var table = $('table#inventory_test').DataTable({
+        searching: false,
+        ordering: false,
         paging: false,
         fixedHeader: true
     });
+
     $(function ()
     {
         var uuid = "_schoolment_uuid_question_" + $('meta[property="uuid"]').attr('content');
@@ -176,6 +178,13 @@
         function save_content(uuid)
         {
             Cookies.set(uuid, make_json_form_data());
+            $.notify({
+                message: 'Jawaban Berhasil disimpan.'
+            }, {
+                type: 'info',
+                delay: 1000,
+                timer: 1000
+            });
         }
 
         function load_content(uuid)
@@ -186,6 +195,17 @@
             {
                 $("input[name=\"" + k + "\"][value=\"" + v + "\"]").prop('checked', true);
                 $("input").find("[name=\"" + k + "\"]").find("[value=\"" + v + "\"]").prop('checked', true);
+            });
+
+            table.destroy();
+
+            table = $('table#inventory_test').DataTable({
+                searching: false,
+                ordering: false,
+                pageLength: 1,
+                paging: true,
+                fixedHeader: true,
+                bLengthChange: false
             });
         }
 
@@ -268,13 +288,6 @@
         function myCallback()
         {
             save_content(uuid);
-            $.notify({
-                message: 'Jawaban Berhasil disimpan.'
-            }, {
-                type: 'info',
-                delay: 1000,
-                timer: 1000
-            });
         }
 
         //TODO This is code for publish data
