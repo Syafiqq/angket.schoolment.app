@@ -20,6 +20,15 @@ $profile['gender'] = $profile['gender'] === 'male' ? 'Laki Laki' : 'Perempuan';
 $profile['address'] = $profile['address'] === null ? '' : $profile['address'];
 $profile['birthplace'] = $profile['birthplace'] === null ? '' : $profile['birthplace'];
 $profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebirth'];
+
+
+use Carbon\Carbon;
+
+$profile['assets']['record']['total'] = $profile['assets']['record']['total'] === null ? 'Belum Pernah' : $profile['assets']['record']['total'];
+$profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] === null ? ['date' => 'Belum Pernah', 'value' => 'Belum Pernah'] : ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['latest']['date'])->formatLocalized('%d %B %Y'), 'value' => sprintf('%.4g%%', $profile['assets']['record']['latest']['value'])];
+$profile['assets']['record']['highest'] = $profile['assets']['record']['highest'] === null ? ['date' => 'Belum Pernah', 'value' => 'Belum Pernah'] : ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['highest']['date'])->formatLocalized('%d %B %Y'), 'value' => sprintf('%.4g%%', $profile['assets']['record']['highest']['value'])];
+$profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] === null ? ['date' => 'Belum Pernah', 'value' => 'Belum Pernah'] : ['date' => Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['lowest']['date'])->formatLocalized('%d %B %Y'), 'value' => sprintf('%.4g%%', $profile['assets']['record']['lowest']['value'])];
+
 ?>
 
 
@@ -42,6 +51,11 @@ $profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebi
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/components-font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/Ionicons/css/ionicons.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/skins/skin-blue.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/bootstrap3_player/css/bootstrap3_player.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/profile/edit/student-edit-profile.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -52,157 +66,270 @@ $profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebi
     <![endif]-->
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
-<body>
-<div class="container-fluid">
-    <div class="row profile">
-        <div class="col-md-3">
-            <div class="profile-sidebar">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img src="<?php echo base_url($profile['avatar']) ?>" class="img-responsive" alt="">
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>" class="navbar-brand _nav-a-link">
+                        <b>Schoolment</b>
+                    </a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
                 </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        <?php echo $profile['name'] ?>
-                    </div>
-                    <div class="profile-usertitle-job">
-                        SISWA
-                    </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-                    <a id="logout" type="button" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
-                </div>
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul class="nav">
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
                         <li class="active">
-                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">
-                                <i class="glyphicon glyphicon-home"></i>
-                                Dashboard
+                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
+                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Profil
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Profil
+                                <span class="caret"></span>
                             </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Ubah</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Rubah Profil
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Inventori
+                                <span class="caret"></span>
                             </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Lihat Inventory
-                            </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Ftest') ?>" target="_blank">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Pengerjaan
-                            </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fresult') ?>" target="_blank">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Hasil
-                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Ftest') ?>">Pengerjaan</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fresult') ?>">Hasil</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
-                <!-- END MENU -->
+                <!-- /.navbar-collapse -->
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a id="logout" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-custom-menu -->
             </div>
-        </div>
-        <div class="col-md-9">
-            <div class="profile-content">
-                <div class="row">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="avatar" class="col-sm-2 control-label">Avatar</label>
-                            <div class="col-sm-10">
-                                <img src="<?php echo base_url("{$profile['avatar']}") ?>" alt="<?php echo base_url("{$profile['avatar']}") ?>" class="img-thumbnail" id="avatar" height="256" width="256">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <input id="imageupload" type="file" name="image" data-url="<?php echo site_url('profile/do_edit_avatar') ?>" class="btn col-sm-12">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Nama</label>
-                            <div class="col-sm-10">
-                                <p class="form-control-static"><?php echo "{$profile['name']}" ?></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">NISN</label>
-                            <div class="col-sm-10">
-                                <p class="form-control-static"><?php echo "{$profile['credential']}" ?></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Jenis Kelamin</label>
-                            <div class="col-sm-10">
-                                <p class="form-control-static"><?php echo "{$profile['gender']}" ?></p>
-                            </div>
-                        </div>
-                    </form>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+        <div class="container" style="margin-bottom: 60px">
+            <!-- Main content -->
+            <section class="content">
 
-                    <form id="edit" action="<?php echo site_url('profile/do_edit_additional') ?>" method="post" class="form-horizontal">
-                        <div class="form-group">
-                            <label for="school" class="col-sm-2 control-label">Sekolah</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="school" placeholder="Sekolah" name="school" value="<?php echo "{$profile['school']}" ?>">
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <!-- Profile Image -->
+                        <div class="box box-primary">
+                            <div class="box-body box-profile">
+                                <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url($profile['avatar']) ?>" alt="User profile picture">
+
+                                <h3 class="profile-username text-center"><?php echo $profile['name'] ?></h3>
+
+                                <p class="text-muted text-center"><?php echo strlen($profile['school']) <= 0 ?  '[Data Tidak Lengkap]' : $profile['school'] ?></p>
+
+                                <ul class="list-group list-group-unbordered">
+                                    <li class="list-group-item">
+                                        <b>Jumlah Pengerjaan</b>
+                                        <a class="pull-right"><?php echo $profile['assets']['record']['total'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Terakhir</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo $profile['assets']['record']['latest']['value'] ?>"><?php echo $profile['assets']['record']['latest']['date'] ?></abbr>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Tertinggi</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo $profile['assets']['record']['highest']['date'] ?>"><?php echo $profile['assets']['record']['highest']['value'] ?></abbr>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Terendah</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo $profile['assets']['record']['lowest']['date'] ?>"><?php echo $profile['assets']['record']['lowest']['value'] ?></abbr>
+                                        </a>
+                                    </li>
+                                </ul>
+
                             </div>
+                            <!-- /.box-body -->
                         </div>
-                        <div class="form-group">
-                            <label for="grade" class="col-sm-2 control-label">Kelas</label>
-                            <div class="col-sm-10">
-                                <select id="grade" name="grade" class="form-control">
-                                    <option value="10" <?php echo $profile['grade'] === 10 ? 'selected' : '' ?>>X</option>
-                                    <option value="11" <?php echo $profile['grade'] === 11 ? 'selected' : '' ?>>XI</option>
-                                    <option value="12" <?php echo $profile['grade'] === 12 ? 'selected' : '' ?>>XII</option>
-                                </select>
+                        <!-- /.box -->
+
+                        <!-- About Me Box -->
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Musik Pengantar</h3>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="address" class="col-sm-2 control-label">Alamat</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="address" placeholder="Alamat" name="address" value="<?php echo "{$profile['address']}" ?>">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <ol id="plList">
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music1.mp3') ?>">Musik 1</li>
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music2.mp3') ?>">Musik 2</li>
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music3.mp3') ?>">Musik 3</li>
+                                </ol>
                             </div>
+                            <!-- /.box-body -->
                         </div>
-                        <div class="form-group">
-                            <label for="birthplace" class="col-sm-2 control-label">Tempat Lahir</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="birthplace" placeholder="Tempat Lahir" name="birthplace" value="<?php echo "{$profile['birthplace']}" ?>">
-                            </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Edit Profile</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="avatar" class="col-sm-2 control-label">Avatar</label>
+                                                <div class="col-sm-10">
+                                                    <img src="<?php echo base_url("{$profile['avatar']}") ?>" alt="<?php echo base_url("{$profile['avatar']}") ?>" class="img-thumbnail" id="avatar" height="256" width="256">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <input id="imageupload" type="file" name="image" data-url="<?php echo site_url('profile/do_edit_avatar') ?>" class="btn col-sm-12">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Nama</label>
+                                                <div class="col-sm-10">
+                                                    <p class="form-control-static"><?php echo "{$profile['name']}" ?></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">NISN</label>
+                                                <div class="col-sm-10">
+                                                    <p class="form-control-static"><?php echo "{$profile['credential']}" ?></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Jenis Kelamin</label>
+                                                <div class="col-sm-10">
+                                                    <p class="form-control-static"><?php echo "{$profile['gender']}" ?></p>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <form id="edit" action="<?php echo site_url('profile/do_edit_additional') ?>" method="post" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="school" class="col-sm-2 control-label">Sekolah</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="school" placeholder="Sekolah" name="school" value="<?php echo "{$profile['school']}" ?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="grade" class="col-sm-2 control-label">Kelas</label>
+                                                <div class="col-sm-10">
+                                                    <select id="grade" name="grade" class="form-control">
+                                                        <option value="10" <?php echo $profile['grade'] === 10 ? 'selected' : '' ?>>X</option>
+                                                        <option value="11" <?php echo $profile['grade'] === 11 ? 'selected' : '' ?>>XI</option>
+                                                        <option value="12" <?php echo $profile['grade'] === 12 ? 'selected' : '' ?>>XII</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address" class="col-sm-2 control-label">Alamat</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="address" placeholder="Alamat" name="address" value="<?php echo "{$profile['address']}" ?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="birthplace" class="col-sm-2 control-label">Tempat Lahir</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="birthplace" placeholder="Tempat Lahir" name="birthplace" value="<?php echo "{$profile['birthplace']}" ?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="datebirth" class="col-sm-2 control-label">Tanggal Lahir</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="datebirth" name="datebirth" placeholder="Tanggal Lahir" value="<?php echo "{$profile['datebirth']}" ?>"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default">Simpan</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>Copyright &copy; 2014-<?php echo Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now())->format('Y') ?>.</strong>
                         </div>
-                        <div class="form-group">
-                            <label for="datebirth" class="col-sm-2 control-label">Tanggal Lahir</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="datebirth" name="datebirth" placeholder="Tanggal Lahir" value="<?php echo "{$profile['datebirth']}" ?>"/>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>
+                                <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+                                .
+                            </strong>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Simpan</button>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            All rights reserved.
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="col-sm-10 _cs-audio">
+                    <audio preload id="music" controls="controls">Browser anda tidak support untuk memutar Musik</audio>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- /.container -->
+    </footer>
 </div>
-<audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -217,7 +344,10 @@ $profile['datebirth'] = $profile['datebirth'] === null ? null : $profile['datebi
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/fastclick/fastclick.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/bootstrap3_player/js/bootstrap3_player.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/profile/edit/student-edit-profile.min.js') ?>"></script>
 </body>
 </html>
