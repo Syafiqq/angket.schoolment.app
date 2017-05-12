@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/components-font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/Ionicons/css/ionicons.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/iCheck/square/blue.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/auth/login/counselor-login-auth.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,84 +39,46 @@
     <![endif]-->
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
-<body>
-<div class="container">
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="<?php echo site_url('/')?>"><b>Schoolment</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Silahkan Login untuk manajemen aplikasi</p>
+        <p class="login-box-msg"><b>Konselor</b></p>
 
-    <form class="well form-horizontal" id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
-        <fieldset>
-            <!-- Form Name -->
-            <legend>Contact Us Today!</legend>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="credential">NIP/NIK</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="credential" placeholder="NIP/NIK" name="credential" type="number" class="form-control">
-                    </div>
-                </div>
+        <form id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
+            <div class="form-group has-feedback">
+                <input type="text" name="credential" class="form-control" placeholder="NIP/NIK">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="password">Password</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-                    </div>
-                </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <input type="hidden" name="role" value="counselor">
-
-            <!-- Button -->
-            <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-warning">Login
-                        <span class="glyphicon glyphicon-send"></span>
-                    </button>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                 </div>
+                <!-- /.col -->
             </div>
+        </form>
 
-            <div class="form-group" style="margin-top: 50px">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <b>Klik</b>
-                    <a href="<?php echo site_url('/auth/login?role=student') ?>" type="submit" class="btn btn-warning">Siswa
-                        <span class="glyphicon glyphicon-send"></span>
-                    </a>
-                    <b>&nbsp;Apabila Anda Siswa ?</b>
-                </div>
-            </div>
+        <div class="social-auth-links text-center">
+            <p>-----</p>
+        </div>
+        <!-- /.social-auth-links -->
 
-            <div class="form-group" style="margin-top: 20px">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <b>Klik</b>
-                    <a href="<?php echo site_url('/auth/register?role=counselor') ?>" type="submit" class="btn btn-warning">Daftar
-                        <span class="glyphicon glyphicon-send"></span>
-                    </a>
-                    <b>&nbsp;Apabila Belum Punya Akun ?</b>
-                </div>
-            </div>
+        <a href="<?php echo site_url('/auth/login?role=student') ?>">Saya adalah <b>Siswa</b>.</a><br>
+        <a href="<?php echo site_url('/auth/recover?role=counselor') ?>">Saya Lupa Akun Saya.</a><br>
+        <a href="<?php echo site_url('/auth/register?role=counselor') ?>" class="text-center">Saya Belum Punya Akun.</a>
 
-            <div class="form-group" style="margin-top: 20px">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <b>Klik</b>
-                    <a href="<?php echo site_url('/auth/recover?role=counselor') ?>" type="submit" class="btn btn-warning">Lupa
-                        <span class="glyphicon glyphicon-send"></span>
-                    </a>
-                    <b>&nbsp;Apabila Anda Lupa ?</b>
-                </div>
-            </div>
-
-        </fieldset>
-    </form>
+    </div>
+    <!-- /.login-box-body -->
 </div>
 <audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
 
@@ -124,7 +90,8 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/iCheck/icheck.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/auth/login/counselor-login-auth.min.js') ?>"></script>
 
 </body>
