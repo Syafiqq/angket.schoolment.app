@@ -51,12 +51,15 @@ class Dashboard extends CI_Controller
         {
             case 'counselor' :
             {
+
+                $profile['assets']['record'] = $this->generateCounselorRecord();
                 $this->load->view('dashboard/view/counselor-view-dashboard', compact('profile'));
 
                 return;
             }
             case 'student' :
             {
+                $profile['assets'] = $_SESSION['user']['data'];
                 $this->load->view('dashboard/view/student-view-dashboard', compact('profile'));
 
                 return;
@@ -149,5 +152,58 @@ class Dashboard extends CI_Controller
         {
             echo apiMakeCallback(API_BAD_REQUEST, 'Permintaan Tidak Dapat Dikenali', ['notify' => [['Permintaan Tidak Dapat Dikenali', 'danger']]]);
         }
+    }
+
+    private function generateCounselorRecord()
+    {
+        $this->load->model('mauth', 'auth');
+        $this->load->model('minventory', 'inventory');
+        $detail = [];
+        $_counselor = $this->auth->getAllCounselor();
+        $_student = $this->auth->getAllStudent();
+        $_question = $this->inventory->getQuestion();
+        $_latest = $this->inventory->getLatestAnswer();
+
+        $dispatcher = ['male' => 0, 'female' => 0];
+        foreach ($_counselor as $_vc)
+        {
+            if($_vc['gender'] === 'female')
+            {
+                ++$dispatcher['female'];
+            }
+            else
+            {
+                ++$dispatcher['male'];
+            }
+        }
+        $detail['counselor'] = $dispatcher;
+        $dispatcher = ['male' => 0, 'female' => 0];
+        foreach ($_student as $_vs)
+        {
+            if($_vs['gender'] === 'female')
+            {
+                ++$dispatcher['female'];
+            }
+            else
+            {
+                ++$dispatcher['male'];
+            }
+        }
+        $detail['student'] = $dispatcher;
+        $dispatcher = ['active' => 0, 'inactive' => 0];
+        foreach ($_question as $_vq)
+        {
+            if((int)$_vq['is_active'] === 1)
+            {
+                ++$dispatcher['active'];
+            }
+            else
+            {
+                ++$dispatcher['inactive'];
+            }
+        }
+        $detail['question'] = $dispatcher;
+        $detail['latest'] = $_latest;
+        return $detail;
     }
 }
