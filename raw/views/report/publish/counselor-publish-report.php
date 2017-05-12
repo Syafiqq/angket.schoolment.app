@@ -34,6 +34,7 @@ if (!isset($counslor))
     $counslor = [];
 }
 
+
 $suggest = '';
 $profile['school'] = $profile['school'] === null ? '-' : $profile['school'];
 $profile['grade'] = $profile['grade'] === null ? '-' : $profile['grade'];
@@ -94,25 +95,22 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo site_url('dashboard') ?>">Site</a>
+            <a class="navbar-brand" href="<?php echo site_url('dashboard') ?>">Schoolment</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="<?php echo site_url('inventory') ?>">Inventory</a>
-                </li>
-                <li>
-                    <a href="<?php echo site_url('student') ?>">Siswa</a>
+                    <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Kembali</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                    <a onclick="print()">Cetak</a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url('profile') ?>">Profile</a>
+                    <a id="logout" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -152,7 +150,12 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
         <div class="row vertical-align">
             <div class="col-sm-12 text-center">
                 <p id="content_welcome" class="margin-bottom-4" style="font-weight: bold; font-size: 20px">LAPORAN HASIL INVENTORI</p>
-                <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">BERPIKIR KRITIS AKADEMIK</p>
+                <p id="content_title" style="font-weight: bolder; font-size: 20px; margin: 4px">
+                    <b>
+                        <i>SCHOOL ENGAGEMENT</i>
+                    </b>
+                    SISWA
+                </p>
             </div>
         </div>
         <div class="row">
@@ -319,7 +322,6 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jQuery.print/jQuery.print.js') ?>"></script>
-<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
 <script src="<?php echo base_url('/assets/js/report/publish/counselor-publish-report.min.js') ?>"></script>
 </body>
 </html>

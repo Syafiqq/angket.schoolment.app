@@ -7,10 +7,7 @@
  */
 
 (function ($)
-{    audiojs.events.ready(function ()
 {
-    var aj = audiojs.createAll();
-});
     $(function ()
     {
         $("a#logout").on('click', function (event)
@@ -59,20 +56,23 @@
                 })
         });
 
-        $("page#printable-area").print({
-         globalStyles: true,
-         mediaPrint: false,
-         stylesheet: null,
-         noPrintSelector: ".no-print",
-         iframe: true,
-         append: null,
-         prepend: null,
-         manuallyCopyFormValues: true,
-         deferred: $.Deferred(),
-         timeout: 750,
-         title: null,
-         doctype: '<!doctype html>'
-        });
+        function print()
+        {
+            $("page#printable-area").print({
+                globalStyles: true,
+                mediaPrint: false,
+                stylesheet: ['/assets/bower_components/bootstrap/dist/css/bootstrap.min.css', '/assets/css/report/publish/counselor-publish-report.min.css'],
+                noPrintSelector: ".no-print",
+                iframe: true,
+                append: null,
+                prepend: null,
+                manuallyCopyFormValues: true,
+                deferred: $.Deferred(),
+                timeout: 750,
+                title: null,
+                doctype: '<!doctype html>'
+            });
+        }
 
         $("a._nav-a-link").on('click', function (event)
         {
@@ -116,6 +116,8 @@
                     });
                 })
         });
+
+        print();
     });
     /*
      * Run right away
