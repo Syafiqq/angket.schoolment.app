@@ -26,6 +26,10 @@
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/components-font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/Ionicons/css/ionicons.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/iCheck/square/blue.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/auth/recover/student-recover-auth.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -36,89 +40,66 @@
     <![endif]-->
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
-<body>
-<div class="container">
-    <form class="well form-horizontal" id="recover" action="<?php echo site_url('auth/do_recover') ?>" method="post">
-        <fieldset>
-            <!-- Form Name -->
-            <legend>Contact Us Today!</legend>
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a href="<?php echo site_url('/')?>"><b>Schoolment</b></a>
+    </div>
+    <!-- /.register-logo -->
+    <div class="register-box-body">
+        <p class="register-box-msg">Silahkan ikuti prosedur berikut</p>
+        <p class="register-box-msg"><b>Siswa</b></p>
 
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="name">Nama</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="name" placeholder="Nama" name="name" type="text" class="form-control">
+        <form  id="recover" action="<?php echo site_url('auth/do_recover') ?>" method="post">
+            <div class="form-group has-feedback">
+                <input type="text" name="name" class="form-control" placeholder="Nama">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" name="credential" class="form-control" placeholder="NISN">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="radio" name="gender" value="male"> Laki-Laki
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="radio" name="gender" value="female"> Perempuan
+                        </label>
                     </div>
                 </div>
             </div>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="credential">NISN</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="credential" placeholder="NISN" name="credential" type="number" class="form-control">
-                    </div>
-                </div>
+            <div class="form-group has-feedback">
+                <input type="text" name="created" id="created" class="form-control" placeholder="Tanggal Pembuatan Akun">
+                <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="role">Jenis Kelamin</label>
-                <div class="col-md-4 selectContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <select id="role" name="gender" class="form-control selectpicker">
-                            <option value="male">Pria</option>
-                            <option value="female">Wanita</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="created">Tanggal Pembuatan Akun</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="text" class="form-control" id="created" placeholder="Password" name="created">
-                    </div>
-                </div>
-            </div>
-
             <input type="hidden" name="role" value="student">
-
-            <!-- Button -->
-            <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-warning">Register
-                        <span class="glyphicon glyphicon-send"></span>
-                    </button>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Recover</button>
                 </div>
+                <!-- /.col -->
             </div>
+        </form>
 
-            <div class="form-group" style="margin-top: 50px">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <b>Klik</b>
-                    <a href="<?php echo site_url('/auth/register?role=counselor') ?>" type="submit" class="btn btn-warning">Daftar
-                        <span class="glyphicon glyphicon-send"></span>
-                    </a>
-                    <b>&nbsp;Apabila Belum Punya Akun ?</b>
-                </div>
-            </div>
+        <div class="social-auth-links text-center">
+            <p>-----</p>
+        </div>
+        <!-- /.social-auth-links -->
 
-
-        </fieldset>
-    </form>
+        <a href="<?php echo site_url('/auth/register?role=student') ?>">Saya ingin mendaftar kembali.</a><br>
+    </div>
+    <!-- /.login-box-body -->
 </div>
 <audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
+<!-- /.register-box -->
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -130,7 +111,8 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/moment/min/moment.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/iCheck/icheck.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/auth/recover/student-recover-auth.min.js') ?>"></script>
 </body>
 </html>
