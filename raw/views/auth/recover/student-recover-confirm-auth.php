@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/main.min.css') ?>">
 
     <link href="<?php echo base_url('/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/components-font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/Ionicons/css/ionicons.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/iCheck/square/blue.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/auth/recover/student-recover-confirm-auth.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -37,65 +41,40 @@
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
 <body>
-<div class="container">
-    <form class="well form-horizontal" id="recover" action="<?php echo site_url('auth/do_recover_confirm') ?>" method="post">
-        <fieldset>
-            <!-- Form Name -->
-            <legend>Contact Us Today!</legend>
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a href="<?php echo site_url('/')?>"><b>Schoolment</b></a>
+    </div>
+    <!-- /.register-logo -->
+    <div class="register-box-body">
+        <p class="register-box-msg">Silahkan isi password baru</p>
+        <p class="register-box-msg"><b>Siswa</b></p>
 
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="password">Password</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-                    </div>
-                </div>
+        <form  id="recover" action="<?php echo site_url('auth/do_recover_confirm') ?>" method="post">
+            <div class="form-group has-feedback">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="re_password">Ulangi Password</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" class="form-control" id="re_password" placeholder="Password" name="re_password">
-                    </div>
-                </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="re_password"  class="form-control" placeholder="Ulangi Password">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
             </div>
-
-            <input type="hidden" name="role" value="student">
             <input type="hidden" name="token" value="<?php echo $token ?>">
-
-
-            <!-- Button -->
-            <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-warning">Recover
-                        <span class="glyphicon glyphicon-send"></span>
-                    </button>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Recover</button>
                 </div>
+                <!-- /.col -->
             </div>
-
-
-            <div class="form-group" style="margin-top: 50px">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4">
-                    <b>Klik</b>
-                    <a href="<?php echo site_url('/auth/register?role=counselor') ?>" type="submit" class="btn btn-warning">Daftar
-                        <span class="glyphicon glyphicon-send"></span>
-                    </a>
-                    <b>&nbsp;Apabila Belum Punya Akun ?</b>
-                </div>
-            </div>
-        </fieldset>
-    </form>
+        </form>
+    </div>
+    <!-- /.login-box-body -->
 </div>
 <audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
+<!-- /.register-box -->
+
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -105,7 +84,8 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/iCheck/icheck.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/js/auth/recover/student-recover-confirm-auth.min.js') ?>"></script>
 
 </body>
