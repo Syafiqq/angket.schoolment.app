@@ -141,7 +141,7 @@ class Auth extends CI_Controller
                     }
                     case 'student' :
                     {
-                        $this->load->view('auth/recover/sutdent-recover-auth');
+                        $this->load->view('auth/recover/student-recover-auth');
 
                         return;
                     }
@@ -392,7 +392,7 @@ class Auth extends CI_Controller
                         }
                         $account = $account[0];
                         $_created = Carbon::createFromFormat('Y-m-d', $_POST['created']);
-                        $_createdDB = Carbon::createFromFormat('Y-m-d H:i:s', $account['on_create']);
+                        $_createdDB = Carbon::createFromFormat('Y-m-d H:i:s', $account['create_at']);
                         if (($_POST['name'] === $account['name']) &&
                             ($_POST['gender'] === $account['gender']) &&
                             ($_created->isSameDay($_createdDB))
