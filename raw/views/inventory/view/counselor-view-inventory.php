@@ -29,6 +29,10 @@ foreach ($categories as $category)
 }
 $categories = $_categories;
 unset($_categories);
+use Carbon\Carbon;
+
+setlocale(LC_TIME, 'id_ID');
+$profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] === null ? 'Belum Pernah' : Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['latest'][0]['answer_at'])->formatLocalized('%d %B %Y %H:%M');
 
 ?>
 
@@ -53,6 +57,11 @@ unset($_categories);
     <link href="<?php echo base_url('/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/css/autoFill.bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/components-font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/Ionicons/css/ionicons.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/AdminLTE/dist/css/skins/skin-blue.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('/assets/bower_components/bootstrap3_player/css/bootstrap3_player.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/inventory/view/counselor-view-inventory.min.css') ?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -64,152 +73,278 @@ unset($_categories);
     <script src="<?php echo base_url('/assets/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row profile">
-        <div class="col-md-3">
-            <div class="profile-sidebar">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img src="<?php echo base_url($profile['avatar']) ?>" class="img-responsive" alt="">
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>" class="navbar-brand _nav-a-link">
+                        <b>Schoolment</b>
+                    </a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
                 </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        <?php echo $profile['name'] ?>
-                    </div>
-                    <div class="profile-usertitle-job">
-                        KONSELOR
-                    </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-                    <a id="logout" type="button" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
-                </div>
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul class="nav">
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
                         <li class="active">
-                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">
-                                <i class="glyphicon glyphicon-home"></i>
-                                Dashboard
+                            <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
+                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Profil
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Profil
+                                <span class="caret"></span>
                             </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">Ubah</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile%2Fedit') ?>">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Rubah Profil
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Inventori
+                                <span class="caret"></span>
                             </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>">Tambah
+                                        <i>Item</i>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Lihat Inventory
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Siswa
+                                <span class="caret"></span>
                             </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>" target="_blank">
-                                <i class="glyphicon glyphicon-list"></i>
-                                Tambah
-                                <i>Item</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">
-                                <i class="glyphicon glyphicon-flag"></i>
-                                Aktivasi Siswa
-                            </a>
-                        </li>
-                        <li>
-                            <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">
-                                <i class="glyphicon glyphicon-flag"></i>
-                                Lihat Nilai Siswa
-                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktivasi</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Hasil Siswa</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
-                <!-- END MENU -->
+                <!-- /.navbar-collapse -->
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a id="logout" class="btn btn-danger btn-sm" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-custom-menu -->
             </div>
-        </div>
-        <div class="col-md-9">
-            <div class="profile-content">
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+        <div class="container" style="margin-bottom: 60px">
+            <!-- Main content -->
+            <section class="content">
+
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Panel heading</div>
-                            <div class="panel-body">
-                                <div class="col-sm-2 col-sm-offset-10">
-                                    <a class="btn btn-default" href="<?php echo site_url('inventory/add') ?>" role="button">Tambah Inventory</a>
+                    <div class="col-md-3">
+
+                        <!-- Profile Image -->
+                        <div class="box box-primary">
+                            <div class="box-body box-profile">
+                                <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url($profile['avatar']) ?>" alt="User profile picture">
+
+                                <h3 class="profile-username text-center"><?php echo $profile['name'] ?></h3>
+
+                                <p class="text-muted text-center"><?php echo strlen($profile['school']) <= 0 ? '[Data Tidak Lengkap]' : $profile['school'] ?></p>
+
+                                <ul class="list-group list-group-unbordered">
+                                    <li class="list-group-item">
+                                        <b>Jumlah Konselor</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo "Laki Laki = {$profile['assets']['record']['counselor']['male']}, Perempuan = {$profile['assets']['record']['counselor']['female']}" ?>"><?php echo($profile['assets']['record']['counselor']['female'] + $profile['assets']['record']['counselor']['male']) ?></abbr>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Jumlah Siswa</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo "Laki Laki = {$profile['assets']['record']['student']['male']}, Perempuan = {$profile['assets']['record']['student']['female']}" ?>"><?php echo($profile['assets']['record']['student']['female'] + $profile['assets']['record']['student']['male']) ?></abbr>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Jumlah Pernyataan</b>
+                                        <a class="pull-right">
+                                            <abbr title="<?php echo "Aktif = {$profile['assets']['record']['question']['active']}, Nonaktif = {$profile['assets']['record']['question']['inactive']}" ?>"><?php echo($profile['assets']['record']['question']['active'] + $profile['assets']['record']['question']['inactive']) ?></abbr>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Terakhir</b>
+                                        <a class="pull-right">
+                                            <?php echo $profile['assets']['record']['latest'] ?>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+
+                        <!-- About Me Box -->
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Musik Pengantar</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <ol id="plList">
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music1.mp3') ?>">Musik 1</li>
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music2.mp3') ?>">Musik 2</li>
+                                    <li data-audio="<?php echo base_url('/assets/audio/mp3/music3.mp3') ?>">Musik 3</li>
+                                </ol>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Daftar Pernyataan</h3>
+                                <div class="box-tools pull-right">
+                                    <!-- Buttons, labels, and many other things can be placed here! -->
+                                    <!-- Here is a label for example -->
+                                    <span class="label label-primary"></span>
+                                </div><!-- /.box-tools -->
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Panel heading</div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-4 col-sm-offset-8 right">
+                                                        <a class="btn btn-default" href="<?php echo site_url('inventory/add') ?>" role="button">Tambah Inventory</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table table-responsive">
+                                                <table id="inventory_tb" class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 40px">No</th>
+                                                        <th>Pertanyaan</th>
+                                                        <th style="width: 150px">Kategori</th>
+                                                        <th style="width: 150px; display: none" >
+                                                            <i>Favourable</i>
+                                                        </th>
+                                                        <th style="width: 100px">Aktif</th>
+                                                        <th style="width: 30px">Edit</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php
+                                                    $favourURL = site_url('inventory/do_change_favour');
+                                                    $activeURL = site_url('inventory/do_change_active');
+                                                    foreach ($questions as $no => $question)
+                                                    {
+                                                        $url = site_url("inventory/edit/{$question['id']}");
+                                                        ++$no;
+                                                        echo '<tr>';
+                                                        echo "<td>{$no}</td>";
+                                                        echo "<td>{$question['question']}</td>";
+                                                        echo "<td>{$categories['.'.$question['category']]['name']}</td>";
+                                                        echo '<td style="display: none">';
+                                                        echo "<select data-question-id=\"{$question['id']}\" id=\"favour\" name=\"favour\" class=\"form-control\" data-question-action=\"{$favourURL}\">";
+                                                        foreach ($favourables as $favourable)
+                                                        {
+                                                            $favourable['description'] = ucfirst($favourable['description']);
+                                                            $selected = $favourable['id'] === $question['favour'] ? 'selected' : '';
+                                                            echo "<option value=\"{$favourable['id']}\" {$selected}>{$favourable['description']}</option>";
+                                                        }
+                                                        echo '</select>';
+                                                        echo '</td>';
+                                                        echo '<td>';
+                                                        echo "<select data-question-id=\"{$question['id']}\" id=\"active\" name=\"active\" class=\"form-control\" data-question-action=\"$activeURL\">";
+                                                        foreach ([['id' => 1, 'description' => 'Aktif'], ['id' => 0, 'description' => 'Tidak Aktif']] as $active)
+                                                        {
+                                                            $selected = $active['id'] === (int)$question['is_active'] ? 'selected' : '';
+                                                            echo "<option value=\"{$active['id']}\" {$selected}>{$active['description']}</option>";
+                                                        }
+                                                        echo '</select>';
+                                                        echo '</td>';
+                                                        echo "<td><a class=\"btn btn-default\" href=\"{$url}\" role=\"button\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></a></td>";
+                                                        echo '</tr>';
+                                                    }
+                                                    ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="table table-responsive">
-                                <table id="inventory_tb" class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 40px">No</th>
-                                        <th>Pertanyaan</th>
-                                        <th style="width: 150px">Kategori</th>
-                                        <th style="width: 150px">
-                                            <i>Favourable</i>
-                                        </th>
-                                        <th style="width: 150px">Aktif</th>
-                                        <th style="width: 30px">Edit</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    $favourURL = site_url('inventory/do_change_favour');
-                                    $activeURL = site_url('inventory/do_change_active');
-                                    foreach ($questions as $no => $question)
-                                    {
-                                        $url = site_url("inventory/edit/{$question['id']}");
-                                        ++$no;
-                                        echo '<tr>';
-                                        echo "<td>{$no}</td>";
-                                        echo "<td>{$question['question']}</td>";
-                                        echo "<td>{$categories['.'.$question['category']]['name']}</td>";
-                                        echo '<td>';
-                                        echo "<select data-question-id=\"{$question['id']}\" id=\"favour\" name=\"favour\" class=\"form-control\" data-question-action=\"{$favourURL}\">";
-                                        foreach ($favourables as $favourable)
-                                        {
-                                            $favourable['description'] = ucfirst($favourable['description']);
-                                            $selected = $favourable['id'] === $question['favour'] ? 'selected' : '';
-                                            echo "<option value=\"{$favourable['id']}\" {$selected}>{$favourable['description']}</option>";
-                                        }
-                                        echo '</select>';
-                                        echo '</td>';
-                                        echo '<td>';
-                                        echo "<select data-question-id=\"{$question['id']}\" id=\"active\" name=\"active\" class=\"form-control\" data-question-action=\"$activeURL\">";
-                                        foreach ([['id' => 1, 'description' => 'Aktif'], ['id' => 0, 'description' => 'Tidak Aktif']] as $active)
-                                        {
-                                            $selected = $active['id'] === (int)$question['is_active'] ? 'selected' : '';
-                                            echo "<option value=\"{$active['id']}\" {$selected}>{$active['description']}</option>";
-                                        }
-                                        echo '</select>';
-                                        echo '</td>';
-                                        echo "<td><a class=\"btn btn-default\" href=\"{$url}\" role=\"button\"><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></a></td>";
-                                        echo '</tr>';
-                                    }
-                                    ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>Copyright &copy; 2014-<?php echo Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now())->format('Y') ?>.</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>
+                                <a href="http://almsaeedstudio.com">Almsaeed Studio</a>
+                                .
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            All rights reserved.
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-10 _cs-audio">
+                    <audio preload id="music" controls="controls">Browser anda tidak support untuk memutar Musik</audio>
+                </div>
             </div>
         </div>
-    </div>
+        <!-- /.container -->
+    </footer>
 </div>
-<audio src="<?php echo base_url('/assets/audio/mp3/black_heaven.mp3') ?>" preload="auto" autoplay loop/>
 
 <script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 <script>window.jQuery || document.write('<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"><\/script>')</script>
@@ -224,7 +359,11 @@ unset($_categories);
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables-autofill-bootstrap/js/autoFill.bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons/js/dataTables.buttons.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>"></script>
-<script src="<?php echo base_url('/assets/bower_components/audiojs/audiojs/audio.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/plugins/fastclick/fastclick.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/assets/bower_components/bootstrap3_player/js/bootstrap3_player.js') ?>"></script>
+
 <script src="<?php echo base_url('/assets/js/inventory/view/counselor-view-inventory.min.js') ?>"></script>
 </body>
 </html>
