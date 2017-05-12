@@ -33,6 +33,14 @@ class Mauth extends CI_Model
         return $result->result_array();
     }
 
+    public function findCounselorById($id)
+    {
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `head`, `head_credential`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `id` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$id));
+
+        return $result->result_array();
+    }
+
     public function findCounselorByCredential($credential)
     {
         //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` WHERE `credential` = ?';
@@ -135,6 +143,15 @@ class Mauth extends CI_Model
     {
         //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` ORDER BY `id` ASC';
         $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `grade`, `school`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` ORDER BY `id` ASC';
+        $result = $this->db->query($query);
+
+        return $result->result_array();
+    }
+
+    public function getAllCounselor()
+    {
+        //$query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `period`, `grade`, `address`, `birthplace`, `datebirth`, `avatar`, `is_active`, `create_at`, `update_at` FROM `user_student` ORDER BY `id` ASC';
+        $query = 'SELECT `id`, `credential`, `name`, `gender`, `password`, `address`, `school`, `school_address`, `head`, `head_credential`, `birthplace`, `datebirth`, `avatar`, `create_at`, `update_at` FROM `user_counselor` ORDER BY `id` ASC';
         $result = $this->db->query($query);
 
         return $result->result_array();

@@ -178,5 +178,43 @@ class Minventory extends CI_Model
         return $result->result_array();
     }
 
+    public function getAnsweredQuestionByUserID($user)
+    {
+        $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` WHERE `student` = ? ORDER BY `answer_at` DESC';
+        $result = $this->db->query($query, [(int)$user]);
 
+        return $result->result_array();
+    }
+
+    public function getAnsweredResultSummaryByID($id)
+    {
+        $query = 'SELECT `answer_id`, `category`, SUM(`value`) AS \'value\' FROM `answered_result` WHERE `answer_id` = ?';
+        $result = $this->db->query($query, [(int)$id]);
+
+        return $result->result_array();
+    }
+
+    public function getHighestSummaryByUserID($user)
+    {
+        $query = 'SELECT `answered_result`.`answer_id`, SUM(`answered_result`.`value`) AS \'value\' FROM `answered_result` LEFT OUTER JOIN `answered_question` ON `answered_result`.`answer_id` = `answered_question`.`id` WHERE `answered_question`.`student` = ? GROUP BY `answered_question`.`id` ORDER BY SUM(`answered_result`.`value`) DESC ';
+        $result = $this->db->query($query, [(int)$user]);
+
+        return $result->result_array();
+    }
+
+    public function getLowestSummaryByUserID($user)
+    {
+        $query = 'SELECT `answered_result`.`answer_id`, SUM(`answered_result`.`value`) AS \'value\' FROM `answered_result` LEFT OUTER JOIN `answered_question` ON `answered_result`.`answer_id` = `answered_question`.`id` WHERE `answered_question`.`student` = ? GROUP BY `answered_question`.`id` ORDER BY SUM(`answered_result`.`value`) ASC ';
+        $result = $this->db->query($query, [(int)$user]);
+
+        return $result->result_array();
+    }
+
+    public function getLatestAnswer()
+    {
+        $query = 'SELECT `id`, `student`, `answer_at` FROM `answered_question` ORDER BY `answer_at` DESC LIMIT 1';
+        $result = $this->db->query($query);
+
+        return $result->result_array();
+    }
 }
