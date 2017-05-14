@@ -91,7 +91,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -110,12 +110,12 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a class="dropdown-toggle" data-toggle="dropdown">Inventori
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
+                                <li class="active">
                                     <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a>
                                 </li>
                                 <li class="divider"></li>
@@ -235,23 +235,20 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                 </div><!-- /.box-tools -->
                             </div><!-- /.box-header -->
                             <div class="box-body">
+                                <div class="row" style="margin-bottom: 20px">
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-default" href="<?php echo site_url('inventory/add') ?>" role="button">Tambah Inventory</a>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">Panel heading</div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-sm-4 col-sm-offset-8 right">
-                                                        <a class="btn btn-default" href="<?php echo site_url('inventory/add') ?>" role="button">Tambah Inventory</a>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="table table-responsive">
                                                 <table id="inventory_tb" class="table table-hover">
                                                     <thead>
                                                     <tr>
                                                         <th style="width: 40px">No</th>
-                                                        <th>Pertanyaan</th>
+                                                        <th>Pernyataan</th>
                                                         <th style="width: 150px">Kategori</th>
                                                         <th style="width: 150px; display: none" >
                                                             <i>Favourable</i>

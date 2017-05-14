@@ -76,7 +76,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -95,7 +95,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a class="dropdown-toggle" data-toggle="dropdown">Inventori
                                 <span class="caret"></span>
                             </a>
@@ -104,7 +104,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                     <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li>
+                                <li class="active">
                                     <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fadd') ?>">Tambah
                                         <i>Item</i>
                                     </a>
@@ -224,9 +224,9 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                     <div class="col-sm-12">
                                         <form id="add" action="<?php echo site_url('inventory/do_add') ?>" method="post" class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="question" class="col-sm-2 control-label">Pertanyaan</label>
+                                                <label for="question" class="col-sm-2 control-label">Pernyataan</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control option-text-disable" id="question" placeholder="Pertanyaan" name="question">
+                                                    <input type="text" class="form-control option-text-disable" id="question" placeholder="Pernyataan" name="question">
                                                 </div>
                                             </div>
                                             <div class="form-group">

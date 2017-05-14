@@ -82,7 +82,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -117,12 +117,12 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a class="dropdown-toggle" data-toggle="dropdown">Siswa
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
+                                <li class="active">
                                     <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktivasi</a>
                                 </li>
                                 <li class="divider"></li>

@@ -22,7 +22,7 @@ if (!isset($categories))
 $profile['birthplace'] = $profile['birthplace'] === null ? '-' : $profile['birthplace'];
 $profile['datebirth'] = $profile['datebirth'] === null ? '-' : Carbon::createFromFormat('Y-m-d', $profile['datebirth'])->formatLocalized('%d %B %Y');
 $profile['birth'] = (($profile['birthplace'] === '-') && ($profile['datebirth'] === '-')) ? '-' : (($profile['birthplace'] === '-') ? $profile['datebirth'] : (($profile['datebirth'] === '-') ? $profile['birthplace'] : "{$profile['birthplace']}, {$profile['datebirth']}"));
-$profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] === null ? 'Belum Pernah' : Carbon::createFromFormat('Y-m-d H:i:s', $profile['assets']['record']['latest'][0]['answer_at'])->formatLocalized('%d %B %Y %H:%M');
+$counselor['assets']['record']['latest'] = $counselor['assets']['record']['latest'] === null ? 'Belum Pernah' : Carbon::createFromFormat('Y-m-d H:i:s', $counselor['assets']['record']['latest'][0]['answer_at'])->formatLocalized('%d %B %Y %H:%M');
 
 ?>
 
@@ -80,7 +80,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -115,7 +115,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a class="dropdown-toggle" data-toggle="dropdown">Siswa
                                 <span class="caret"></span>
                             </a>
@@ -124,7 +124,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                     <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktivasi</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li>
+                                <li class="active">
                                     <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Hasil Siswa</a>
                                 </li>
                             </ul>
@@ -157,35 +157,35 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                         <!-- Profile Image -->
                         <div class="box box-primary">
                             <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url($profile['avatar']) ?>" alt="User profile picture">
+                                <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url($counselor['avatar']) ?>" alt="User profile picture">
 
-                                <h3 class="profile-username text-center"><?php echo $profile['name'] ?></h3>
+                                <h3 class="profile-username text-center"><?php echo $counselor['name'] ?></h3>
 
-                                <p class="text-muted text-center"><?php echo strlen($profile['school']) <= 0 ? '[Data Tidak Lengkap]' : $profile['school'] ?></p>
+                                <p class="text-muted text-center"><?php echo strlen($counselor['school']) <= 0 ? '[Data Tidak Lengkap]' : $counselor['school'] ?></p>
 
                                 <ul class="list-group list-group-unbordered">
                                     <li class="list-group-item">
                                         <b>Jumlah Konselor</b>
                                         <a class="pull-right">
-                                            <abbr title="<?php echo "Laki Laki = {$profile['assets']['record']['counselor']['male']}, Perempuan = {$profile['assets']['record']['counselor']['female']}" ?>"><?php echo($profile['assets']['record']['counselor']['female'] + $profile['assets']['record']['counselor']['male']) ?></abbr>
+                                            <abbr title="<?php echo "Laki Laki = {$counselor['assets']['record']['counselor']['male']}, Perempuan = {$counselor['assets']['record']['counselor']['female']}" ?>"><?php echo($counselor['assets']['record']['counselor']['female'] + $counselor['assets']['record']['counselor']['male']) ?></abbr>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Jumlah Siswa</b>
                                         <a class="pull-right">
-                                            <abbr title="<?php echo "Laki Laki = {$profile['assets']['record']['student']['male']}, Perempuan = {$profile['assets']['record']['student']['female']}" ?>"><?php echo($profile['assets']['record']['student']['female'] + $profile['assets']['record']['student']['male']) ?></abbr>
+                                            <abbr title="<?php echo "Laki Laki = {$counselor['assets']['record']['student']['male']}, Perempuan = {$counselor['assets']['record']['student']['female']}" ?>"><?php echo($counselor['assets']['record']['student']['female'] + $counselor['assets']['record']['student']['male']) ?></abbr>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Jumlah Pernyataan</b>
                                         <a class="pull-right">
-                                            <abbr title="<?php echo "Aktif = {$profile['assets']['record']['question']['active']}, Nonaktif = {$profile['assets']['record']['question']['inactive']}" ?>"><?php echo($profile['assets']['record']['question']['active'] + $profile['assets']['record']['question']['inactive']) ?></abbr>
+                                            <abbr title="<?php echo "Aktif = {$counselor['assets']['record']['question']['active']}, Nonaktif = {$counselor['assets']['record']['question']['inactive']}" ?>"><?php echo($counselor['assets']['record']['question']['active'] + $counselor['assets']['record']['question']['inactive']) ?></abbr>
                                         </a>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Terakhir</b>
                                         <a class="pull-right">
-                                            <?php echo $profile['assets']['record']['latest'] ?>
+                                            <?php echo $counselor['assets']['record']['latest'] ?>
                                         </a>
                                     </li>
                                 </ul>
@@ -216,7 +216,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                     <div class="col-md-9">
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Selamat Datang</h3>
+                                <h3 class="box-title">Detail Siswa</h3>
                                 <div class="box-tools pull-right">
                                     <!-- Buttons, labels, and many other things can be placed here! -->
                                     <!-- Here is a label for example -->

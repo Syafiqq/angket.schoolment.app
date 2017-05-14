@@ -79,7 +79,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -114,7 +114,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a class="dropdown-toggle" data-toggle="dropdown">Siswa
                                 <span class="caret"></span>
                             </a>
@@ -123,7 +123,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                     <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student') ?>">Aktivasi</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li>
+                                <li class="active">
                                     <a class="_nav-a-link" href="<?php echo site_url('student/jump?tab=student%2Freport') ?>">Hasil Siswa</a>
                                 </li>
                             </ul>
@@ -215,7 +215,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                     <div class="col-md-9">
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Selamat Datang</h3>
+                                <h3 class="box-title">Hasil Siswa</h3>
                                 <div class="box-tools pull-right">
                                     <!-- Buttons, labels, and many other things can be placed here! -->
                                     <!-- Here is a label for example -->
@@ -226,9 +226,6 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">Panel heading</div>
-                                            <div class="panel-body">
-                                            </div>
                                             <div class="table-responsive">
                                                 <table id="report_tb" class="table table-hover">
                                                     <thead>
@@ -238,7 +235,7 @@ $profile['assets']['record']['latest'] = $profile['assets']['record']['latest'] 
                                                         <th>Nama</th>
                                                         <th style="width: 100px">Kelas</th>
                                                         <th style="width: 100px">Sekolah</th>
-                                                        <th style="width: 100px">Cetak</th>
+                                                        <th style="width: 100px">Detail</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
