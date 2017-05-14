@@ -198,6 +198,30 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                                 </div><!-- /.box-tools -->
                             </div><!-- /.box-header -->
                             <div class="box-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h1>Selamat Datang</h1>
+                                            <h3>
+                                                Selamat datang di Inventory <i>School Engangement</i>
+                                            </h3>
+                                            <ul>
+                                                <li style="padding: 2px">Klik
+                                                    <a class="btn btn-default _nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">
+                                                        <b>Inventory</b>
+                                                    </a>
+                                                                         &nbsp;untuk memulai pengisian
+                                                </li>
+                                                <li style="padding: 2px">Klik
+                                                    <a class="btn btn-default _nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory%2Fresult') ?>">
+                                                        <b>Hasil</b>
+                                                    </a>
+                                                                         &nbsp;untuk melihat hasil pengisian
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div>

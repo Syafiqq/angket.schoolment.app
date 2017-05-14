@@ -69,7 +69,7 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -88,12 +88,12 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a class="dropdown-toggle" data-toggle="dropdown">Inventori
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
+                                <li class="active">
                                     <a class="_nav-a-link" href="<?php echo site_url('inventory/jump?tab=inventory') ?>">Lihat</a>
                                 </li>
                                 <li class="divider"></li>
@@ -194,6 +194,32 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                                 <h3 class="box-title">Petunjuk Penggunaan</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h1>
+                                            <b>Petunjuk Pengisian</b>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <ol>
+                                            <li>Isilah angket dengan kejujuran dan apa adanya sesuai dengan kondisi diri anda. Hasil angket ini tidak akan mempengaruhi nilai mata pelajaran apapun. Kejujuran anda dalam mengisi angket ini akan mempengaruhi pemahaman anda terkait kondisi diri anda.</li>
+                                            <li>Isilah setiap pernyataan menurut pendapat Anda dengan memilih satu dari empat alternatif jawaban yang telah disediakan, yaitu:</li>
+                                            <dl class="dl-horizontal" style="margin-top: 10px; margin-bottom: 10px">
+                                                <dt>Sangat Sesuai</dt>
+                                                <dd>: Apabila kondisi yang digambarkan pada item sangat sesuai dengen diri anda</dd>
+                                                <dt>Sesuai</dt>
+                                                <dd>: Apabila kondisi yang digambarkan pada item cukup sesuai dengen diri anda</dd>
+                                                <dt>Kurang Sesuai</dt>
+                                                <dd>: Apabila kondisi yang digambarkan pada item kurang sesuai dengen diri anda</dd>
+                                                <dt>Tidak Sesuai</dt>
+                                                <dd>: Apabila kondisi yang digambarkan pada item tidak sesuai dengen diri anda</dd>
+                                            </dl>
+                                            <li>Periksa kembali jawaban Anda dan pastikan tidak ada jawaban yang terlewatkan.</li>
+                                        </ol>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <?php

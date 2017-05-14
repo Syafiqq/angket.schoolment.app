@@ -83,7 +83,7 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a class="_nav-a-link" href="<?php echo site_url('dashboard/jump?tab=dashboard') ?>">Home
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -93,7 +93,7 @@ $profile['assets']['record']['lowest'] = $profile['assets']['record']['lowest'] 
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
+                                <li class="active">
                                     <a class="_nav-a-link" href="<?php echo site_url('profile/jump?tab=profile') ?>">Lihat</a>
                                 </li>
                                 <li class="divider"></li>
