@@ -279,7 +279,7 @@ $counselor['head_credential'] = $counselor['head_credential'] === null ? '-' : $
             <div class="col-sm-1 ">
             </div>
             <div class="col-sm-4 no-padding-side">
-                <p class="margin-bottom-2">Kepala Sekolah SMA <?php echo $counselor['school'] ?></p>
+                <p class="margin-bottom-2">Kepala Sekolah <?php echo $counselor['school'] ?></p>
             </div>
             <div class="col-sm-3 ">
             </div>
