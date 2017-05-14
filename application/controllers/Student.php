@@ -86,7 +86,6 @@ class Student extends CI_Controller
 
     public function detail()
     {
-        $profile = $_SESSION['user']['auth'];
         switch ($_SESSION['user']['auth']['role'])
         {
             case 'counselor' :
@@ -118,8 +117,9 @@ class Student extends CI_Controller
                         $answered[".{$rv['answer_id']}"]['category'][".{$rv['category']}"] = $rv['value'];
                     }
                     unset($_answered, $result);
-                    $profile['assets']['record'] = $this->generateCounselorRecord();
-                    $this->load->view('student/detail/counselor-detail-student', compact('profile', 'answered', 'categories', 'profile'));
+                    $counselor = $_SESSION['user']['auth'];
+                    $counselor['assets']['record'] = $this->generateCounselorRecord();
+                    $this->load->view('student/detail/counselor-detail-student', compact('counselor', 'answered', 'categories', 'profile'));
 
                     return;
                 }
