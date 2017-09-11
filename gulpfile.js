@@ -29,7 +29,7 @@ gulp.task('minify-js', function (cb)
 gulp.task('minify-css', function ()
 {
     return gulp.src(['./raw/**/*.css', '!./raw/{link,link/**,views,views/**}', '!./raw/**/*.min.css'], {base: './raw/'})
-        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(cleanCSS({compatibility: 'ie8', rebase: false}))
         .pipe(rename({
             suffix: ".min",
             extname: ".css"
@@ -78,7 +78,7 @@ gulp.task('watch-minify-css', function ()
     return watch(['./raw/**/*.css', '!./raw/{link,link/**,views,views/**}', '!./raw/**/*.min.css'], function ()
     {
         return gulp.src(['./raw/**/*.css', '!./raw/{link,link/**,views,views/**}', '!./raw/**/*.min.css'], {base: './raw/'})
-            .pipe(cleanCSS({compatibility: 'ie8'}))
+            .pipe(cleanCSS({compatibility: 'ie8', rebase: false}))
             .pipe(rename({
                 suffix: ".min",
                 extname: ".css"
