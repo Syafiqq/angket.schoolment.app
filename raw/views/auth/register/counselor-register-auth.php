@@ -46,7 +46,7 @@
     </div>
     <!-- /.register-logo -->
     <div class="register-box-body">
-        <p class="register-box-msg">Silahkan Daftar untuk manajemen Aplikasi</p>
+        <p class="register-box-msg">Silahkan Daftar untuk manajemen Software</p>
         <p class="register-box-msg"><b>Konselor</b></p>
 
         <form  id="register" action="<?php echo site_url('auth/do_register') ?>" method="post">
