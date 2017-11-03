@@ -46,7 +46,7 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Silahkan Login untuk manajemen aplikasi</p>
+        <p class="login-box-msg">Silahkan Login untuk manajemen software</p>
         <p class="login-box-msg"><b>Konselor</b></p>
 
         <form id="login" action="<?php echo site_url('auth/do_login') ?>" method="post">
